@@ -1,0 +1,25 @@
+{
+  "name": "Pattern Dojo — Candlestick & Chart Patterns",
+  "short_name": "Pattern Dojo",
+  "description": "Master candlestick & chart patterns with plain-English explanations.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0c0f14",
+  "theme_color": "#0c0f14",
+  "orientation": "any",
+  "categories": ["education", "finance"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
