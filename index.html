@@ -2,1144 +2,1081 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0c0f14">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Pattern Dojo">
-<meta name="description" content="Master candlestick & chart patterns with plain-English explanations">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<title>Pattern Dojo — Master Candlestick & Chart Patterns</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#070b14">
+<title>Pattern Dojo</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0c0f14;
-  --surface: #13161d;
-  --surface-2: #1a1e27;
-  --surface-3: #222730;
-  --border: #2a2f3a;
-  --text: #e8eaf0;
-  --text-dim: #8a90a0;
-  --text-muted: #555b6e;
-  --green: #22c55e;
-  --green-dim: rgba(34,197,94,0.12);
-  --green-glow: rgba(34,197,94,0.25);
-  --red: #ef4444;
-  --red-dim: rgba(239,68,68,0.12);
-  --red-glow: rgba(239,68,68,0.25);
-  --gold: #f59e0b;
-  --gold-dim: rgba(245,158,11,0.12);
+  --bg-0: #070b14;
+  --bg-1: #0c1220;
+  --bg-2: #111a2e;
+  --bg-3: #182440;
+  --border: #1c2a44;
+  --border-hi: #2a3f66;
+  --tx-1: #e8edf5;
+  --tx-2: #94a3b8;
+  --tx-3: #5a6a82;
+  --bull: #10b981;
+  --bull-d: #10b98122;
+  --bear: #f43f5e;
+  --bear-d: #f43f5e22;
   --blue: #3b82f6;
-  --blue-dim: rgba(59,130,246,0.12);
-  --accent: #a78bfa;
+  --blue-d: #3b82f622;
+  --gold: #f59e0b;
+  --gold-d: #f59e0b1a;
+  --purple: #a78bfa;
+  --purple-d: #a78bfa1a;
+  --cyan: #22d3ee;
+  --cyan-d: #22d3ee1a;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
-  color: var(--text);
   font-family: 'Outfit', sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
+  background: var(--bg-0);
+  color: var(--tx-1);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+/* ── Scanline effect ── */
+body::after {
+  content:'';
+  position:fixed; inset:0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.015) 3px, rgba(0,0,0,0.015) 6px);
+  pointer-events:none; z-index:9999;
+}
 
-/* HERO */
-.hero {
+.app { max-width: 860px; margin: 0 auto; padding: 0 14px 80px; }
+
+/* ── Header ── */
+.header {
   text-align: center;
-  padding: 60px 20px 40px;
+  padding: 44px 10px 30px;
   position: relative;
-  overflow: hidden;
 }
-.hero::before {
-  content: '';
+.header::before {
+  content:'';
   position: absolute;
-  top: -100px; left: 50%; transform: translateX(-50%);
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 70%);
+  top: -60px; left: 50%; transform: translateX(-50%);
+  width: 500px; height: 400px;
+  background: radial-gradient(ellipse, #3b82f60c 0%, transparent 70%);
   pointer-events: none;
 }
-.hero h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  letter-spacing: -0.5px;
-  margin-bottom: 12px;
-  background: linear-gradient(135deg, #e8eaf0 40%, var(--accent));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.hero p {
-  color: var(--text-dim);
-  font-size: 1.05rem;
-  max-width: 560px;
-  margin: 0 auto;
-}
-.hero .badge {
+.header .logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-d);
+  border: 1px solid var(--gold);
   display: inline-block;
-  margin-top: 18px;
-  padding: 6px 16px;
-  background: var(--surface-2);
+  padding: 3px 14px; border-radius: 3px;
+  margin-bottom: 14px;
+}
+.header h1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(26px, 5vw, 38px);
+  font-weight: 700;
+  background: linear-gradient(135deg, #e8edf5 30%, var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.15;
+}
+.header p { color: var(--tx-2); font-size: 14px; margin-top: 8px; }
+
+/* ── Main Tabs ── */
+.main-tabs {
+  display: flex;
+  background: var(--bg-1);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.78rem;
-  color: var(--accent);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+  position: sticky; top: 8px; z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.main-tab {
+  flex: 1;
+  padding: 11px 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 600;
   letter-spacing: 0.5px;
-}
-
-/* NAV TABS */
-.nav-wrap {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(12,15,20,0.85);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 20px;
-}
-.nav {
-  display: flex;
-  max-width: 900px;
-  margin: 0 auto;
-  gap: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.nav::-webkit-scrollbar { display: none; }
-.nav button {
-  flex-shrink: 0;
-  padding: 14px 20px;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 500;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.25s;
-  white-space: nowrap;
-}
-.nav button:hover { color: var(--text-dim); }
-.nav button.active {
-  color: var(--text);
-  border-bottom-color: var(--accent);
-}
-
-/* FILTER PILLS */
-.filters {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding: 24px 20px 8px;
-  flex-wrap: wrap;
-}
-.filters button {
-  padding: 7px 18px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-dim);
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 500;
-  cursor: pointer;
+  color: var(--tx-3);
+  background: none; border: none;
+  border-radius: 8px; cursor: pointer;
   transition: all 0.2s;
+  text-align: center;
 }
-.filters button:hover { border-color: var(--text-muted); color: var(--text); }
-.filters button.active-all { border-color: var(--accent); color: var(--accent); background: rgba(167,139,250,0.08); }
-.filters button.active-bull { border-color: var(--green); color: var(--green); background: var(--green-dim); }
-.filters button.active-bear { border-color: var(--red); color: var(--red); background: var(--red-dim); }
-.filters button.active-neutral { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
-
-/* GRID */
-.grid {
-  max-width: 1100px;
-  margin: 20px auto;
-  padding: 0 20px 60px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+.main-tab:hover { color: var(--tx-2); }
+.main-tab.active {
+  color: var(--blue);
+  background: var(--blue-d);
+  box-shadow: 0 0 16px var(--blue-d);
 }
 
-/* CARD */
-.card {
-  background: var(--surface);
+.main-panel { display: none; animation: panelIn 0.3s ease; }
+.main-panel.active { display: block; }
+@keyframes panelIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── Filter Chips (Patterns tab) ── */
+.filter-row {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 20px;
+}
+.filter-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  padding: 5px 14px; border-radius: 5px;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  background: var(--bg-1);
+  color: var(--tx-3);
+  cursor: pointer; transition: all 0.2s;
+}
+.filter-chip:hover { border-color: var(--border-hi); color: var(--tx-2); }
+.filter-chip.active { color: var(--blue); border-color: var(--blue); background: var(--blue-d); }
+.filter-chip.active[data-f="bullish"] { color: var(--bull); border-color: var(--bull); background: var(--bull-d); }
+.filter-chip.active[data-f="bearish"] { color: var(--bear); border-color: var(--bear); background: var(--bear-d); }
+.filter-chip.active[data-f="reversal"] { color: var(--purple); border-color: var(--purple); background: var(--purple-d); }
+.filter-chip.active[data-f="continuation"] { color: var(--cyan); border-color: var(--cyan); background: var(--cyan-d); }
+
+/* ── Pattern Cards ── */
+.pattern-grid { display: flex; flex-direction: column; gap: 12px; }
+
+.p-card {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.3s;
-  animation: fadeUp 0.4s ease both;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-.card:hover {
-  border-color: var(--text-muted);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-}
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(16px); }
-  to { opacity:1; transform:translateY(0); }
-}
-.card-canvas {
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.card-canvas.bull { background: linear-gradient(180deg, var(--green-dim), transparent); }
-.card-canvas.bear { background: linear-gradient(180deg, var(--red-dim), transparent); }
-.card-canvas.neutral { background: linear-gradient(180deg, var(--gold-dim), transparent); }
-.card-canvas svg { width: 90%; height: 80%; }
-.card-body { padding: 18px 20px 20px; }
-.card-tag {
-  display: inline-block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 4px;
-  margin-bottom: 8px;
-}
-.tag-bull { background: var(--green-dim); color: var(--green); }
-.tag-bear { background: var(--red-dim); color: var(--red); }
-.tag-neutral { background: var(--gold-dim); color: var(--gold); }
-.card-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.2rem;
-  margin-bottom: 6px;
-}
-.card-subtitle {
-  color: var(--text-dim);
-  font-size: 0.85rem;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.card-meta {
-  margin-top: 12px;
-  display: flex;
-  gap: 12px;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-family: 'IBM Plex Mono', monospace;
-}
-.card-meta span {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
+.p-card:hover { border-color: var(--border-hi); box-shadow: 0 2px 20px #0004; }
 
-/* MODAL */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
-  z-index: 200;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px 20px;
-  overflow-y: auto;
-}
-.modal-overlay.open { display: flex; }
-.modal {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  width: 100%;
-  max-width: 700px;
-  animation: modalIn 0.3s ease;
-  margin-bottom: 40px;
-}
-@keyframes modalIn {
-  from { opacity:0; transform:translateY(24px) scale(0.97); }
-  to { opacity:1; transform:translateY(0) scale(1); }
-}
-.modal-header {
-  padding: 28px 28px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.modal-close {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--surface-2);
-  color: var(--text-dim);
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-  flex-shrink: 0;
-}
-.modal-close:hover { background: var(--surface-3); color: var(--text); }
-.modal-canvas {
-  margin: 20px 28px;
-  height: 220px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.modal-canvas.bull { background: linear-gradient(135deg, var(--green-dim), rgba(34,197,94,0.03)); border: 1px solid rgba(34,197,94,0.15); }
-.modal-canvas.bear { background: linear-gradient(135deg, var(--red-dim), rgba(239,68,68,0.03)); border: 1px solid rgba(239,68,68,0.15); }
-.modal-canvas.neutral { background: linear-gradient(135deg, var(--gold-dim), rgba(245,158,11,0.03)); border: 1px solid rgba(245,158,11,0.15); }
-.modal-canvas svg { width: 85%; height: 85%; }
-.modal-content { padding: 0 28px 28px; }
-.modal-content h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.6rem;
-  margin-bottom: 4px;
-}
-.modal-section {
-  margin-top: 20px;
-}
-.modal-section h3 {
-  font-size: 0.78rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--accent);
-  margin-bottom: 10px;
-  font-family: 'IBM Plex Mono', monospace;
-}
-.modal-section p, .modal-section li {
-  color: var(--text-dim);
-  font-size: 0.92rem;
-  line-height: 1.7;
-}
-.modal-section ul {
-  list-style: none;
-  padding: 0;
-}
-.modal-section li {
-  padding: 6px 0 6px 20px;
-  position: relative;
-}
-.modal-section li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-}
-.modal-tip {
-  margin-top: 20px;
+.p-card-head {
+  display: flex; align-items: center; gap: 14px;
   padding: 16px 18px;
-  background: var(--surface-2);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 10px 10px 0;
 }
-.modal-tip .tip-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--accent);
-  margin-bottom: 6px;
+.p-card-head .icon {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
 }
-.modal-tip p {
-  color: var(--text-dim);
-  font-size: 0.88rem;
-  line-height: 1.6;
+.p-card-head .icon.bull { background: var(--bull-d); color: var(--bull); }
+.p-card-head .icon.bear { background: var(--bear-d); color: var(--bear); }
+.p-card-head .icon.neutral { background: var(--blue-d); color: var(--blue); }
+
+.p-card-head .info { flex: 1; min-width: 0; }
+.p-card-head .info h3 { font-size: 14px; font-weight: 600; }
+.p-card-head .info .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--tx-3);
+  display: flex; gap: 10px; margin-top: 2px;
 }
-.modal-stats {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-  flex-wrap: wrap;
+
+.p-card-head .rel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 4px;
+  flex-shrink: 0;
 }
-.stat-chip {
-  padding: 8px 14px;
-  background: var(--surface-2);
+.rel.high { color: var(--bull); background: var(--bull-d); }
+.rel.med { color: var(--gold); background: var(--gold-d); }
+.rel.low { color: var(--bear); background: var(--bear-d); }
+
+.p-card-body {
+  display: none;
+  padding: 0 18px 18px;
+  border-top: 1px solid var(--border);
+}
+.p-card.open .p-card-body { display: block; animation: panelIn 0.25s ease; }
+
+.p-card-body p { font-size: 13px; color: var(--tx-2); margin-top: 12px; }
+.p-card-body h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 600;
+  color: var(--blue); margin-top: 16px; margin-bottom: 6px;
+}
+.p-card-body ul { list-style: none; padding: 0; }
+.p-card-body ul li {
+  font-size: 13px; color: var(--tx-2);
+  padding: 4px 0 4px 18px;
+  position: relative;
+}
+.p-card-body ul li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--tx-3);
+}
+
+.pro-tip-box {
+  margin-top: 14px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 1px solid var(--gold);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.pro-tip-box .lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  color: var(--gold); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.pro-tip-box p { margin: 0; font-size: 12px; color: var(--tx-2); }
+
+/* ── Strategy Dropdown & Content ── */
+.strat-select-wrap {
+  margin-bottom: 24px;
+}
+.strat-select-wrap label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--tx-3); margin-bottom: 8px;
+}
+.strat-dropdown {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 500;
+  color: var(--tx-1);
+  background: var(--bg-1);
   border: 1px solid var(--border);
   border-radius: 8px;
-  font-size: 0.8rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6a82' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: border-color 0.2s;
 }
-.stat-chip .stat-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
+.strat-dropdown:focus { outline: none; border-color: var(--blue); }
+.strat-dropdown option { background: var(--bg-1); color: var(--tx-1); }
+
+.strat-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--tx-3);
 }
-.stat-chip .stat-value {
-  font-weight: 600;
-  margin-top: 2px;
+.strat-empty .icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+.strat-empty p { font-size: 13px; }
+
+.strat-panel { display: none; animation: panelIn 0.35s ease; }
+.strat-panel.active { display: block; }
+
+/* ── Strategy Sub-tabs ── */
+.sub-tabs {
+  display: flex; gap: 3px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 22px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.sub-tab {
+  flex: 1; min-width: max-content;
+  padding: 9px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  color: var(--tx-3);
+  background: none; border: none;
+  border-radius: 6px; cursor: pointer;
+  transition: all 0.2s; white-space: nowrap;
+}
+.sub-tab:hover { color: var(--tx-2); }
+.sub-tab.active { color: var(--blue); background: var(--blue-d); }
+
+.sub-panel { display: none; animation: panelIn 0.25s ease; }
+.sub-panel.active { display: block; }
+
+/* ── Strategy content cards ── */
+.s-card {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 20px;
+  margin-bottom: 16px;
+  position: relative; overflow: hidden;
+}
+.s-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  opacity: 0.4;
+}
+.s-card.bull::before { background: linear-gradient(90deg, transparent, var(--bull), transparent); }
+.s-card.bear::before { background: linear-gradient(90deg, transparent, var(--bear), transparent); }
+.s-card.gold::before { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.s-card.purple::before { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+
+.s-card h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px; font-weight: 700;
+  margin-bottom: 12px;
+}
+.s-card h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 600;
+  color: var(--blue); margin: 18px 0 8px;
+}
+.s-card p { color: var(--tx-2); font-size: 13px; margin-bottom: 10px; }
+.s-card strong { color: var(--tx-1); }
+
+.step-num {
+  display: inline-flex; align-items:center; justify-content:center;
+  width:24px; height:24px;
+  background: var(--blue-d); border:1px solid var(--blue);
+  border-radius:50%;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px; font-weight:700; color:var(--blue);
+  flex-shrink:0;
+}
+.step-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.step-list li { display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--tx-2); }
+
+/* Diagram */
+.dia-wrap {
+  background: var(--bg-0);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 8px;
+  margin: 16px 0;
+  overflow-x: auto;
+}
+.dia-wrap svg { display:block; margin:0 auto; max-width:100%; height:auto; }
+.dia-label {
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; color:var(--tx-3);
+  margin-top:8px; letter-spacing:1px; text-transform:uppercase;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .hero { padding: 40px 16px 28px; }
-  .grid { grid-template-columns: 1fr; padding: 0 12px 40px; }
-  .modal-header, .modal-content { padding-left: 20px; padding-right: 20px; }
-  .modal-canvas { margin: 16px 20px; height: 180px; }
-  .nav button { padding: 12px 14px; font-size: 0.82rem; }
+/* Compare grid */
+.cmp-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0; }
+@media(max-width:550px){ .cmp-grid{grid-template-columns:1fr;} }
+.cmp-box {
+  background:var(--bg-2); border-radius:8px; padding:14px;
+  border:1px solid var(--border);
+}
+.cmp-box h4 {
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px; font-weight:700; margin-bottom:6px;
+}
+.cmp-box.tbs h4 { color:var(--bull); }
+.cmp-box.tws h4 { color:var(--bear); }
+.cmp-box p { font-size:12px; color:var(--tx-3); margin:0; }
+
+/* Chips */
+.chip-row { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; }
+.chip {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; font-weight:600;
+  padding:4px 10px; border-radius:4px; border:1px solid;
+}
+.chip.bl { color:var(--blue); border-color:var(--blue); background:var(--blue-d); }
+.chip.gr { color:var(--bull); border-color:var(--bull); background:var(--bull-d); }
+.chip.rd { color:var(--bear); border-color:var(--bear); background:var(--bear-d); }
+.chip.gd { color:var(--gold); border-color:var(--gold); background:var(--gold-d); }
+.chip.pr { color:var(--purple); border-color:var(--purple); background:var(--purple-d); }
+
+/* TF Table */
+.tf-tbl { width:100%; border-collapse:collapse; margin:14px 0; font-size:12px; }
+.tf-tbl th {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; font-weight:600; letter-spacing:1px;
+  text-transform:uppercase; color:var(--tx-3);
+  text-align:left; padding:8px 12px;
+  border-bottom:1px solid var(--border);
+}
+.tf-tbl td {
+  padding:10px 12px; border-bottom:1px solid var(--border);
+  color:var(--tx-2);
+}
+.tf-tbl tr:last-child td { border-bottom:none; }
+.tf-tbl td:first-child { color:var(--blue); font-weight:600; font-family:'JetBrains Mono',monospace; }
+.tf-tbl td:nth-child(2) { color:var(--gold); font-family:'JetBrains Mono',monospace; }
+.tf-tbl td:nth-child(3) { color:var(--purple); font-family:'JetBrains Mono',monospace; }
+
+/* Workflow */
+.wf { display:flex; flex-direction:column; gap:0; margin:16px 0; }
+.wf-s {
+  display:flex; gap:14px; align-items:flex-start;
+  position:relative; padding-bottom:20px;
+}
+.wf-s:last-child { padding-bottom:0; }
+.wf-s::before {
+  content:''; position:absolute;
+  left:15px; top:34px; bottom:0; width:2px;
+  background:var(--border);
+}
+.wf-s:last-child::before { display:none; }
+.wf-i {
+  width:32px; height:32px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px; font-weight:700; flex-shrink:0; border:2px solid;
+}
+.wf-i.c1 { background:var(--blue-d); border-color:var(--blue); color:var(--blue); }
+.wf-i.c2 { background:var(--gold-d); border-color:var(--gold); color:var(--gold); }
+.wf-i.c3 { background:var(--purple-d); border-color:var(--purple); color:var(--purple); }
+.wf-i.c4 { background:var(--bull-d); border-color:var(--bull); color:var(--bull); }
+.wf-b h4 { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600; margin-bottom:3px; }
+.wf-b p { font-size:12px; color:var(--tx-3); margin:0; }
+
+/* Session tags */
+.ses-row { display:flex; flex-wrap:wrap; gap:5px; margin:8px 0; }
+.ses-tag {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; padding:3px 9px; border-radius:4px;
+  background:var(--bg-2); border:1px solid var(--border);
+  color:var(--cyan);
 }
 
-/* PWA standalone mode — safe area for notched phones */
-@media (display-mode: standalone) {
-  .hero { padding-top: calc(60px + env(safe-area-inset-top)); }
-  .nav-wrap { padding-top: env(safe-area-inset-top); }
-  body { padding-bottom: env(safe-area-inset-bottom); }
+/* RR box */
+.rr-box {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--bull-d); border:1px solid var(--bull);
+  border-radius:6px; padding:7px 14px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px; font-weight:700; color:var(--bull);
+  margin:10px 0;
 }
+
+/* Pro tip inside strategy */
+.s-tip {
+  margin-top:14px;
+  background: linear-gradient(135deg,#12152a,#141e38);
+  border:1px solid var(--gold); border-left:3px solid var(--gold);
+  border-radius:6px; padding:12px 14px;
+}
+.s-tip .lbl {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; font-weight:700;
+  color:var(--gold); letter-spacing:1.5px;
+  text-transform:uppercase; margin-bottom:4px;
+}
+.s-tip p { margin:0; font-size:12px; color:var(--tx-2); }
 </style>
 </head>
 <body>
+<div class="app">
 
-<div class="hero">
-  <h1>Pattern Dojo</h1>
-  <p>Master candlestick & chart patterns with plain-English explanations. Click any pattern to learn the "why" behind it.</p>
-  <div class="badge">✦ 30+ PATTERNS — INTERACTIVE GUIDE</div>
-</div>
-
-<div class="nav-wrap">
-  <div class="nav" id="nav">
-    <button class="active" data-tab="candle">Candlestick Patterns</button>
-    <button data-tab="chart">Chart Patterns</button>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">Pattern Dojo</div>
+    <h1>Master the Charts</h1>
+    <p>Candlestick patterns, chart formations & trading strategies — all in one place.</p>
   </div>
-</div>
 
-<div class="filters" id="filters">
-  <button class="active-all" data-filter="all">All</button>
-  <button data-filter="bullish">Bullish</button>
-  <button data-filter="bearish">Bearish</button>
-  <button data-filter="neutral">Neutral / Either</button>
-</div>
+  <!-- Main Tabs -->
+  <div class="main-tabs">
+    <button class="main-tab active" data-mt="patterns">Patterns</button>
+    <button class="main-tab" data-mt="strategies">Strategies</button>
+  </div>
 
-<div class="grid" id="grid"></div>
+  <!-- ═══════════════ PATTERNS TAB ═══════════════ -->
+  <div class="main-panel active" id="mt-patterns">
 
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal" id="modal"></div>
-</div>
+    <div class="filter-row">
+      <button class="filter-chip active" data-f="all">All</button>
+      <button class="filter-chip" data-f="bullish">Bullish</button>
+      <button class="filter-chip" data-f="bearish">Bearish</button>
+      <button class="filter-chip" data-f="reversal">Reversal</button>
+      <button class="filter-chip" data-f="continuation">Continuation</button>
+    </div>
+
+    <div class="pattern-grid" id="patternGrid"></div>
+  </div>
+
+  <!-- ═══════════════ STRATEGIES TAB ═══════════════ -->
+  <div class="main-panel" id="mt-strategies">
+
+    <div class="strat-select-wrap">
+      <label>Select Strategy</label>
+      <select class="strat-dropdown" id="stratSelect">
+        <option value="">— Choose a strategy —</option>
+        <option value="crt-tbs">CRT + Turtle Body Soup</option>
+      </select>
+    </div>
+
+    <!-- Empty state -->
+    <div class="strat-empty" id="stratEmpty">
+      <div class="icon">&#9881;</div>
+      <p>Select a strategy from the dropdown above to view the full breakdown.</p>
+    </div>
+
+    <!-- ─── CRT + TBS Strategy ─── -->
+    <div class="strat-panel" id="strat-crt-tbs">
+
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-st="s-overview">Overview</button>
+        <button class="sub-tab" data-st="s-crt">Find CRT</button>
+        <button class="sub-tab" data-st="s-keylevel">Key Levels</button>
+        <button class="sub-tab" data-st="s-tbs">Find TBS</button>
+        <button class="sub-tab" data-st="s-tf">Timeframes</button>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="sub-panel active" id="s-overview">
+        <div class="s-card">
+          <h2>What is CRT?</h2>
+          <p>Every higher-timeframe candle is just a range of price action on a lower timeframe. Candle Range Theory says that range follows a predictable 3-act script — and if you can read it, you can trade the reversal before the crowd realizes the breakout was fake.</p>
+
+          <h3>The 3-Act Play</h3>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Accumulation:</strong> Price chops sideways inside the previous candle's high and low. Orders are being collected quietly.</div></li>
+            <li><span class="step-num">2</span><div><strong>Manipulation:</strong> Price sweeps the liquidity above or below the range — a false breakout that traps retail traders and triggers their stops.</div></li>
+            <li><span class="step-num">3</span><div><strong>Distribution:</strong> The real move begins. Price reverses and drives toward the opposite end of the range (or beyond).</div></li>
+          </ol>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="g1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern>
+                <marker id="aG" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M 0 0 L 7 3.5 L 0 7 Z" fill="#10b981"/></marker>
+              </defs>
+              <rect width="680" height="280" fill="#070b14"/><rect width="680" height="280" fill="url(#g1)"/>
+              <!-- Range -->
+              <rect x="30" y="70" width="620" height="120" fill="#3b82f60a" stroke="#3b82f633" stroke-width="1" stroke-dasharray="6,4" rx="3"/>
+              <text x="40" y="63" font-family="JetBrains Mono" font-size="9" fill="#3b82f6" font-weight="600">CRT RANGE</text>
+              <line x1="30" y1="70" x2="650" y2="70" stroke="#3b82f633" stroke-width="1" stroke-dasharray="4,3"/>
+              <line x1="30" y1="190" x2="650" y2="190" stroke="#3b82f633" stroke-width="1" stroke-dasharray="4,3"/>
+              <text x="654" y="74" font-family="JetBrains Mono" font-size="8" fill="#5a6a82">HIGH</text>
+              <text x="654" y="194" font-family="JetBrains Mono" font-size="8" fill="#5a6a82">LOW</text>
+              <!-- Phase 1 -->
+              <rect x="50" y="95" width="140" height="60" fill="#f59e0b0a" rx="3"/>
+              <text x="85" y="88" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600">1. ACCUMULATION</text>
+              <line x1="85" y1="110" x2="85" y2="145" stroke="#5a6a82" stroke-width="1"/><rect x="80" y="115" width="10" height="20" fill="#10b981" rx="1"/>
+              <line x1="115" y1="108" x2="115" y2="142" stroke="#5a6a82" stroke-width="1"/><rect x="110" y="125" width="10" height="12" fill="#f43f5e" rx="1"/>
+              <line x1="145" y1="112" x2="145" y2="148" stroke="#5a6a82" stroke-width="1"/><rect x="140" y="116" width="10" height="22" fill="#10b981" rx="1"/>
+              <!-- Phase 2 -->
+              <text x="260" y="240" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" font-weight="600">2. MANIPULATION</text>
+              <line x1="270" y1="125" x2="270" y2="228" stroke="#5a6a82" stroke-width="1"/><rect x="265" y="132" width="10" height="48" fill="#f43f5e" rx="1"/>
+              <circle cx="265" cy="210" r="2" fill="#f43f5e" opacity="0.5"/><circle cx="275" cy="218" r="2" fill="#f43f5e" opacity="0.5"/>
+              <text x="285" y="222" font-family="JetBrains Mono" font-size="8" fill="#f43f5e88">SWEEP</text>
+              <!-- Reversal -->
+              <line x1="315" y1="150" x2="315" y2="215" stroke="#5a6a82" stroke-width="1"/><rect x="310" y="155" width="10" height="42" fill="#10b981" rx="1"/>
+              <!-- Phase 3 -->
+              <text x="390" y="52" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="600">3. DISTRIBUTION</text>
+              <line x1="385" y1="85" x2="385" y2="168" stroke="#5a6a82" stroke-width="1"/><rect x="380" y="90" width="10" height="58" fill="#10b981" rx="1"/>
+              <line x1="420" y1="62" x2="420" y2="125" stroke="#5a6a82" stroke-width="1"/><rect x="415" y="67" width="10" height="40" fill="#10b981" rx="1"/>
+              <line x1="455" y1="45" x2="455" y2="95" stroke="#5a6a82" stroke-width="1"/><rect x="450" y="50" width="10" height="30" fill="#10b981" rx="1"/>
+              <path d="M 475 55 L 510 38" fill="none" stroke="#10b981" stroke-width="1.5" marker-end="url(#aG)"/>
+              <text x="515" y="40" font-family="JetBrains Mono" font-size="8" fill="#10b981">REAL MOVE</text>
+              <!-- EQ line -->
+              <line x1="30" y1="130" x2="650" y2="130" stroke="#a78bfa33" stroke-width="1" stroke-dasharray="3,5"/>
+              <text x="600" y="126" font-family="JetBrains Mono" font-size="8" fill="#a78bfa">50% EQ</text>
+            </svg>
+            <div class="dia-label">CRT 3-Phase Model — Bullish Reversal</div>
+          </div>
+
+          <p>The golden rule: <strong>when one candle sweeps the previous candle's high or low and price returns inside the range, the real move is toward the opposite extreme.</strong></p>
+        </div>
+
+        <div class="s-card gold">
+          <h2>What is Turtle Body Soup?</h2>
+          <p>TBS is the <strong>entry method</strong> inside a CRT setup. The name is a play on the original Turtle Traders who traded breakouts — Turtle Soup flips that by fading false breakouts and "making soup out of the turtles."</p>
+          <p>The "body" part is critical: in TBS, the manipulation candle's <strong>body closes beyond</strong> the previous high or low. This traps more traders than a wick-only sweep, creating a higher-probability reversal.</p>
+
+          <div class="cmp-grid">
+            <div class="cmp-box tbs">
+              <h4>TBS (Turtle Body Soup)</h4>
+              <p>Body CLOSES beyond the level. Stronger trap = higher probability. More liquidity grabbed.</p>
+            </div>
+            <div class="cmp-box tws">
+              <h4>TWS (Turtle Wick Soup)</h4>
+              <p>Only the WICK pokes past. Body stays inside. Weaker signal — fewer traders trapped.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FIND CRT -->
+      <div class="sub-panel" id="s-crt">
+        <div class="s-card">
+          <h2>How to Find the CRT Candle</h2>
+          <p>You're looking for a 3-candle sequence on your HTF where the middle candle sweeps one side of the range and the third expands to the other.</p>
+
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Pick your HTF candle</strong> — Daily, 4H, or 1H. Mark its high and low — that's your range.</div></li>
+            <li><span class="step-num">2</span><div><strong>Watch Candle 2</strong> — Does it break the high or low but close back inside the range? That's your manipulation = CRT trigger.</div></li>
+            <li><span class="step-num">3</span><div><strong>Candle 3 = Distribution</strong> — Price expands toward the opposite extreme. This is where your trade lives.</div></li>
+          </ol>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="g2" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern>
+                <marker id="aGy" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M 0 0 L 6 3 L 0 6 Z" fill="#5a6a82"/></marker>
+              </defs>
+              <rect width="680" height="300" fill="#070b14"/><rect width="680" height="300" fill="url(#g2)"/>
+              <line x1="40" y1="75" x2="640" y2="75" stroke="#3b82f633" stroke-width="1" stroke-dasharray="5,4"/>
+              <line x1="40" y1="210" x2="640" y2="210" stroke="#3b82f633" stroke-width="1" stroke-dasharray="5,4"/>
+              <text x="45" y="68" font-family="JetBrains Mono" font-size="9" fill="#3b82f6">RANGE HIGH</text>
+              <text x="45" y="226" font-family="JetBrains Mono" font-size="9" fill="#3b82f6">RANGE LOW</text>
+              <!-- C1 -->
+              <rect x="90" y="70" width="75" height="145" fill="#3b82f608" stroke="#3b82f622" stroke-width="1" rx="3"/>
+              <text x="102" y="58" font-family="JetBrains Mono" font-size="10" fill="#3b82f6" font-weight="700">CANDLE 1</text>
+              <text x="95" y="280" font-family="JetBrains Mono" font-size="9" fill="#5a6a82">THE RANGE</text>
+              <line x1="128" y1="75" x2="128" y2="210" stroke="#5a6a82" stroke-width="1"/>
+              <rect x="118" y="95" width="20" height="95" fill="#3b82f633" stroke="#3b82f6" stroke-width="1" rx="2"/>
+              <!-- C2 -->
+              <rect x="240" y="70" width="75" height="190" fill="#f43f5e08" stroke="#f43f5e22" stroke-width="1" rx="3"/>
+              <text x="248" y="58" font-family="JetBrains Mono" font-size="10" fill="#f43f5e" font-weight="700">CANDLE 2</text>
+              <text x="237" y="280" font-family="JetBrains Mono" font-size="9" fill="#5a6a82">MANIPULATION</text>
+              <line x1="278" y1="100" x2="278" y2="255" stroke="#5a6a82" stroke-width="1"/>
+              <rect x="268" y="110" width="20" height="75" fill="#f43f5e" rx="2"/>
+              <circle cx="278" cy="255" r="7" fill="none" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <text x="295" y="248" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">SWEEPS LOW</text>
+              <text x="295" y="260" font-family="JetBrains Mono" font-size="8" fill="#f43f5e66">body inside = CRT ✓</text>
+              <!-- C3 -->
+              <rect x="400" y="45" width="75" height="170" fill="#10b98108" stroke="#10b98122" stroke-width="1" rx="3"/>
+              <text x="408" y="38" font-family="JetBrains Mono" font-size="10" fill="#10b981" font-weight="700">CANDLE 3</text>
+              <text x="400" y="280" font-family="JetBrains Mono" font-size="9" fill="#5a6a82">DISTRIBUTION</text>
+              <line x1="438" y1="52" x2="438" y2="200" stroke="#5a6a82" stroke-width="1"/>
+              <rect x="428" y="60" width="20" height="110" fill="#10b981" rx="2"/>
+              <text x="460" y="80" font-family="JetBrains Mono" font-size="8" fill="#10b981">EXPANDS</text>
+              <text x="460" y="92" font-family="JetBrains Mono" font-size="8" fill="#10b981">OPPOSITE</text>
+              <!-- Arrows -->
+              <path d="M 170 145 L 235 145" fill="none" stroke="#5a6a82" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aGy)"/>
+              <path d="M 320 145 L 395 145" fill="none" stroke="#5a6a82" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aGy)"/>
+            </svg>
+            <div class="dia-label">CRT 3-Candle Identification — Bullish Setup</div>
+          </div>
+
+          <div class="s-tip">
+            <div class="lbl">Pro Tip</div>
+            <p>The deeper the sweep wick and the stronger the close back inside the range, the higher probability. A candle that barely tags the level is weak. You want a convincing stab that grabs real liquidity — then a decisive rejection.</p>
+          </div>
+        </div>
+
+        <div class="s-card bull">
+          <h2>Good CRT Candle Checklist</h2>
+          <ol class="step-list">
+            <li><span class="step-num">✓</span><div><strong>Clear range:</strong> Candle 1 has a well-defined high and low with decent body size.</div></li>
+            <li><span class="step-num">✓</span><div><strong>Sweep + rejection:</strong> Candle 2 pokes past one extreme but body closes back inside.</div></li>
+            <li><span class="step-num">✓</span><div><strong>At a key level:</strong> The range sits at significant S/R (PDH, PDL, OB, FVG).</div></li>
+            <li><span class="step-num">✓</span><div><strong>Session timing:</strong> Sweep happens during a killzone when volume supports the move.</div></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- KEY LEVELS -->
+      <div class="sub-panel" id="s-keylevel">
+        <div class="s-card purple">
+          <h2>How to Find Key Levels</h2>
+          <p>A CRT without a key level is like fishing in a bathtub. Key levels are where stop orders cluster and institutions go hunting.</p>
+
+          <h3>Liquidity Pools</h3>
+          <div class="chip-row">
+            <span class="chip bl">PDH / PDL</span>
+            <span class="chip bl">PWH / PWL</span>
+            <span class="chip bl">PMH / PML</span>
+            <span class="chip gd">Session H/L</span>
+          </div>
+          <p>Previous Day/Week/Month High/Low — where retail traders cluster their stops.</p>
+
+          <h3>Order Blocks</h3>
+          <p>The last bullish candle before a big drop (bearish OB) or the last bearish candle before a rally (bullish OB). These represent where institutional money entered.</p>
+
+          <h3>Fair Value Gaps (FVGs)</h3>
+          <p>Three-candle gaps where price moved so fast it left an imbalance. Price tends to return and fill these.</p>
+
+          <h3>Round Numbers</h3>
+          <div class="chip-row">
+            <span class="chip gr">$50K BTC</span>
+            <span class="chip rd">$100 Stock</span>
+            <span class="chip pr">1.0000 FX</span>
+            <span class="chip gd">$2,000 Gold</span>
+          </div>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="g3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="260" fill="#070b14"/><rect width="680" height="260" fill="url(#g3)"/>
+              <!-- Key level zone -->
+              <rect x="30" y="140" width="620" height="25" fill="#a78bfa0a" rx="2"/>
+              <line x1="30" y1="152" x2="650" y2="152" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="8,4"/>
+              <text x="35" y="135" font-family="JetBrains Mono" font-size="9" fill="#a78bfa" font-weight="600">KEY LEVEL (PDL / OB / FVG)</text>
+              <!-- Bearish into level -->
+              <line x1="85" y1="40" x2="85" y2="80" stroke="#5a6a82" stroke-width="1"/><rect x="79" y="45" width="12" height="24" fill="#f43f5e" rx="1"/>
+              <line x1="135" y1="60" x2="135" y2="105" stroke="#5a6a82" stroke-width="1"/><rect x="129" y="65" width="12" height="26" fill="#f43f5e" rx="1"/>
+              <line x1="185" y1="80" x2="185" y2="130" stroke="#5a6a82" stroke-width="1"/><rect x="179" y="88" width="12" height="28" fill="#f43f5e" rx="1"/>
+              <!-- CRT Range -->
+              <rect x="230" y="100" width="65" height="60" fill="#3b82f608" stroke="#3b82f622" stroke-width="1" stroke-dasharray="4,3" rx="3"/>
+              <text x="235" y="94" font-family="JetBrains Mono" font-size="8" fill="#3b82f6">CRT RANGE</text>
+              <line x1="262" y1="102" x2="262" y2="158" stroke="#5a6a82" stroke-width="1"/><rect x="256" y="110" width="12" height="38" fill="#3b82f644" rx="1"/>
+              <!-- Sweep -->
+              <line x1="330" y1="108" x2="330" y2="200" stroke="#5a6a82" stroke-width="1"/><rect x="324" y="118" width="12" height="35" fill="#f43f5e" rx="1"/>
+              <circle cx="330" cy="190" r="3" fill="#f43f5e" opacity="0.4"/>
+              <text x="348" y="192" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">SWEEP</text>
+              <!-- Reversal -->
+              <line x1="395" y1="80" x2="395" y2="175" stroke="#5a6a82" stroke-width="1"/><rect x="389" y="88" width="12" height="65" fill="#10b981" rx="1"/>
+              <line x1="445" y1="55" x2="445" y2="115" stroke="#5a6a82" stroke-width="1"/><rect x="439" y="60" width="12" height="38" fill="#10b981" rx="1"/>
+              <line x1="495" y1="32" x2="495" y2="82" stroke="#5a6a82" stroke-width="1"/><rect x="489" y="37" width="12" height="30" fill="#10b981" rx="1"/>
+              <text x="515" y="45" font-family="JetBrains Mono" font-size="8" fill="#10b981">DISTRIBUTION</text>
+              <!-- Bottom annotation -->
+              <text x="200" y="248" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600">CRT + KEY LEVEL = HIGH PROBABILITY</text>
+            </svg>
+            <div class="dia-label">CRT at a Key Support Level — Bullish Reversal</div>
+          </div>
+
+          <div class="s-tip">
+            <div class="lbl">Pro Tip</div>
+            <p>Stack confluences. PDL sitting on a bullish OB AND a FVG? When the CRT sweep goes through all three, that's a triple-confluence zone. Those are the A+ setups.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FIND TBS -->
+      <div class="sub-panel" id="s-tbs">
+        <div class="s-card bear">
+          <h2>How to Find TBS</h2>
+          <p>TBS is your precision entry. The key: the sweep candle's <strong>body closes beyond</strong> the previous level — not just the wick.</p>
+
+          <h3>TBS Model #1 — Standard Entry</h3>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Mark CRT Range:</strong> HTF candle's high and low = your boundaries.</div></li>
+            <li><span class="step-num">2</span><div><strong>Wait for TBS Sweep:</strong> Next candle's BODY closes beyond the high or low.</div></li>
+            <li><span class="step-num">3</span><div><strong>Confirm MSS on LTF:</strong> Drop to lower TF, look for a Market Structure Shift opposing the sweep direction.</div></li>
+            <li><span class="step-num">4</span><div><strong>Enter at OB/FVG:</strong> After MSS, enter on the retest of the OB or FVG created by the reversal.</div></li>
+            <li><span class="step-num">5</span><div><strong>SL & TP:</strong> SL beyond the sweep wick. TP at opposite CRT range extreme (100%).</div></li>
+          </ol>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="g4" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern>
+                <marker id="aGo" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M 0 0 L 6 3 L 0 6 Z" fill="#f59e0b"/></marker>
+              </defs>
+              <rect width="680" height="320" fill="#070b14"/><rect width="680" height="320" fill="url(#g4)"/>
+              <!-- CRT lines -->
+              <line x1="25" y1="75" x2="655" y2="75" stroke="#3b82f633" stroke-width="1" stroke-dasharray="5,4"/>
+              <line x1="25" y1="190" x2="655" y2="190" stroke="#3b82f633" stroke-width="1" stroke-dasharray="5,4"/>
+              <text x="30" y="68" font-family="JetBrains Mono" font-size="9" fill="#3b82f6">CRT HIGH</text>
+              <text x="30" y="206" font-family="JetBrains Mono" font-size="9" fill="#3b82f6">CRT LOW</text>
+              <!-- C1 Range -->
+              <line x1="80" y1="75" x2="80" y2="190" stroke="#5a6a82" stroke-width="1"/>
+              <rect x="71" y="90" width="18" height="82" fill="#3b82f633" stroke="#3b82f6" stroke-width="1" rx="2"/>
+              <text x="60" y="290" font-family="JetBrains Mono" font-size="8" fill="#5a6a82">RANGE</text>
+              <!-- C2 TBS sweep -->
+              <line x1="160" y1="110" x2="160" y2="258" stroke="#5a6a82" stroke-width="1"/>
+              <rect x="151" y="118" width="18" height="105" fill="#f43f5e" rx="2"/>
+              <text x="125" y="290" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">TBS CANDLE</text>
+              <!-- Body close annotation -->
+              <rect x="185" y="192" width="92" height="35" fill="#f43f5e0a" stroke="#f43f5e33" stroke-width="1" rx="3"/>
+              <text x="193" y="207" font-family="JetBrains Mono" font-size="8" fill="#f43f5e" font-weight="600">BODY CLOSES</text>
+              <text x="193" y="220" font-family="JetBrains Mono" font-size="8" fill="#f43f5e" font-weight="600">BELOW LOW</text>
+              <!-- SL -->
+              <line x1="135" y1="262" x2="360" y2="262" stroke="#f43f5e66" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="300" y="278" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">SL</text>
+              <!-- MSS box -->
+              <rect x="230" y="130" width="80" height="48" fill="#a78bfa0a" stroke="#a78bfa33" stroke-width="1" rx="3"/>
+              <text x="238" y="148" font-family="JetBrains Mono" font-size="8" fill="#a78bfa" font-weight="600">LTF shows:</text>
+              <text x="238" y="165" font-family="JetBrains Mono" font-size="8" fill="#a78bfa">MSS + FVG</text>
+              <!-- Entry -->
+              <rect x="330" y="155" width="50" height="20" fill="#10b98133" stroke="#10b981" stroke-width="1" rx="3"/>
+              <text x="337" y="169" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="700">ENTRY</text>
+              <!-- Distribution -->
+              <line x1="415" y1="82" x2="415" y2="178" stroke="#5a6a82" stroke-width="1"/><rect x="406" y="90" width="18" height="65" fill="#10b981" rx="2"/>
+              <line x1="468" y1="55" x2="468" y2="118" stroke="#5a6a82" stroke-width="1"/><rect x="459" y="60" width="18" height="42" fill="#10b981" rx="2"/>
+              <line x1="520" y1="30" x2="520" y2="82" stroke="#5a6a82" stroke-width="1"/><rect x="511" y="35" width="18" height="32" fill="#10b981" rx="2"/>
+              <!-- TP -->
+              <line x1="395" y1="75" x2="580" y2="75" stroke="#10b98188" stroke-width="1.5"/>
+              <text x="545" y="68" font-family="JetBrains Mono" font-size="8" fill="#10b981">TP (CRT HIGH)</text>
+              <!-- RR arrow -->
+              <line x1="610" y1="262" x2="610" y2="78" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#aGo)"/>
+              <text x="620" y="172" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="700" transform="rotate(-90, 625, 172)">R:R 1:3+</text>
+            </svg>
+            <div class="dia-label">TBS Model #1 — Bullish Entry (Bearish Body Sweep)</div>
+          </div>
+
+          <div class="rr-box">Min R:R — 1:2 &nbsp;|&nbsp; Target — 1:3 to 1:5</div>
+
+          <div class="s-tip">
+            <div class="lbl">TBS vs TWS</div>
+            <p>TBS (body close beyond) is the A+ setup. TWS (wick only) is valid but lower probability. Focus on TBS first. Context and key levels always matter more than the pattern alone.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMEFRAMES -->
+      <div class="sub-panel" id="s-tf">
+        <div class="s-card">
+          <h2>CRT + TBS Timeframe Pairing</h2>
+          <p>Use the HTF to spot the range, the mid-TF to see the sweep, and the LTF to confirm entry. Time is more crucial than price.</p>
+
+          <table class="tf-tbl">
+            <thead><tr><th>CRT Range (HTF)</th><th>TBS Sweep (Mid)</th><th>Entry (LTF)</th></tr></thead>
+            <tbody>
+              <tr><td>Daily</td><td>4H / 1H</td><td>15m / 5m</td></tr>
+              <tr><td>4H</td><td>1H / 30m</td><td>15m / 5m</td></tr>
+              <tr><td>1H</td><td>15m</td><td>5m / 3m</td></tr>
+              <tr><td>15m</td><td>5m</td><td>1m</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Execution Workflow</h3>
+          <div class="wf">
+            <div class="wf-s"><div class="wf-i c1">1</div><div class="wf-b"><h4 style="color:var(--blue);">HTF — Identify CRT Range</h4><p>Find range candle at a key level. Mark high/low. Determine directional bias.</p></div></div>
+            <div class="wf-s"><div class="wf-i c2">2</div><div class="wf-b"><h4 style="color:var(--gold);">Mid-TF — Watch for TBS Sweep</h4><p>Body closing beyond the range? TBS. Only wick? TWS (lower prob). Wait for the close.</p></div></div>
+            <div class="wf-s"><div class="wf-i c3">3</div><div class="wf-b"><h4 style="color:var(--purple);">LTF — Confirm MSS + Entry</h4><p>Drop to 5m/1m. Find the Market Structure Shift. Enter at the OB or FVG retest.</p></div></div>
+            <div class="wf-s"><div class="wf-i c4">4</div><div class="wf-b"><h4 style="color:var(--bull);">Execute the Trade</h4><p>Entry at OB/FVG. SL beyond sweep wick. TP1 at 50% EQ. TP2 at opposite extreme. Trail rest.</p></div></div>
+          </div>
+
+          <h3>Key Session Times (EST)</h3>
+          <div class="ses-row">
+            <span class="ses-tag">1:00 AM</span>
+            <span class="ses-tag">5:00 AM</span>
+            <span class="ses-tag">9:00 AM</span>
+            <span class="ses-tag">1:00 PM</span>
+            <span class="ses-tag">3:00 PM</span>
+            <span class="ses-tag">9:00 PM</span>
+          </div>
+          <p style="margin-top:8px;font-size:13px;color:var(--tx-2);">London and NY Open are highest volume. Asian sweeps confirmed during London = the Judas Swing.</p>
+
+          <div class="s-tip">
+            <div class="lbl">Mental Model</div>
+            <p><strong>CRT</strong> = WHERE the play is. <strong>TBS</strong> = THE TRAP IS SET. <strong>LTF MSS</strong> = PULL THE TRIGGER. All three = A+ setup.</p>
+          </div>
+        </div>
+
+        <div class="s-card gold">
+          <h2>Quick Reference Checklist</h2>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>HTF Bias:</strong> Larger trend? At a key level?</div></li>
+            <li><span class="step-num">2</span><div><strong>CRT Range:</strong> Can I clearly mark the range high and low?</div></li>
+            <li><span class="step-num">3</span><div><strong>TBS Confirmed:</strong> Body close beyond? (Not just wick)</div></li>
+            <li><span class="step-num">4</span><div><strong>Session:</strong> Is this during a killzone?</div></li>
+            <li><span class="step-num">5</span><div><strong>LTF MSS:</strong> Clear structure shift on lower TF?</div></li>
+            <li><span class="step-num">6</span><div><strong>Entry Zone:</strong> OB or FVG to enter on retest?</div></li>
+            <li><span class="step-num">7</span><div><strong>R:R:</strong> At least 1:2 to opposite range extreme?</div></li>
+          </ol>
+        </div>
+      </div>
+
+    </div><!-- end strat-crt-tbs -->
+
+  </div><!-- end strategies panel -->
+
+</div><!-- end app -->
 
 <script>
-// ─── DATA ──────────────────────────────────────────────
-const patterns = {
-candle: [
-  {
-    name: "Hammer",
-    type: "bullish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "Sellers pushed hard, but buyers slammed the door shut.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="100" y1="20" x2="100" y2="50" stroke="#555" stroke-width="2"/><rect x="80" y="50" width="40" height="20" rx="3" fill="#22c55e"/><line x1="100" y1="70" x2="100" y2="145" stroke="#555" stroke-width="2"/></svg>`,
-    what: "A small body sitting near the top of the candle, with a very long lower wick (at least 2x the body) and little or no upper wick.",
-    story: "Imagine a tug-of-war. The bears dragged the price way down during the session — it looked like they were winning big. But then the bulls made a massive comeback, pushing the price almost all the way back up. That long lower wick is the scar from the battle the bears lost. It appears after a downtrend and signals that sellers are running out of steam.",
-    howToTrade: [
-      "Look for it at the bottom of a downtrend or near support",
-      "Confirmation = next candle closes green/above the hammer",
-      "Stop loss below the hammer's low",
-      "Target: nearest resistance or 1:2 risk-reward"
-    ],
-    proTip: "A green (bullish) hammer is slightly more powerful than a red one, but both are valid. Volume spike on the hammer adds extra conviction."
-  },
-  {
-    name: "Inverted Hammer",
-    type: "bullish",
-    reliability: "Moderate",
-    timeframe: "All",
-    subtitle: "Bulls tested the ceiling — a reversal might be brewing.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="100" y1="15" x2="100" y2="90" stroke="#555" stroke-width="2"/><rect x="80" y="90" width="40" height="20" rx="3" fill="#22c55e"/><line x1="100" y1="110" x2="100" y2="140" stroke="#555" stroke-width="2"/></svg>`,
-    what: "A small body near the bottom of the candle with a long upper wick (2x+ body) and little lower wick. Found after a downtrend.",
-    story: "After the market's been falling, suddenly buyers show up and push price sharply higher during the session. They can't hold it all, and the price slips back down — but the message is clear: buyers are waking up. Think of it as a trial balloon. The bulls are testing the waters, and if the next candle confirms, the reversal is on.",
-    howToTrade: [
-      "Must appear after a downtrend",
-      "Wait for next candle to close above the inverted hammer's body",
-      "Stop loss below the low",
-      "Works best near key support zones"
-    ],
-    proTip: "This one needs confirmation more than the regular hammer. Don't jump in until that next green candle shows up."
-  },
-  {
-    name: "Bullish Engulfing",
-    type: "bullish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "Bulls completely swallowed the previous bar — a power move.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="75" y1="40" x2="75" y2="60" stroke="#555" stroke-width="2"/><rect x="60" y="60" width="30" height="40" rx="3" fill="#ef4444"/><line x1="75" y1="100" x2="75" y2="120" stroke="#555" stroke-width="2"/><line x1="130" y1="30" x2="130" y2="50" stroke="#555" stroke-width="2"/><rect x="110" y="50" width="40" height="55" rx="3" fill="#22c55e"/><line x1="130" y1="105" x2="130" y2="130" stroke="#555" stroke-width="2"/></svg>`,
-    what: "A two-candle pattern: a small red candle followed by a larger green candle whose body completely covers ('engulfs') the previous red body.",
-    story: "Day one: bears are in control, pushing price down — nothing unusual. Day two: the bulls show up with overwhelming force. They open lower than yesterday's close (scary for a moment!), then rocket the price up past yesterday's open. It's like the bears threw a punch and the bulls caught their fist and pushed them backwards. The bigger the second candle, the stronger the signal.",
-    howToTrade: [
-      "Most powerful at the end of a downtrend or at support",
-      "Enter at the close of the green engulfing candle",
-      "Stop loss below the low of the engulfing candle",
-      "Target previous swing high or 1:2 RR"
-    ],
-    proTip: "If the engulfing candle also swallows the wicks (not just the body) of the previous candle, that's a mega-strong signal called a 'full engulfing'."
-  },
-  {
-    name: "Morning Star",
-    type: "bullish",
-    reliability: "Very High",
-    timeframe: "Daily+",
-    subtitle: "Three candles that tell the complete story of a reversal.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="45" y1="25" x2="45" y2="40" stroke="#555" stroke-width="2"/><rect x="30" y="40" width="30" height="50" rx="3" fill="#ef4444"/><line x1="45" y1="90" x2="45" y2="105" stroke="#555" stroke-width="2"/><line x1="100" y1="90" x2="100" y2="98" stroke="#555" stroke-width="2"/><rect x="88" y="98" width="24" height="12" rx="3" fill="#888"/><line x1="100" y1="110" x2="100" y2="125" stroke="#555" stroke-width="2"/><line x1="155" y1="25" x2="155" y2="45" stroke="#555" stroke-width="2"/><rect x="140" y="45" width="30" height="45" rx="3" fill="#22c55e"/><line x1="155" y1="90" x2="155" y2="105" stroke="#555" stroke-width="2"/></svg>`,
-    what: "Three candles: (1) a big red candle, (2) a small-bodied candle (any color) that gaps down, and (3) a big green candle that closes into the body of candle #1.",
-    story: "Act 1: The bears are dominating, pushing a big red candle. Feels hopeless. Act 2: The next day opens with a gap down, but... the candle is tiny. Neither side can win. This is the moment of indecision — the tide is turning. Act 3: The bulls charge in with a massive green candle, reclaiming lost ground. It's called 'morning star' because it's the star that appears just before sunrise — darkness is ending.",
-    howToTrade: [
-      "Best on daily charts or higher",
-      "Enter after the third candle closes",
-      "Stop loss below the low of the middle candle (the star)",
-      "The deeper the third candle penetrates the first, the stronger the signal"
-    ],
-    proTip: "If the middle candle is a doji (open = close), it's called a 'Morning Doji Star' and it's even more powerful. It means absolute indecision before the reversal."
-  },
-  {
-    name: "Three White Soldiers",
-    type: "bullish",
-    reliability: "Very High",
-    timeframe: "Daily+",
-    subtitle: "Three consecutive green candles marching upward — bulls in full control.",
-    svg: `<svg viewBox="0 0 200 160"><rect x="30" y="85" width="30" height="40" rx="3" fill="#22c55e"/><line x1="45" y1="75" x2="45" y2="85" stroke="#555" stroke-width="2"/><line x1="45" y1="125" x2="45" y2="135" stroke="#555" stroke-width="2"/><rect x="85" y="55" width="30" height="40" rx="3" fill="#22c55e"/><line x1="100" y1="45" x2="100" y2="55" stroke="#555" stroke-width="2"/><line x1="100" y1="95" x2="100" y2="100" stroke="#555" stroke-width="2"/><rect x="140" y="25" width="30" height="40" rx="3" fill="#22c55e"/><line x1="155" y1="15" x2="155" y2="25" stroke="#555" stroke-width="2"/><line x1="155" y1="65" x2="155" y2="72" stroke="#555" stroke-width="2"/></svg>`,
-    what: "Three consecutive long green candles, each opening within the previous candle's body and closing near its high.",
-    story: "This is an army on the march. Each day, buyers show up with even more confidence. The candles open within the body of the prior candle (showing overlap, no gaps = sustainable move) and close near their highs (no profit-taking weakness). It's like momentum building — wave after wave of buying pressure. The bears have completely retreated.",
-    howToTrade: [
-      "Best after a downtrend or consolidation",
-      "Can enter after the third candle with tight stop",
-      "Watch for overextension — if wicks get long, momentum may fade",
-      "Works great when combined with a support zone bounce"
-    ],
-    proTip: "If the candles are getting progressively shorter or growing long upper wicks, that's 'advance block' — a weakening version that might stall."
-  },
-  {
-    name: "Piercing Line",
-    type: "bullish",
-    reliability: "Moderate",
-    timeframe: "All",
-    subtitle: "Bulls pierced deep into bear territory — a counter-attack begins.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="70" y1="20" x2="70" y2="40" stroke="#555" stroke-width="2"/><rect x="55" y="40" width="30" height="55" rx="3" fill="#ef4444"/><line x1="70" y1="95" x2="70" y2="115" stroke="#555" stroke-width="2"/><line x1="130" y1="50" x2="130" y2="65" stroke="#555" stroke-width="2"/><rect x="115" y="65" width="30" height="50" rx="3" fill="#22c55e" opacity="0.9"/><line x1="130" y1="115" x2="130" y2="140" stroke="#555" stroke-width="2"/></svg>`,
-    what: "Two candles: a big red candle followed by a green candle that opens below the prior low but closes above the midpoint of the red candle's body.",
-    story: "The bears make a strong push on day one. Next day opens even lower — panic! But then the bulls step in and rally so hard that they close above the halfway point of yesterday's red candle. It's like the bears overstretched and the bulls found a crack in their armor. The deeper the green candle penetrates, the stronger the reversal signal.",
-    howToTrade: [
-      "Must close above 50% of the previous red candle's body",
-      "Confirm with next candle or volume increase",
-      "Stop loss below the piercing candle's low",
-      "Best at support levels"
-    ],
-    proTip: "If the green candle closes above the red candle's open (fully engulfs), it becomes a Bullish Engulfing — an even stronger pattern."
-  },
-  {
-    name: "Hanging Man",
-    type: "bearish",
-    reliability: "Moderate",
-    timeframe: "All",
-    subtitle: "Looks like a hammer, but at the top — trouble is coming.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="100" y1="20" x2="100" y2="45" stroke="#555" stroke-width="2"/><rect x="80" y="45" width="40" height="20" rx="3" fill="#ef4444"/><line x1="100" y1="65" x2="100" y2="145" stroke="#555" stroke-width="2"/></svg>`,
-    what: "Same shape as a hammer (small body at top, long lower wick), but it appears after an uptrend. The context flips its meaning entirely.",
-    story: "Here's the twist: same candle shape, totally different story. After the market has been rising, this pattern says 'hey, during today's session, sellers managed to push price WAY down before buyers recovered it.' That selling pressure is a warning sign. The party might be ending. Think of it as the first crack in the dam — the long wick shows that someone big was selling hard today.",
-    howToTrade: [
-      "Only valid after an uptrend or at resistance",
-      "Wait for confirmation — next candle closing below the hanging man",
-      "Stop loss above the high",
-      "Red hanging man is slightly more bearish than green"
-    ],
-    proTip: "Many traders get faked out here. Always wait for confirmation. A hanging man without follow-through is just a regular candle."
-  },
-  {
-    name: "Shooting Star",
-    type: "bearish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "Bulls shot for the sky and got rejected — reversal incoming.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="100" y1="15" x2="100" y2="90" stroke="#555" stroke-width="2"/><rect x="80" y="90" width="40" height="20" rx="3" fill="#ef4444"/><line x1="100" y1="110" x2="100" y2="135" stroke="#555" stroke-width="2"/></svg>`,
-    what: "Small body near the bottom of the candle, with a very long upper wick (2x+ body) and little lower wick. Appears after an uptrend.",
-    story: "Buyers got super excited and pushed price sharply higher — then reality hit. Sellers slammed it right back down to near the open. That long upper wick is a rejection. It's like someone tried to break through a ceiling and got knocked back hard. The longer the wick, the more violent the rejection. This is the market screaming 'we don't want higher prices right now.'",
-    howToTrade: [
-      "Best after a strong uptrend or at resistance",
-      "Enter short on confirmation (next red candle)",
-      "Stop loss above the shooting star's high",
-      "Combine with resistance/supply zones for high probability"
-    ],
-    proTip: "A shooting star at a major resistance level that also has declining volume? That's a A+ setup. Layer your confluences."
-  },
-  {
-    name: "Bearish Engulfing",
-    type: "bearish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "Bears engulfed the bulls — the power shift is here.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="75" y1="40" x2="75" y2="55" stroke="#555" stroke-width="2"/><rect x="60" y="55" width="30" height="40" rx="3" fill="#22c55e"/><line x1="75" y1="95" x2="75" y2="115" stroke="#555" stroke-width="2"/><line x1="130" y1="30" x2="130" y2="45" stroke="#555" stroke-width="2"/><rect x="110" y="45" width="40" height="55" rx="3" fill="#ef4444"/><line x1="130" y1="100" x2="130" y2="125" stroke="#555" stroke-width="2"/></svg>`,
-    what: "A small green candle followed by a larger red candle whose body completely engulfs the previous green body.",
-    story: "Day one: bulls are cruising, nice little green candle. Day two: bears open higher (for a split second it looks great!) then crush the price all the way below yesterday's open. It's a total overtake. Like a bigger fish swallowing a smaller one. The message is clear — the balance of power has shifted to sellers. The bigger the red candle relative to the green, the louder the warning.",
-    howToTrade: [
-      "Strongest at the top of an uptrend or at resistance",
-      "Enter short at the close of the engulfing candle",
-      "Stop loss above the high of the pattern",
-      "Target nearest support or 1:2 RR"
-    ],
-    proTip: "Bearish engulfing + high volume + RSI overbought = triple confluence. That's a high-confidence short setup."
-  },
-  {
-    name: "Evening Star",
-    type: "bearish",
-    reliability: "Very High",
-    timeframe: "Daily+",
-    subtitle: "The mirror of the Morning Star — the sun is setting on the uptrend.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="45" y1="55" x2="45" y2="75" stroke="#555" stroke-width="2"/><rect x="30" y="75" width="30" height="50" rx="3" fill="#22c55e"/><line x1="45" y1="125" x2="45" y2="140" stroke="#555" stroke-width="2"/><line x1="100" y1="35" x2="100" y2="45" stroke="#555" stroke-width="2"/><rect x="88" y="45" width="24" height="12" rx="3" fill="#888"/><line x1="100" y1="57" x2="100" y2="68" stroke="#555" stroke-width="2"/><line x1="155" y1="55" x2="155" y2="70" stroke="#555" stroke-width="2"/><rect x="140" y="70" width="30" height="50" rx="3" fill="#ef4444"/><line x1="155" y1="120" x2="155" y2="140" stroke="#555" stroke-width="2"/></svg>`,
-    what: "Three candles: (1) a big green candle, (2) a small candle that gaps up, and (3) a big red candle that closes deep into candle #1's body.",
-    story: "Act 1: Bulls are partying — big green candle, euphoria. Act 2: Next candle gaps up but barely moves — the momentum stalls. This is the hesitation at the peak. Act 3: The bears take over with a massive red candle, erasing the gains. It's the narrative arc of every bubble in miniature: excitement → doubt → collapse. Called 'evening star' because it appears before nightfall.",
-    howToTrade: [
-      "Best on daily or weekly charts",
-      "Enter short after the third candle closes",
-      "Stop loss above the high of the middle candle",
-      "Target previous support zone"
-    ],
-    proTip: "The evening star is considered one of the most reliable reversal patterns in technical analysis. But always look at the broader context — a strong uptrend can sometimes power through it."
-  },
-  {
-    name: "Three Black Crows",
-    type: "bearish",
-    reliability: "Very High",
-    timeframe: "Daily+",
-    subtitle: "Three dark candles in a row — an omen of continued selling.",
-    svg: `<svg viewBox="0 0 200 160"><rect x="30" y="25" width="30" height="40" rx="3" fill="#ef4444"/><line x1="45" y1="18" x2="45" y2="25" stroke="#555" stroke-width="2"/><line x1="45" y1="65" x2="45" y2="72" stroke="#555" stroke-width="2"/><rect x="85" y="55" width="30" height="40" rx="3" fill="#ef4444"/><line x1="100" y1="48" x2="100" y2="55" stroke="#555" stroke-width="2"/><line x1="100" y1="95" x2="100" y2="102" stroke="#555" stroke-width="2"/><rect x="140" y="85" width="30" height="40" rx="3" fill="#ef4444"/><line x1="155" y1="78" x2="155" y2="85" stroke="#555" stroke-width="2"/><line x1="155" y1="125" x2="155" y2="135" stroke="#555" stroke-width="2"/></svg>`,
-    what: "Three consecutive long red candles, each opening within the prior body and closing near its low.",
-    story: "The opposite of Three White Soldiers. Each day, sellers pile on. Each candle opens inside the previous body (sustained selling, not panic gaps) and closes near its low (no relief bounces). It's like an avalanche — each wave of selling triggers more selling. The name comes from crows sitting on a fence, which in old folklore was considered a bad omen.",
-    howToTrade: [
-      "Strongest after an uptrend or at resistance",
-      "Watch for the pattern to break a support level for extra confirmation",
-      "Stop loss above the first crow's high",
-      "Can lead to extended moves — don't take profit too early"
-    ],
-    proTip: "If the candles are getting smaller or showing lower wicks, selling pressure may be fading. True Three Black Crows have strong, full-bodied candles."
-  },
-  {
-    name: "Dark Cloud Cover",
-    type: "bearish",
-    reliability: "Moderate",
-    timeframe: "All",
-    subtitle: "A dark cloud rolls in over the bullish sky.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="70" y1="40" x2="70" y2="60" stroke="#555" stroke-width="2"/><rect x="55" y="60" width="30" height="55" rx="3" fill="#22c55e"/><line x1="70" y1="115" x2="70" y2="135" stroke="#555" stroke-width="2"/><line x1="130" y1="20" x2="130" y2="50" stroke="#555" stroke-width="2"/><rect x="115" y="50" width="30" height="50" rx="3" fill="#ef4444"/><line x1="130" y1="100" x2="130" y2="120" stroke="#555" stroke-width="2"/></svg>`,
-    what: "Two candles: a big green candle followed by a red candle that opens above the green's high but closes below the midpoint of the green body.",
-    story: "The mirror of Piercing Line. Day one: Bulls make a strong move. Day two: the market opens even higher — you can almost hear the champagne corks popping. Then... it reverses and crashes below the midpoint of yesterday's candle. The party got crashed. Like a dark cloud rolling over a sunny day. The deeper the red candle penetrates, the more bearish.",
-    howToTrade: [
-      "Must close below 50% of the previous green body",
-      "Best at resistance zones or after extended rallies",
-      "Confirm with next candle or volume surge",
-      "Stop loss above the high of the pattern"
-    ],
-    proTip: "If it doesn't penetrate past the midpoint, it's just a 'near miss' — not a valid dark cloud cover. Be strict with this rule."
-  },
-  {
-    name: "Doji",
-    type: "neutral",
-    reliability: "Moderate",
-    timeframe: "All",
-    subtitle: "The market holds its breath — a decision point.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="100" y1="25" x2="100" y2="75" stroke="#555" stroke-width="2"/><line x1="80" y1="80" x2="120" y2="80" stroke="#f59e0b" stroke-width="3"/><line x1="100" y1="85" x2="100" y2="140" stroke="#555" stroke-width="2"/></svg>`,
-    what: "A candle where the open and close are virtually the same price, creating a cross or plus-sign shape.",
-    story: "This is the sound of the market shrugging. Bulls and bears fought all session and ended up exactly where they started. Nobody won. Nobody lost. It's pure indecision. By itself, a doji doesn't tell you direction — but in context, it's powerful. After a big uptrend, it says 'the bulls are hesitating.' After a downtrend, it says 'the bears might be done.' It's like a coin in the air — which way it lands depends on what comes next.",
-    howToTrade: [
-      "Never trade a doji alone — it needs context",
-      "After uptrend = potential bearish reversal",
-      "After downtrend = potential bullish reversal",
-      "Wait for the candle after the doji for confirmation"
-    ],
-    proTip: "There are many doji variants: long-legged doji (extreme indecision), dragonfly doji (bullish bias), gravestone doji (bearish bias). The wick shapes tell the story."
-  },
-  {
-    name: "Spinning Top",
-    type: "neutral",
-    reliability: "Low",
-    timeframe: "All",
-    subtitle: "Long wicks both ways — the market can't make up its mind.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="100" y1="20" x2="100" y2="60" stroke="#555" stroke-width="2"/><rect x="85" y="60" width="30" height="20" rx="3" fill="#888"/><line x1="100" y1="80" x2="100" y2="140" stroke="#555" stroke-width="2"/></svg>`,
-    what: "A small body (any color) with long upper and lower wicks on both sides.",
-    story: "This is chaos in candle form. During the session, price went way up and way down, but ended up closing near where it opened. Both bulls and bears flexed, but nobody could maintain control. It's less decisive than a doji because there IS a small body — one side barely edged ahead. Like a spinning top toy wobbling before it falls — which direction it tips depends on what happens next.",
-    howToTrade: [
-      "Signals indecision — not a standalone signal",
-      "After a trend, it suggests exhaustion",
-      "Wait for the next candle to confirm direction",
-      "Can precede major moves — watch closely what follows"
-    ],
-    proTip: "A cluster of spinning tops or dojis usually leads to a breakout. The longer the indecision lasts, the more explosive the eventual move."
-  },
-  {
-    name: "Tweezer Tops",
-    type: "bearish",
-    reliability: "Moderate",
-    timeframe: "All",
-    subtitle: "Price tried twice and failed — the ceiling holds.",
-    svg: `<svg viewBox="0 0 200 160"><line x1="75" y1="30" x2="75" y2="30" stroke="#555" stroke-width="2"/><rect x="60" y="30" width="30" height="50" rx="3" fill="#22c55e"/><line x1="75" y1="80" x2="75" y2="105" stroke="#555" stroke-width="2"/><line x1="130" y1="30" x2="130" y2="30" stroke="#555" stroke-width="2"/><rect x="115" y="30" width="30" height="50" rx="3" fill="#ef4444"/><line x1="130" y1="80" x2="130" y2="105" stroke="#555" stroke-width="2"/><line x1="50" y1="30" x2="155" y2="30" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,4"/></svg>`,
-    what: "Two consecutive candles with matching highs — typically first green, then red. Appears after an uptrend.",
-    story: "Price reaches a level and gets rejected. Next candle tries the exact same level... rejected again. Two failed attempts at the same price is the market drawing a line in the sand. It's like trying to break down a door twice and failing both times — you stop trying. The matching highs create a micro resistance level that's been tested and confirmed.",
-    howToTrade: [
-      "Highs don't need to be exact — very close counts",
-      "Stronger at established resistance zones",
-      "Enter short after the second candle closes",
-      "Stop loss just above the matching highs"
-    ],
-    proTip: "Tweezer tops are more reliable on higher timeframes (4H, daily). On a 5-minute chart, they're noise."
-  },
-  {
-    name: "Tweezer Bottoms",
-    type: "bullish",
-    reliability: "Moderate",
-    timeframe: "All",
-    subtitle: "The floor was tested twice and held — buyers are defending.",
-    svg: `<svg viewBox="0 0 200 160"><rect x="60" y="60" width="30" height="50" rx="3" fill="#ef4444"/><line x1="75" y1="40" x2="75" y2="60" stroke="#555" stroke-width="2"/><line x1="75" y1="110" x2="75" y2="110" stroke="#555" stroke-width="2"/><rect x="115" y="60" width="30" height="50" rx="3" fill="#22c55e"/><line x1="130" y1="40" x2="130" y2="60" stroke="#555" stroke-width="2"/><line x1="130" y1="110" x2="130" y2="110" stroke="#555" stroke-width="2"/><line x1="50" y1="110" x2="155" y2="110" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,4"/></svg>`,
-    what: "Two consecutive candles with matching lows — typically first red, then green. Appears after a downtrend.",
-    story: "The mirror of tweezer tops. Price drops to a level and bounces. Next session, it drops to the exact same level and bounces again. The message? There's a buyer — probably a big one — sitting at that price and absorbing all the selling. Two tests of the same floor is strong evidence that the bottom might be in.",
-    howToTrade: [
-      "Best at known support zones",
-      "Enter long after the second candle closes",
-      "Stop loss just below the matching lows",
-      "Combine with volume analysis for extra confidence"
-    ],
-    proTip: "Look for a volume spike on the second candle. It means more buyers are stepping in at the support level — smart money accumulation."
-  }
-],
-chart: [
-  {
-    name: "Head & Shoulders",
-    type: "bearish",
-    reliability: "Very High",
-    timeframe: "Daily+",
-    subtitle: "The king of reversal patterns — when you see it, pay attention.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="20,120 50,90 70,100 100,50 120,100 140,80 180,20 210,80 240,65 270,110 290,130" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linejoin="round"/><line x1="60" y1="100" x2="250" y2="100" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,4"/><text x="93" y="45" fill="#888" font-size="10" font-family="IBM Plex Mono">Head</text><text x="40" y="82" fill="#888" font-size="9" font-family="IBM Plex Mono">LS</text><text x="230" y="58" fill="#888" font-size="9" font-family="IBM Plex Mono">RS</text><text x="150" y="115" fill="#f59e0b" font-size="9" font-family="IBM Plex Mono">Neckline</text></svg>`,
-    what: "Three peaks: a higher middle peak (head) flanked by two lower peaks (shoulders) with a support line (neckline) connecting the lows between them.",
-    story: "This tells a three-chapter story. Chapter 1 (left shoulder): Price rallies and pulls back — normal. Chapter 2 (head): Price rallies even higher — excitement! — then pulls back again. Chapter 3 (right shoulder): Price tries to rally again but CAN'T reach the head. The failure to make a new high is the key. The bulls are exhausted. When price breaks below the neckline, it's game over. Think of it as someone trying to climb a mountain, reaching the top, sliding down, trying again but giving up lower. The energy is gone.",
-    howToTrade: [
-      "Enter short when price breaks below the neckline with volume",
-      "Measure: distance from head to neckline = expected move down from neckline",
-      "Stop loss above the right shoulder",
-      "Sometimes there's a retest of the neckline — that's a second entry opportunity"
-    ],
-    proTip: "The neckline doesn't have to be perfectly horizontal. Slanted necklines are common and valid. Also, volume typically decreases from left shoulder → head → right shoulder. If it doesn't, be more cautious."
-  },
-  {
-    name: "Inverse Head & Shoulders",
-    type: "bullish",
-    reliability: "Very High",
-    timeframe: "Daily+",
-    subtitle: "The bullish mirror — the bottom is in when the neckline breaks.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="20,40 50,70 70,55 100,110 120,60 140,80 180,140 210,75 240,90 270,50 290,30" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linejoin="round"/><line x1="60" y1="60" x2="250" y2="60" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,4"/><text x="88" y="125" fill="#888" font-size="10" font-family="IBM Plex Mono">Head</text><text x="40" y="75" fill="#888" font-size="9" font-family="IBM Plex Mono">LS</text><text x="230" y="100" fill="#888" font-size="9" font-family="IBM Plex Mono">RS</text><text x="150" y="53" fill="#f59e0b" font-size="9" font-family="IBM Plex Mono">Neckline</text></svg>`,
-    what: "Three troughs: a deeper middle trough (head) between two shallower troughs (shoulders), with a resistance line (neckline) connecting the highs.",
-    story: "The exact opposite of head & shoulders, but for bottoms. Price makes a low (left shoulder), an even lower low (head), but then the next low is HIGHER (right shoulder). The bears couldn't push price as low as before — they're losing power. When price breaks above the neckline, the reversal is confirmed. It's like being underwater and each dive getting shallower — you're running out of air and about to surface.",
-    howToTrade: [
-      "Enter long on neckline break with volume confirmation",
-      "Target = head-to-neckline distance projected upward",
-      "Stop loss below the right shoulder",
-      "Pullback to neckline after breakout = ideal entry"
-    ],
-    proTip: "Volume should increase on the breakout above the neckline. If price breaks out on low volume, be cautious — it might be a false breakout."
-  },
-  {
-    name: "Double Top",
-    type: "bearish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "Price hit its head on the ceiling twice — it's coming back down.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="20,120 60,40 100,90 150,40 200,90 240,110 280,130" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linejoin="round"/><line x1="40" y1="40" x2="170" y2="40" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/><line x1="80" y1="90" x2="220" y2="90" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,4"/><text x="50" y="33" fill="#888" font-size="10" font-family="IBM Plex Mono">Top 1</text><text x="140" y="33" fill="#888" font-size="10" font-family="IBM Plex Mono">Top 2</text><text x="160" y="105" fill="#f59e0b" font-size="9" font-family="IBM Plex Mono">Support</text></svg>`,
-    what: "Price reaches a high, pulls back, rallies to roughly the same high again, then fails and drops below the pullback low (support).",
-    story: "Think of it as price running into a glass ceiling. First attempt: BONK, rejected. Price falls back, catches its breath, tries again... BONK, rejected at the same level. When two attempts fail at the same price, it tells you there's a serious seller (or cluster of sellers) parked there. The break below the support between the two tops confirms the pattern. It forms the letter 'M' on your chart.",
-    howToTrade: [
-      "Enter short on break below the support between the two tops",
-      "Target = height of the 'M' pattern projected downward",
-      "Stop loss above the double top",
-      "Wait for a retest of broken support (now resistance) for a better entry"
-    ],
-    proTip: "The two tops don't need to be the exact same price. Within 1-2% is fine. Also, the second top often has divergence on RSI (lower RSI reading at same price) — that's strong confirmation."
-  },
-  {
-    name: "Double Bottom",
-    type: "bullish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "The floor held twice — bulls are loading up for a move.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="20,40 60,120 100,70 150,120 200,70 240,50 280,30" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linejoin="round"/><line x1="40" y1="120" x2="170" y2="120" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/><line x1="80" y1="70" x2="220" y2="70" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,4"/><text x="47" y="135" fill="#888" font-size="10" font-family="IBM Plex Mono">Bottom 1</text><text x="132" y="135" fill="#888" font-size="10" font-family="IBM Plex Mono">Bottom 2</text><text x="150" y="64" fill="#f59e0b" font-size="9" font-family="IBM Plex Mono">Resistance</text></svg>`,
-    what: "Price hits a low, bounces up, drops to roughly the same low again, bounces and breaks above the middle resistance. The 'W' pattern.",
-    story: "Same idea as double top but flipped. Price drops to a level and bounces (someone is buying there). It comes back to test that same level — still a buyer! Two bounces from the same price is like the floor being reinforced. When price breaks above the middle peak (the middle of the 'W'), it's go time.",
-    howToTrade: [
-      "Enter long on break above the resistance between the two bottoms",
-      "Target = height of the 'W' projected upward",
-      "Stop loss below the double bottom",
-      "Retest of broken resistance = ideal entry"
-    ],
-    proTip: "Volume should pick up on the second bounce and especially on the breakout. Also check for RSI bullish divergence — price same, RSI higher = hidden bull strength."
-  },
-  {
-    name: "Ascending Triangle",
-    type: "bullish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "Buyers getting more aggressive with each push — breakout loading.",
-    svg: `<svg viewBox="0 0 300 160"><line x1="30" y1="40" x2="270" y2="40" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,4"/><polyline points="30,140 70,40 90,110 130,40 150,85 190,40 210,65 250,40 280,20" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linejoin="round"/><line x1="30" y1="140" x2="250" y2="40" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/><text x="120" y="33" fill="#f59e0b" font-size="9" font-family="IBM Plex Mono">Flat Resistance</text><text x="40" y="135" fill="#3b82f6" font-size="9" font-family="IBM Plex Mono">Rising Lows</text></svg>`,
-    what: "A flat resistance line on top with rising lows connecting on the bottom, creating a triangle that gets tighter over time.",
-    story: "Picture this: there's a seller sitting at a fixed price — every time the market reaches that level, they sell. But each time the market pulls back, it doesn't pull back as far. The lows keep getting higher. What does this mean? Each dip gets bought up faster and faster. Buyers are getting more and more aggressive. Eventually, they overwhelm the seller at the top and price breaks out. It's pressure building inside a triangle until it explodes upward.",
-    howToTrade: [
-      "Enter on breakout above the flat resistance with volume",
-      "Target = height of the triangle projected from breakout point",
-      "Stop loss below the most recent higher low",
-      "Breakout should occur in the first 2/3 of the triangle for best results"
-    ],
-    proTip: "If the breakout happens too late (in the final third of the triangle), the move is often weaker. Early breakouts from ascending triangles are the strongest."
-  },
-  {
-    name: "Descending Triangle",
-    type: "bearish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "Sellers are squeezing the market — a breakdown is likely.",
-    svg: `<svg viewBox="0 0 300 160"><line x1="30" y1="120" x2="270" y2="120" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,4"/><polyline points="30,20 70,120 90,50 130,120 150,75 190,120 210,95 250,120 280,140" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linejoin="round"/><line x1="30" y1="20" x2="250" y2="120" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/><text x="120" y="137" fill="#f59e0b" font-size="9" font-family="IBM Plex Mono">Flat Support</text><text x="160" y="45" fill="#3b82f6" font-size="9" font-family="IBM Plex Mono">Lower Highs</text></svg>`,
-    what: "Flat support on the bottom with descending highs on top — the mirror of an ascending triangle.",
-    story: "There's a buyer sitting at a fixed price (the support). But each rally is getting weaker — the highs keep getting lower. Sellers are getting more aggressive with each push. The buyer at the bottom is absorbing all this selling, but eventually they run out of firepower. When that floor breaks, it can be dramatic. Imagine a dam with more and more water pressing against it — when it breaks, the flood is powerful.",
-    howToTrade: [
-      "Enter short on breakdown below flat support with volume",
-      "Target = height of triangle projected downward",
-      "Stop loss above the most recent lower high",
-      "Breakdown with high volume = strongest signal"
-    ],
-    proTip: "Sometimes descending triangles can break upward (surprise breakout). It's less common but does happen. Always wait for confirmation before committing."
-  },
-  {
-    name: "Symmetrical Triangle",
-    type: "neutral",
-    reliability: "Moderate",
-    timeframe: "All",
-    subtitle: "The market is coiling — an explosive move is building.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="30,20 80,130 110,40 150,110 180,55 210,95 230,70 250,85" fill="none" stroke="#888" stroke-width="2.5" stroke-linejoin="round"/><line x1="30" y1="20" x2="260" y2="75" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/><line x1="30" y1="140" x2="260" y2="75" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/><text x="105" y="15" fill="#888" font-size="9" font-family="IBM Plex Mono">Lower Highs</text><text x="105" y="155" fill="#888" font-size="9" font-family="IBM Plex Mono">Higher Lows</text></svg>`,
-    what: "Both lower highs AND higher lows, creating a triangle that converges to a point. Can break either direction.",
-    story: "This is a coiled spring. Both buyers and sellers are getting squeezed into a tighter and tighter range. Each high is lower, each low is higher — the range compresses. Something has to give. It's like two people pushing on either side of a door — eventually one of them is going to overpower the other and the door flies open. The direction of the breakout tells you who won. Usually (not always) it breaks in the direction of the prior trend.",
-    howToTrade: [
-      "Wait for breakout direction — don't guess",
-      "Enter on breakout above upper line OR breakdown below lower line",
-      "Volume should confirm the breakout",
-      "Target = widest part of the triangle"
-    ],
-    proTip: "The later in the triangle you get (closer to the apex), the less reliable the breakout. Best breakouts happen in the first 2/3. After 75%, many patterns fizzle."
-  },
-  {
-    name: "Bull Flag",
-    type: "bullish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "A pause in a strong uptrend — the bull is catching its breath.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="30,140 50,130 80,60" fill="none" stroke="#22c55e" stroke-width="3" stroke-linejoin="round"/><polyline points="80,60 110,75 130,65 160,80 185,72 200,85" fill="none" stroke="#22c55e" stroke-width="2" stroke-linejoin="round"/><line x1="80" y1="55" x2="200" y2="70" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/><line x1="80" y1="65" x2="200" y2="90" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/><polyline points="200,85 220,70 240,40 260,20" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="6,4"/><text x="30" y="155" fill="#888" font-size="9" font-family="IBM Plex Mono">Flagpole</text><text x="120" y="55" fill="#888" font-size="9" font-family="IBM Plex Mono">Flag</text></svg>`,
-    what: "A sharp move up (the flagpole) followed by a slight downward drift in a channel (the flag), then a breakout upward.",
-    story: "After a big sprint upward, price needs to catch its breath. It drifts lower gently in a small channel — this isn't selling, it's profit-taking and consolidation. Think of a runner who sprints, jogs for a bit, then sprints again. The flag portion should be lazy and low-volume. The breakout from the flag should be sharp and high-volume — that's the next sprint beginning.",
-    howToTrade: [
-      "Enter on breakout above the upper channel line",
-      "Target = length of the flagpole projected from breakout",
-      "Stop loss below the flag's lowest point",
-      "Volume should be declining in the flag and spike on breakout"
-    ],
-    proTip: "The flag should be shallow (pulling back 30-50% of the flagpole at most). If it retraces more than 50%, the pattern weakens significantly."
-  },
-  {
-    name: "Bear Flag",
-    type: "bearish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "A pause in the downtrend — the bear is reloading.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="30,20 50,30 80,100" fill="none" stroke="#ef4444" stroke-width="3" stroke-linejoin="round"/><polyline points="80,100 110,85 130,95 160,80 185,88 200,75" fill="none" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/><line x1="80" y1="95" x2="200" y2="70" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/><line x1="80" y1="105" x2="200" y2="92" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/><polyline points="200,75 220,90 240,120 260,140" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="6,4"/><text x="30" y="15" fill="#888" font-size="9" font-family="IBM Plex Mono">Flagpole</text><text x="120" y="115" fill="#888" font-size="9" font-family="IBM Plex Mono">Flag</text></svg>`,
-    what: "A sharp drop (flagpole) followed by a slight upward drift in a channel (flag), then breakdown continues.",
-    story: "The mirror of bull flag. After a sharp selloff, price drifts upward slightly — shorts are covering, weak bulls are trying to buy the dip. But the drift is shallow and unconvincing. When the lower channel breaks, the next leg down begins. The bear was just resting before the next attack.",
-    howToTrade: [
-      "Enter short on breakdown below the lower channel line",
-      "Target = flagpole length projected down from breakdown",
-      "Stop loss above the flag's highest point",
-      "Shallow flag + declining volume = best setup"
-    ],
-    proTip: "Bear flags often play out faster than bull flags because fear moves faster than greed. Don't hesitate too long on the entry."
-  },
-  {
-    name: "Rising Wedge",
-    type: "bearish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "Looks bullish on the surface, but the walls are closing in.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="30,140 80,100 100,120 150,70 170,95 220,45 240,65 260,35" fill="none" stroke="#888" stroke-width="2.5" stroke-linejoin="round"/><line x1="30" y1="140" x2="260" y2="30" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4,3"/><line x1="30" y1="150" x2="260" y2="55" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4,3"/><polyline points="260,35 270,60 285,140" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,4"/><text x="180" y="155" fill="#888" font-size="9" font-family="IBM Plex Mono">Converging lines</text></svg>`,
-    what: "Both the highs and lows are rising, but the channel is narrowing — the lines converge upward.",
-    story: "This is sneaky. Price keeps making higher highs and higher lows — that sounds bullish, right? Wrong. The key is that the range is narrowing. Each rally is weaker than the last (the highs are barely higher), while the lows are rising faster. It's like climbing a hill that gets steeper and steeper — eventually you can't take another step and you tumble down. The narrowing suggests buying momentum is fading even as price grinds higher.",
-    howToTrade: [
-      "Enter short on breakdown below the lower trendline",
-      "Target = height of the wedge's widest point",
-      "Stop loss above the most recent high",
-      "Often has a dramatic breakdown move"
-    ],
-    proTip: "Rising wedges in an uptrend are reversal patterns. Rising wedges in a downtrend (a bear flag variant) are continuation patterns. Context matters!"
-  },
-  {
-    name: "Falling Wedge",
-    type: "bullish",
-    reliability: "High",
-    timeframe: "All",
-    subtitle: "Looks bearish, but the selling is losing steam — reversal ahead.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="30,20 80,60 100,40 150,90 170,65 220,115 240,95 260,125" fill="none" stroke="#888" stroke-width="2.5" stroke-linejoin="round"/><line x1="30" y1="15" x2="260" y2="120" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="4,3"/><line x1="30" y1="25" x2="260" y2="130" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="4,3"/><polyline points="260,125 270,100 285,20" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="6,4"/><text x="180" y="15" fill="#888" font-size="9" font-family="IBM Plex Mono">Converging lines</text></svg>`,
-    what: "Both highs and lows are falling, but the channel narrows — lines converge downward.",
-    story: "The mirror of rising wedge. Price keeps dropping, but the drops are getting smaller. Each sell-off has less conviction. The narrowing channel means sellers are running out of energy. It's like a ball bouncing down stairs — each bounce gets shorter until it stops. When the upper trendline breaks, it's the signal that selling pressure has been exhausted and buyers are taking control.",
-    howToTrade: [
-      "Enter long on breakout above the upper trendline",
-      "Target = widest part of the wedge",
-      "Stop loss below the most recent low",
-      "Breakouts can be very strong — be ready"
-    ],
-    proTip: "Falling wedges in a downtrend are reversal patterns. In an uptrend, they're continuation patterns (bullish flag variant). Always check the bigger picture."
-  },
-  {
-    name: "Cup & Handle",
-    type: "bullish",
-    reliability: "Very High",
-    timeframe: "Daily+",
-    subtitle: "A smooth rounded bottom followed by a small pullback — classic breakout setup.",
-    svg: `<svg viewBox="0 0 300 160"><path d="M 30,40 C 30,40 50,130 150,130 C 250,130 250,40 250,40" fill="none" stroke="#22c55e" stroke-width="2.5"/><polyline points="250,40 260,55 270,45 280,30" fill="none" stroke="#22c55e" stroke-width="2" stroke-linejoin="round"/><line x1="20" y1="40" x2="290" y2="40" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,4"/><text x="120" y="100" fill="#888" font-size="10" font-family="IBM Plex Mono">Cup</text><text x="252" y="65" fill="#888" font-size="9" font-family="IBM Plex Mono">Handle</text><text x="200" y="33" fill="#f59e0b" font-size="9" font-family="IBM Plex Mono">Resistance</text></svg>`,
-    what: "A rounded bottom (the cup) followed by a small pullback (the handle), then a breakout above the cup's resistance level.",
-    story: "This is one of William O'Neil's favorites from 'How to Make Money in Stocks.' The cup forms as selling gradually slows, bottoms out, and buying gradually resumes — it's smooth and round, not V-shaped. The handle is the last shakeout: some traders take profit at the old resistance, causing a small dip. But if the dip is small and volume is light, it's just the weak hands exiting before the real move. Think of it as a deep breath before a big leap.",
-    howToTrade: [
-      "Enter on breakout above the handle's high (the rim of the cup)",
-      "Target = depth of the cup projected upward",
-      "Stop loss below the handle's low",
-      "Handle should not retrace more than 1/3 of the cup"
-    ],
-    proTip: "The ideal cup has a 'U' shape, not a 'V.' A V-shaped bottom means the reversal was too sharp and might not have built enough support. Also, the handle should form in the upper half of the cup."
-  },
-  {
-    name: "Triple Top",
-    type: "bearish",
-    reliability: "Very High",
-    timeframe: "Daily+",
-    subtitle: "Three strikes at resistance — the bulls are out.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="20,120 50,40 80,90 120,40 160,90 200,40 240,90 280,130" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linejoin="round"/><line x1="35" y1="40" x2="215" y2="40" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/><line x1="65" y1="90" x2="255" y2="90" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,4"/><text x="130" y="105" fill="#f59e0b" font-size="9" font-family="IBM Plex Mono">Support</text></svg>`,
-    what: "Three roughly equal peaks hitting the same resistance, with support connecting the pullback lows.",
-    story: "If a double top is running into a glass ceiling twice, a triple top is running into it THREE times. Each failure at the same level makes the resistance even more psychologically powerful. By the third failure, buyers lose all confidence. When the support connecting the lows finally breaks, it's like three failed siege attempts — the army retreats for good.",
-    howToTrade: [
-      "Enter short on break below the support connecting the lows",
-      "Target = height from resistance to support, projected down",
-      "Stop loss above the triple top",
-      "Volume typically decreases with each successive peak"
-    ],
-    proTip: "Triple tops are rarer than double tops but more reliable. The more times a level holds as resistance, the more significant the eventual breakdown."
-  },
-  {
-    name: "Triple Bottom",
-    type: "bullish",
-    reliability: "Very High",
-    timeframe: "Daily+",
-    subtitle: "Three bounces off support — the floor is reinforced concrete.",
-    svg: `<svg viewBox="0 0 300 160"><polyline points="20,40 50,120 80,70 120,120 160,70 200,120 240,70 280,30" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linejoin="round"/><line x1="35" y1="120" x2="215" y2="120" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/><line x1="65" y1="70" x2="255" y2="70" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,4"/><text x="130" y="63" fill="#f59e0b" font-size="9" font-family="IBM Plex Mono">Resistance</text></svg>`,
-    what: "Three roughly equal troughs at the same support, with resistance connecting the bounce highs.",
-    story: "Three tests of the same floor. Each bounce confirms a major buyer (or buyers) is positioned there. By the third bounce, the short sellers give up and the breakout above resistance releases all the pent-up energy. It's like a coiled spring that's been pressed down three times — when it finally releases, the move can be powerful.",
-    howToTrade: [
-      "Enter long on break above the resistance",
-      "Target = support-to-resistance distance projected up",
-      "Stop loss below the triple bottom",
-      "Volume should increase on the breakout"
-    ],
-    proTip: "Look for RSI making higher lows while price makes equal lows — that hidden bullish divergence adds major confidence to the triple bottom thesis."
-  }
-]
-};
+// ── Pattern Data ──
+const patterns = [
+  { name:"Hammer", type:"bullish", cat:"reversal", rel:"high",
+    desc:"A short body at the top with a long lower wick — like a hammer hanging from a cliff. The market tried to push lower, got slammed down, but buyers stepped in hard and yanked price back up by the close.",
+    entry:"Enter long above the hammer's high on the next candle.",
+    sl:"Below the hammer's low (the wick tail).",
+    tip:"The longer the lower wick relative to the body, the stronger the signal. A hammer at a key support level after a downtrend is textbook." },
+  { name:"Inverted Hammer", type:"bullish", cat:"reversal", rel:"med",
+    desc:"Looks like a hammer flipped upside-down — long upper wick, small body at the bottom. Buyers tried to push up, failed, but the fact they tried at all after a downtrend shows momentum is shifting.",
+    entry:"Enter long above the inverted hammer's high with next candle confirmation.",
+    sl:"Below the inverted hammer's low.",
+    tip:"Needs confirmation from the next candle closing higher. Alone, it's just buyers testing the waters." },
+  { name:"Bullish Engulfing", type:"bullish", cat:"reversal", rel:"high",
+    desc:"A small bearish candle followed by a big bullish candle that completely swallows it — body, wick, the whole thing. It's buyers saying 'everything you just did? Erased.'",
+    entry:"Enter long at the close of the engulfing candle or at the open of the next.",
+    sl:"Below the low of the engulfing candle.",
+    tip:"The bigger the engulfing candle relative to the first one, the more violent the reversal. Volume spike on the engulfing confirms it." },
+  { name:"Morning Star", type:"bullish", cat:"reversal", rel:"high",
+    desc:"Three-candle drama: a big bearish candle, then a tiny indecisive candle (the star), then a big bullish candle. The star is the moment of hesitation before bulls take over.",
+    entry:"Enter long at the close of the third (bullish) candle.",
+    sl:"Below the low of the star (middle candle).",
+    tip:"If the star candle is a doji, even better — maximum indecision before the reversal. Gaps between candles add extra juice." },
+  { name:"Three White Soldiers", type:"bullish", cat:"continuation", rel:"high",
+    desc:"Three consecutive big green candles, each closing higher than the last, each opening within the body of the previous candle. It's an army marching uphill with zero hesitation.",
+    entry:"Enter long at the close of the third soldier or on a pullback.",
+    sl:"Below the low of the first soldier candle.",
+    tip:"Watch for the soldiers getting progressively smaller (shrinking bodies) — that's exhaustion, not strength. Equal or growing bodies are ideal." },
+  { name:"Bearish Engulfing", type:"bearish", cat:"reversal", rel:"high",
+    desc:"A small bullish candle followed by a massive bearish candle that completely engulfs it. Sellers showed up with a sledgehammer and wiped out all the buying pressure in one bar.",
+    entry:"Enter short at the close of the engulfing candle.",
+    sl:"Above the high of the engulfing candle.",
+    tip:"At the top of an uptrend after a parabolic move? That's where bearish engulfings are career-defining trades." },
+  { name:"Evening Star", type:"bearish", cat:"reversal", rel:"high",
+    desc:"Mirror image of the morning star: big bullish candle, tiny star candle, then a big bearish candle. The star is the last gasp of the uptrend before sellers take control.",
+    entry:"Enter short at the close of the third (bearish) candle.",
+    sl:"Above the high of the star candle.",
+    tip:"An evening star at a major resistance level with a volume spike on the third candle is an A+ short setup." },
+  { name:"Shooting Star", type:"bearish", cat:"reversal", rel:"high",
+    desc:"Long upper wick, small body near the bottom — like a rocket that ran out of fuel. Buyers pushed hard to the upside but sellers crushed them back down by the close.",
+    entry:"Enter short below the shooting star's low on next candle confirmation.",
+    sl:"Above the shooting star's high (wick tip).",
+    tip:"A shooting star after a strong uptrend at a round number or previous high? Chef's kiss. The wick shows exactly where sellers drew their line." },
+  { name:"Three Black Crows", type:"bearish", cat:"continuation", rel:"high",
+    desc:"Three consecutive big red candles, each closing lower than the last. It's the bearish version of Three White Soldiers — sellers marching downhill with conviction.",
+    entry:"Enter short after the third crow closes or on a relief bounce.",
+    sl:"Above the high of the first crow candle.",
+    tip:"If crows appear after a long uptrend, it's often the start of a major reversal. Watch for increasing volume across the three candles." },
+  { name:"Hanging Man", type:"bearish", cat:"reversal", rel:"med",
+    desc:"Looks identical to a hammer — but shows up at the TOP of an uptrend. The long lower wick shows sellers tested the waters hard. Even though buyers fought back, the damage is done.",
+    entry:"Enter short below the hanging man's low with confirmation.",
+    sl:"Above the hanging man's high.",
+    tip:"A hanging man means nothing in isolation — you NEED the next candle to confirm by closing lower. Without confirmation, it's just a hammer in the wrong place." },
+  { name:"Doji", type:"neutral", cat:"reversal", rel:"med",
+    desc:"Open and close are virtually the same — the candle is just a cross. It's pure indecision: buyers and sellers fought all session and ended up exactly where they started.",
+    entry:"Wait for the next candle to establish direction, then enter with that trend.",
+    sl:"Above/below the doji's high/low depending on direction.",
+    tip:"A doji after a big move is like a yellow traffic light — something's about to change. A doji in the middle of chop means nothing." },
+  { name:"Double Bottom", type:"bullish", cat:"reversal", rel:"high",
+    desc:"Price hits a support level twice and bounces both times, forming a 'W' shape. The second bounce confirms that level is serious — sellers couldn't break it even with a second try.",
+    entry:"Enter long on the break above the neckline (the peak between the two bottoms).",
+    sl:"Below the second bottom.",
+    tip:"The second bottom doesn't need to be at the exact same price — slightly higher actually shows increasing buyer strength." },
+  { name:"Double Top", type:"bearish", cat:"reversal", rel:"high",
+    desc:"Price hits a resistance level twice and rejects both times, forming an 'M' shape. Two failed attempts at a level = that ceiling is reinforced with steel.",
+    entry:"Enter short on the break below the neckline.",
+    sl:"Above the second top.",
+    tip:"The longer the time between the two tops, the more significant the pattern. Two weeks apart beats two hours apart." },
+  { name:"Head & Shoulders", type:"bearish", cat:"reversal", rel:"high",
+    desc:"Three peaks with the middle one (the head) being the tallest. The shoulders show momentum fading — each push up gets weaker. It's the classic 'exhaustion' pattern.",
+    entry:"Enter short on the break below the neckline.",
+    sl:"Above the right shoulder's high.",
+    tip:"A sloping neckline (downward) is even more bearish. Volume should decline on the right shoulder vs the head — confirming weakening buying pressure." },
+  { name:"Inverse Head & Shoulders", type:"bullish", cat:"reversal", rel:"high",
+    desc:"Three valleys with the middle one being the deepest. The mirror image of head & shoulders — sellers are running out of steam and buyers are gaining ground.",
+    entry:"Enter long on the break above the neckline.",
+    sl:"Below the right shoulder's low.",
+    tip:"Volume should increase on the breakout above the neckline. A breakout on thin volume is suspect." },
+  { name:"Bull Flag", type:"bullish", cat:"continuation", rel:"high",
+    desc:"A sharp rally (the pole) followed by a tight downward-sloping channel (the flag). It's the market catching its breath before the next leg up. Consolidation, not reversal.",
+    entry:"Enter long on the break above the flag's upper trendline.",
+    sl:"Below the flag's low.",
+    tip:"Measure the pole height and project it from the breakout point — that's your target. Flags that last too long (more than 3 weeks) lose their power." },
+  { name:"Bear Flag", type:"bearish", cat:"continuation", rel:"high",
+    desc:"A sharp decline (pole) followed by a tight upward-sloping channel (flag). Bears are taking a coffee break before continuing the selloff.",
+    entry:"Enter short on the break below the flag's lower trendline.",
+    sl:"Above the flag's high.",
+    tip:"Bear flags in a strong downtrend with declining volume inside the flag are the highest probability continuation patterns you'll find." },
+  { name:"Rising Wedge", type:"bearish", cat:"reversal", rel:"med",
+    desc:"Price makes higher highs and higher lows but the range is compressing — the highs and lows are converging upward. It looks bullish but it's actually a bear trap. Momentum is dying.",
+    entry:"Enter short on the break below the lower trendline.",
+    sl:"Above the most recent high inside the wedge.",
+    tip:"Rising wedges after extended uptrends are the best. The breakdown is often violent because everyone inside the wedge is long and trapped." },
+  { name:"Falling Wedge", type:"bullish", cat:"reversal", rel:"med",
+    desc:"Price makes lower highs and lower lows but the range compresses downward. Looks bearish but sellers are losing steam. The breakout is usually explosive.",
+    entry:"Enter long on the break above the upper trendline.",
+    sl:"Below the most recent low inside the wedge.",
+    tip:"Falling wedges in an overall uptrend (correction pattern) have the highest breakout success rate." },
+  { name:"Ascending Triangle", type:"bullish", cat:"continuation", rel:"high",
+    desc:"Flat resistance on top, rising support on the bottom. Each pullback gets shallower — buyers are getting more aggressive. Eventually, they bust through the ceiling.",
+    entry:"Enter long on the break above the flat resistance line.",
+    sl:"Below the most recent higher low.",
+    tip:"The breakout is most reliable when it happens in the first 75% of the triangle. Late breakouts near the apex tend to be weak." },
+  { name:"Descending Triangle", type:"bearish", cat:"continuation", rel:"high",
+    desc:"Flat support on the bottom, declining resistance on top. Each rally gets weaker — sellers are in control. The floor eventually gives way.",
+    entry:"Enter short on the break below the flat support line.",
+    sl:"Above the most recent lower high.",
+    tip:"High volume on the breakdown confirms conviction. Low-volume breakdowns often result in fake-outs." },
+];
 
-// ─── STATE ──────────────────────────────────────────────
-let currentTab = 'candle';
-let currentFilter = 'all';
+// ── Render Patterns ──
+const grid = document.getElementById('patternGrid');
 
-// ─── RENDER ─────────────────────────────────────────────
-function renderGrid() {
-  const grid = document.getElementById('grid');
-  const data = patterns[currentTab].filter(p => {
-    if (currentFilter === 'all') return true;
-    if (currentFilter === 'neutral') return p.type === 'neutral';
-    return p.type === currentFilter;
+function renderPatterns(filter) {
+  grid.innerHTML = '';
+  const filtered = filter === 'all' ? patterns :
+    patterns.filter(p => p.type === filter || p.cat === filter);
+
+  filtered.forEach(p => {
+    const iconClass = p.type === 'bullish' ? 'bull' : p.type === 'bearish' ? 'bear' : 'neutral';
+    const iconChar = p.type === 'bullish' ? '▲' : p.type === 'bearish' ? '▼' : '◆';
+    const relClass = p.rel === 'high' ? 'high' : p.rel === 'med' ? 'med' : 'low';
+    const relLabel = p.rel === 'high' ? 'HIGH' : p.rel === 'med' ? 'MED' : 'LOW';
+
+    const card = document.createElement('div');
+    card.className = 'p-card';
+    card.setAttribute('data-type', p.type);
+    card.setAttribute('data-cat', p.cat);
+    card.innerHTML = `
+      <div class="p-card-head">
+        <div class="icon ${iconClass}">${iconChar}</div>
+        <div class="info">
+          <h3>${p.name}</h3>
+          <div class="meta">
+            <span>${p.type.toUpperCase()}</span>
+            <span>${p.cat.toUpperCase()}</span>
+          </div>
+        </div>
+        <span class="rel ${relClass}">${relLabel}</span>
+      </div>
+      <div class="p-card-body">
+        <p>${p.desc}</p>
+        <h4>Entry</h4><p>${p.entry}</p>
+        <h4>Stop Loss</h4><p>${p.sl}</p>
+        <div class="pro-tip-box">
+          <div class="lbl">Pro Tip</div>
+          <p>${p.tip}</p>
+        </div>
+      </div>`;
+    card.querySelector('.p-card-head').addEventListener('click', () => {
+      card.classList.toggle('open');
+    });
+    grid.appendChild(card);
   });
-
-  grid.innerHTML = data.map((p, i) => {
-    const typeLabel = p.type === 'bullish' ? 'bull' : p.type === 'bearish' ? 'bear' : 'neutral';
-    return `
-    <div class="card" onclick="openModal('${currentTab}', '${p.name}')" style="animation-delay:${i*0.05}s">
-      <div class="card-canvas ${typeLabel}">${p.svg}</div>
-      <div class="card-body">
-        <span class="card-tag tag-${typeLabel}">${p.type}</span>
-        <h3 class="card-title">${p.name}</h3>
-        <p class="card-subtitle">${p.subtitle}</p>
-        <div class="card-meta">
-          <span>⚡ ${p.reliability}</span>
-          <span>⏱ ${p.timeframe}</span>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
 }
 
-function openModal(tab, name) {
-  const p = patterns[tab].find(x => x.name === name);
-  if (!p) return;
-  const typeLabel = p.type === 'bullish' ? 'bull' : p.type === 'bearish' ? 'bear' : 'neutral';
+renderPatterns('all');
 
-  document.getElementById('modal').innerHTML = `
-    <div class="modal-header">
-      <div>
-        <span class="card-tag tag-${typeLabel}" style="margin-bottom:6px">${p.type}</span>
-        <h2 style="font-family:'DM Serif Display',serif;font-size:1.6rem;">${p.name}</h2>
-        <p style="color:var(--text-dim);font-size:0.9rem;margin-top:4px;">${p.subtitle}</p>
-      </div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-canvas ${typeLabel}">${p.svg}</div>
-    <div class="modal-content">
-      <div class="modal-stats">
-        <div class="stat-chip">
-          <div class="stat-label">Reliability</div>
-          <div class="stat-value">${p.reliability}</div>
-        </div>
-        <div class="stat-chip">
-          <div class="stat-label">Best Timeframe</div>
-          <div class="stat-value">${p.timeframe}</div>
-        </div>
-        <div class="stat-chip">
-          <div class="stat-label">Signal Type</div>
-          <div class="stat-value" style="text-transform:capitalize">${p.type} ${currentTab === 'candle' ? 'Reversal' : 'Pattern'}</div>
-        </div>
-      </div>
-
-      <div class="modal-section">
-        <h3>🔍 What It Looks Like</h3>
-        <p>${p.what}</p>
-      </div>
-
-      <div class="modal-section">
-        <h3>📖 The Story Behind It</h3>
-        <p>${p.story}</p>
-      </div>
-
-      <div class="modal-section">
-        <h3>🎯 How To Trade It</h3>
-        <ul>${p.howToTrade.map(t => `<li>${t}</li>`).join('')}</ul>
-      </div>
-
-      <div class="modal-tip">
-        <div class="tip-label">💡 Pro Tip</div>
-        <p>${p.proTip}</p>
-      </div>
-    </div>
-  `;
-
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// ─── EVENTS ─────────────────────────────────────────────
-document.getElementById('nav').addEventListener('click', e => {
-  if (e.target.tagName !== 'BUTTON') return;
-  document.querySelectorAll('#nav button').forEach(b => b.classList.remove('active'));
-  e.target.classList.add('active');
-  currentTab = e.target.dataset.tab;
-  currentFilter = 'all';
-  updateFilters();
-  renderGrid();
+// Filter chips
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderPatterns(chip.dataset.f);
+  });
 });
 
-document.getElementById('filters').addEventListener('click', e => {
-  if (e.target.tagName !== 'BUTTON') return;
-  currentFilter = e.target.dataset.filter;
-  updateFilters();
-  renderGrid();
+// ── Main Tabs ──
+document.querySelectorAll('.main-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.main-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('mt-' + tab.dataset.mt).classList.add('active');
+  });
 });
 
-function updateFilters() {
-  document.querySelectorAll('#filters button').forEach(b => {
-    b.className = '';
-    if (b.dataset.filter === currentFilter) {
-      const cls = currentFilter === 'all' ? 'active-all' :
-                  currentFilter === 'bullish' ? 'active-bull' :
-                  currentFilter === 'bearish' ? 'active-bear' : 'active-neutral';
-      b.classList.add(cls);
+// ── Strategy Dropdown ──
+document.getElementById('stratSelect').addEventListener('change', function() {
+  document.querySelectorAll('.strat-panel').forEach(p => p.classList.remove('active'));
+  const empty = document.getElementById('stratEmpty');
+
+  if (this.value) {
+    empty.style.display = 'none';
+    const panel = document.getElementById('strat-' + this.value);
+    if (panel) {
+      panel.classList.add('active');
+      // Reset sub-tabs
+      panel.querySelectorAll('.sub-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+      panel.querySelectorAll('.sub-panel').forEach((p, i) => p.classList.toggle('active', i === 0));
     }
-  });
-}
-
-document.getElementById('modalOverlay').addEventListener('click', e => {
-  if (e.target === document.getElementById('modalOverlay')) closeModal();
-});
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
-
-// ─── INIT ───────────────────────────────────────────────
-renderGrid();
-
-// ─── PWA SERVICE WORKER ─────────────────────────────────
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js')
-    .then(reg => console.log('SW registered:', reg.scope))
-    .catch(err => console.log('SW failed:', err));
-}
-
-// ─── PWA INSTALL PROMPT ─────────────────────────────────
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  showInstallBanner();
-});
-
-function showInstallBanner() {
-  if (document.getElementById('installBanner')) return;
-  const banner = document.createElement('div');
-  banner.id = 'installBanner';
-  banner.innerHTML = `
-    <div style="
-      position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
-      background:var(--surface-2); border:1px solid var(--accent);
-      border-radius:14px; padding:14px 20px; display:flex; align-items:center;
-      gap:14px; z-index:300; box-shadow:0 8px 32px rgba(0,0,0,0.4);
-      max-width:420px; width:calc(100% - 32px); animation:fadeUp 0.4s ease;
-      font-family:'Outfit',sans-serif;
-    ">
-      <div style="flex:1">
-        <div style="font-weight:600;font-size:0.92rem;color:var(--text);">Install Pattern Dojo</div>
-        <div style="font-size:0.78rem;color:var(--text-dim);margin-top:2px;">Add to home screen for offline access</div>
-      </div>
-      <button onclick="installApp()" style="
-        padding:8px 18px; background:var(--accent); color:#0c0f14; border:none;
-        border-radius:8px; font-weight:600; font-size:0.82rem; cursor:pointer;
-        font-family:'Outfit',sans-serif; white-space:nowrap;
-      ">Install</button>
-      <button onclick="this.parentElement.parentElement.remove()" style="
-        background:none; border:none; color:var(--text-muted); font-size:1.2rem;
-        cursor:pointer; padding:4px; line-height:1;
-      ">✕</button>
-    </div>
-  `;
-  document.body.appendChild(banner);
-}
-
-async function installApp() {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  const result = await deferredPrompt.userChoice;
-  if (result.outcome === 'accepted') {
-    document.getElementById('installBanner')?.remove();
+  } else {
+    empty.style.display = 'block';
   }
-  deferredPrompt = null;
-}
+});
 
-// Detect standalone mode (already installed)
-if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-  console.log('Running as installed PWA');
-}
+// ── Sub-tabs (Strategy) ──
+document.querySelectorAll('.sub-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const parent = tab.closest('.strat-panel');
+    parent.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+    parent.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.st).classList.add('active');
+  });
+});
 </script>
 </body>
 </html>
