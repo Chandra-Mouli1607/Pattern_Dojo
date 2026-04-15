@@ -506,6 +506,9 @@ body::after {
       <select class="strat-dropdown" id="stratSelect">
         <option value="">— Choose a strategy —</option>
         <option value="crt-tbs">CRT + Turtle Body Soup</option>
+        <option value="silver-bullet">ICT Silver Bullet</option>
+        <option value="ote">ICT Optimal Trade Entry (OTE)</option>
+        <option value="po3-amd">Power of 3 / AMD</option>
       </select>
     </div>
 
@@ -866,6 +869,415 @@ body::after {
       </div>
 
     </div><!-- end strat-crt-tbs -->
+
+    <!-- ─── SILVER BULLET Strategy ─── -->
+    <div class="strat-panel" id="strat-silver-bullet">
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-st="sb-overview">Overview</button>
+        <button class="sub-tab" data-st="sb-setup">Setup</button>
+        <button class="sub-tab" data-st="sb-entry">Entry</button>
+        <button class="sub-tab" data-st="sb-tf">Timeframes</button>
+      </div>
+
+      <div class="sub-panel active" id="sb-overview">
+        <div class="s-card">
+          <h2>What is the Silver Bullet?</h2>
+          <p>The Silver Bullet is ICT's <strong>time-based sniper strategy</strong>. Instead of watching charts all day, you only trade during specific 1-hour windows when institutional algorithms are most active. You wait for a liquidity sweep, spot the FVG left behind, and enter on the retrace. Clean, quick, minimal screen time.</p>
+          <p>It's designed for scalping — targeting 20-30 pips on major forex pairs, or equivalent moves on indices and crypto. The entire trade from entry to exit often completes within 30-60 minutes.</p>
+
+          <h3>The 3 Silver Bullet Windows (EST)</h3>
+          <div class="chip-row">
+            <span class="chip bl">3:00–4:00 AM (London)</span>
+            <span class="chip gd">10:00–11:00 AM (NY AM)</span>
+            <span class="chip pr">2:00–3:00 PM (NY PM)</span>
+          </div>
+          <p>The <strong>10:00–11:00 AM NY session</strong> is considered the highest probability window. This is when NYSE and NASDAQ volume peaks and institutional algorithms deliver the most displacement.</p>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="sg1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="240" fill="#070b14"/><rect width="680" height="240" fill="url(#sg1)"/>
+              <text x="340" y="20" font-family="JetBrains Mono" font-size="10" fill="#3b82f6" font-weight="600" text-anchor="middle">SILVER BULLET WORKFLOW</text>
+              <rect x="30" y="40" width="130" height="55" fill="#3b82f611" stroke="#3b82f644" stroke-width="1" rx="6"/>
+              <text x="95" y="62" font-family="JetBrains Mono" font-size="9" fill="#3b82f6" font-weight="600" text-anchor="middle">1. IDENTIFY BIAS</text>
+              <text x="95" y="80" font-family="Outfit" font-size="9" fill="#5a6a82" text-anchor="middle">HTF structure + DOL</text>
+              <path d="M 165 67 L 195 67" stroke="#5a6a82" stroke-width="1" marker-end="url(#aGy)"/>
+              <rect x="200" y="40" width="130" height="55" fill="#f43f5e11" stroke="#f43f5e44" stroke-width="1" rx="6"/>
+              <text x="265" y="62" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" font-weight="600" text-anchor="middle">2. LIQUIDITY SWEEP</text>
+              <text x="265" y="80" font-family="Outfit" font-size="9" fill="#5a6a82" text-anchor="middle">Price raids high/low</text>
+              <path d="M 335 67 L 365 67" stroke="#5a6a82" stroke-width="1" marker-end="url(#aGy)"/>
+              <rect x="370" y="40" width="130" height="55" fill="#f59e0b11" stroke="#f59e0b44" stroke-width="1" rx="6"/>
+              <text x="435" y="62" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600" text-anchor="middle">3. DISPLACEMENT</text>
+              <text x="435" y="80" font-family="Outfit" font-size="9" fill="#5a6a82" text-anchor="middle">Strong move + FVG</text>
+              <path d="M 505 67 L 535 67" stroke="#5a6a82" stroke-width="1" marker-end="url(#aGy)"/>
+              <rect x="540" y="40" width="110" height="55" fill="#10b98111" stroke="#10b98144" stroke-width="1" rx="6"/>
+              <text x="595" y="62" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="600" text-anchor="middle">4. FVG ENTRY</text>
+              <text x="595" y="80" font-family="Outfit" font-size="9" fill="#5a6a82" text-anchor="middle">Enter on retrace</text>
+              <!-- Time windows -->
+              <rect x="30" y="120" width="200" height="50" fill="#3b82f608" stroke="#3b82f633" stroke-width="1" rx="4"/>
+              <text x="40" y="140" font-family="JetBrains Mono" font-size="9" fill="#3b82f6" font-weight="600">LONDON: 3–4 AM EST</text>
+              <text x="40" y="158" font-family="Outfit" font-size="9" fill="#5a6a82">Asian range sweep</text>
+              <rect x="240" y="120" width="200" height="50" fill="#f59e0b08" stroke="#f59e0b44" stroke-width="1" rx="4"/>
+              <text x="250" y="140" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600">NY AM: 10–11 AM EST</text>
+              <text x="250" y="158" font-family="Outfit" font-size="9" fill="#f59e0b88">Highest probability window</text>
+              <rect x="450" y="120" width="200" height="50" fill="#a78bfa08" stroke="#a78bfa44" stroke-width="1" rx="4"/>
+              <text x="460" y="140" font-family="JetBrains Mono" font-size="9" fill="#a78bfa" font-weight="600">NY PM: 2–3 PM EST</text>
+              <text x="460" y="158" font-family="Outfit" font-size="9" fill="#5a6a82">End-of-day rebalancing</text>
+              <text x="340" y="210" font-family="JetBrains Mono" font-size="9" fill="#5a6a82" text-anchor="middle">WIN RATE: 65-80% | R:R: 1:2 to 1:3 | TARGET: 20-30 pips</text>
+            </svg>
+            <div class="dia-label">Silver Bullet — Time-Based FVG Sniper</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="sb-setup">
+        <div class="s-card">
+          <h2>Setup Conditions</h2>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Establish HTF Bias:</strong> Check 1H or 4H for market structure. Are we bullish (higher highs/lows) or bearish (lower highs/lows)? Mark premium/discount zones using Fibonacci.</div></li>
+            <li><span class="step-num">2</span><div><strong>Identify Draw on Liquidity (DOL):</strong> Where is price likely heading? Previous session high/low, PDH/PDL, or an unfilled FVG on a higher timeframe.</div></li>
+            <li><span class="step-num">3</span><div><strong>Wait for Silver Bullet Window:</strong> Only look for setups during the 3 time windows. Outside these hours, close your charts.</div></li>
+            <li><span class="step-num">4</span><div><strong>Mark Session High/Low:</strong> At the start of the SB window, mark the current session's high and low. These are your liquidity targets.</div></li>
+          </ol>
+          <div class="s-tip">
+            <div class="lbl">Pro Tip</div>
+            <p>The 10-11 AM window is highest probability because it's 1 hour after NYSE opens. The initial 9:30-10:00 volatility creates the liquidity sweep, and the Silver Bullet window captures the real move that follows.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="sb-entry">
+        <div class="s-card bear">
+          <h2>Entry Model</h2>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Liquidity Sweep:</strong> Within the SB window, price must sweep a session high/low or PDH/PDL. This grabs stops and creates the fuel for the real move.</div></li>
+            <li><span class="step-num">2</span><div><strong>Displacement:</strong> After the sweep, watch for a strong move in the opposite direction — big-bodied candles with momentum. This displacement creates the FVG.</div></li>
+            <li><span class="step-num">3</span><div><strong>Identify the FVG:</strong> The first Fair Value Gap created by the displacement is your entry zone. It must form within the SB time window.</div></li>
+            <li><span class="step-num">4</span><div><strong>Entry:</strong> Set a limit order at the FVG boundary closest to your trade direction. Bullish = top of FVG. Bearish = bottom of FVG.</div></li>
+            <li><span class="step-num">5</span><div><strong>SL:</strong> Above/below the liquidity sweep wick. <strong>TP:</strong> Next internal liquidity level or the DOL identified in setup.</div></li>
+          </ol>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="sg2" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="280" fill="#070b14"/><rect width="680" height="280" fill="url(#sg2)"/>
+              <!-- Session low line -->
+              <line x1="30" y1="190" x2="650" y2="190" stroke="#3b82f633" stroke-width="1" stroke-dasharray="5,4"/>
+              <text x="35" y="205" font-family="JetBrains Mono" font-size="8" fill="#3b82f6">SESSION LOW (SSL)</text>
+              <!-- Time window -->
+              <rect x="120" y="25" width="400" height="230" fill="#f59e0b04" stroke="#f59e0b22" stroke-width="1" stroke-dasharray="6,4" rx="4"/>
+              <text x="130" y="18" font-family="JetBrains Mono" font-size="9" fill="#f59e0b">10:00 AM ────── SILVER BULLET WINDOW ────── 11:00 AM</text>
+              <!-- Price action: sweep down then reverse -->
+              <line x1="80" y1="80" x2="80" y2="130" stroke="#5a6a82" stroke-width="1"/><rect x="74" y="85" width="12" height="30" fill="#f43f5e" rx="1"/>
+              <line x1="140" y1="110" x2="140" y2="165" stroke="#5a6a82" stroke-width="1"/><rect x="134" y="118" width="12" height="32" fill="#f43f5e" rx="1"/>
+              <!-- Sweep candle -->
+              <line x1="200" y1="140" x2="200" y2="230" stroke="#5a6a82" stroke-width="1"/><rect x="194" y="148" width="12" height="40" fill="#f43f5e" rx="1"/>
+              <circle cx="200" cy="225" r="6" fill="none" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <text x="215" y="232" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">SWEEP SSL</text>
+              <!-- Displacement candles -->
+              <line x1="260" y1="100" x2="260" y2="210" stroke="#5a6a82" stroke-width="1"/><rect x="254" y="105" width="12" height="80" fill="#10b981" rx="1"/>
+              <line x1="310" y1="70" x2="310" y2="140" stroke="#5a6a82" stroke-width="1"/><rect x="304" y="75" width="12" height="45" fill="#10b981" rx="1"/>
+              <text x="280" y="60" font-family="JetBrains Mono" font-size="8" fill="#10b981">DISPLACEMENT</text>
+              <!-- FVG zone -->
+              <rect x="252" y="105" width="72" height="25" fill="#10b98122" stroke="#10b981" stroke-width="1" stroke-dasharray="3,2" rx="3"/>
+              <text x="330" y="120" font-family="JetBrains Mono" font-size="8" fill="#10b981">FVG</text>
+              <!-- Entry arrow -->
+              <line x1="360" y1="130" x2="360" y2="115" stroke="#f59e0b" stroke-width="1.5"/>
+              <rect x="372" y="108" width="45" height="18" fill="#10b98133" stroke="#10b981" stroke-width="1" rx="3"/>
+              <text x="380" y="121" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="700">ENTRY</text>
+              <!-- Continuation -->
+              <line x1="440" y1="50" x2="440" y2="100" stroke="#5a6a82" stroke-width="1"/><rect x="434" y="55" width="12" height="30" fill="#10b981" rx="1"/>
+              <line x1="490" y1="35" x2="490" y2="75" stroke="#5a6a82" stroke-width="1"/><rect x="484" y="40" width="12" height="22" fill="#10b981" rx="1"/>
+              <!-- SL/TP -->
+              <line x1="185" y1="235" x2="420" y2="235" stroke="#f43f5e66" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="370" y="248" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">SL</text>
+              <line x1="430" y1="45" x2="550" y2="45" stroke="#10b98188" stroke-width="1.5"/>
+              <text x="510" y="38" font-family="JetBrains Mono" font-size="8" fill="#10b981">TP (DOL)</text>
+            </svg>
+            <div class="dia-label">Silver Bullet Bullish Entry — Sweep SSL, Displacement, FVG Entry</div>
+          </div>
+          <div class="rr-box">Target R:R — 1:2 to 1:3 | 20-30 pip target</div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="sb-tf">
+        <div class="s-card">
+          <h2>Timeframe Setup</h2>
+          <table class="tf-tbl">
+            <thead><tr><th>Purpose</th><th>Timeframe</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>HTF Bias</td><td>1H / 4H</td><td>Structure + premium/discount</td></tr>
+              <tr><td>SB Window</td><td>15m</td><td>Spot the sweep + displacement</td></tr>
+              <tr><td>Entry</td><td>5m / 1m</td><td>Identify FVG for precision entry</td></tr>
+            </tbody>
+          </table>
+          <div class="s-tip">
+            <div class="lbl">Key Rule</div>
+            <p>If no valid FVG forms within the 1-hour Silver Bullet window — <strong>no trade</strong>. The discipline of walking away when the setup doesn't appear is what separates 70%+ win rates from 50%.</p>
+          </div>
+        </div>
+      </div>
+    </div><!-- end strat-silver-bullet -->
+
+    <!-- ─── OTE Strategy ─── -->
+    <div class="strat-panel" id="strat-ote">
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-st="ot-overview">Overview</button>
+        <button class="sub-tab" data-st="ot-setup">Setup</button>
+        <button class="sub-tab" data-st="ot-entry">Entry</button>
+        <button class="sub-tab" data-st="ot-tf">Timeframes</button>
+      </div>
+
+      <div class="sub-panel active" id="ot-overview">
+        <div class="s-card">
+          <h2>What is OTE?</h2>
+          <p>Optimal Trade Entry is ICT's <strong>Fibonacci-based pullback entry</strong>. When price makes an impulsive move and retraces, the OTE zone (62%–79% retracement) is where institutions reload their positions. It's deep enough to offer a genuine discount but shallow enough that the trend isn't broken.</p>
+          <p>Think of it this way: if you're bullish and price just made a strong leg up, OTE tells you exactly where to buy the dip — not at random support, but at the mathematically optimal spot where smart money is accumulating.</p>
+
+          <h3>The Key Fibonacci Levels</h3>
+          <div class="chip-row">
+            <span class="chip bl">0.50 — Equilibrium</span>
+            <span class="chip gd">0.62 — OTE Start</span>
+            <span class="chip pr">0.705 — Sweet Spot</span>
+            <span class="chip rd">0.79 — OTE End</span>
+          </div>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="og1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="280" fill="#070b14"/><rect width="680" height="280" fill="url(#og1)"/>
+              <!-- Swing high/low -->
+              <text x="80" y="245" font-family="JetBrains Mono" font-size="9" fill="#3b82f6">SWING LOW (0%)</text>
+              <text x="80" y="35" font-family="JetBrains Mono" font-size="9" fill="#3b82f6">SWING HIGH (100%)</text>
+              <!-- Fib lines -->
+              <line x1="70" y1="250" x2="620" y2="250" stroke="#3b82f633" stroke-width="1"/>
+              <line x1="70" y1="40" x2="620" y2="40" stroke="#3b82f633" stroke-width="1"/>
+              <line x1="70" y1="145" x2="620" y2="145" stroke="#5a6a8244" stroke-width="1" stroke-dasharray="4,3"/>
+              <text x="625" y="149" font-family="JetBrains Mono" font-size="8" fill="#5a6a82">0.50 EQ</text>
+              <!-- OTE ZONE -->
+              <rect x="70" y="116" width="550" height="58" fill="#f59e0b0c" stroke="#f59e0b44" stroke-width="1" rx="3"/>
+              <line x1="70" y1="116" x2="620" y2="116" stroke="#f59e0b66" stroke-width="1"/>
+              <text x="625" y="120" font-family="JetBrains Mono" font-size="8" fill="#f59e0b">0.62</text>
+              <line x1="70" y1="140" x2="620" y2="140" stroke="#a78bfa66" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="625" y="143" font-family="JetBrains Mono" font-size="8" fill="#a78bfa">0.705</text>
+              <line x1="70" y1="174" x2="620" y2="174" stroke="#f59e0b66" stroke-width="1"/>
+              <text x="625" y="178" font-family="JetBrains Mono" font-size="8" fill="#f59e0b">0.79</text>
+              <text x="340" y="150" font-family="JetBrains Mono" font-size="11" fill="#f59e0b" font-weight="700" text-anchor="middle">OTE ZONE</text>
+              <!-- Impulse leg up -->
+              <line x1="130" y1="245" x2="130" y2="100" stroke="#5a6a82" stroke-width="1"/><rect x="124" y="105" width="12" height="100" fill="#10b981" rx="1"/>
+              <line x1="165" y1="200" x2="165" y2="60" stroke="#5a6a82" stroke-width="1"/><rect x="159" y="65" width="12" height="95" fill="#10b981" rx="1"/>
+              <line x1="200" y1="130" x2="200" y2="44" stroke="#5a6a82" stroke-width="1"/><rect x="194" y="48" width="12" height="55" fill="#10b981" rx="1"/>
+              <text x="170" y="265" font-family="JetBrains Mono" font-size="8" fill="#10b981">IMPULSE LEG</text>
+              <!-- Retracement into OTE -->
+              <line x1="270" y1="55" x2="270" y2="110" stroke="#5a6a82" stroke-width="1"/><rect x="264" y="60" width="12" height="35" fill="#f43f5e" rx="1"/>
+              <line x1="310" y1="80" x2="310" y2="145" stroke="#5a6a82" stroke-width="1"/><rect x="304" y="88" width="12" height="38" fill="#f43f5e" rx="1"/>
+              <line x1="350" y1="100" x2="350" y2="168" stroke="#5a6a82" stroke-width="1"/><rect x="344" y="108" width="12" height="42" fill="#f43f5e" rx="1"/>
+              <text x="310" y="265" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">RETRACEMENT</text>
+              <!-- OB/FVG in OTE zone -->
+              <rect x="380" y="130" width="50" height="18" fill="#10b98133" stroke="#10b981" stroke-width="1" rx="3"/>
+              <text x="387" y="143" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="700">ENTRY</text>
+              <!-- Continuation -->
+              <line x1="450" y1="60" x2="450" y2="155" stroke="#5a6a82" stroke-width="1"/><rect x="444" y="65" width="12" height="65" fill="#10b981" rx="1"/>
+              <line x1="490" y1="30" x2="490" y2="90" stroke="#5a6a82" stroke-width="1"/><rect x="484" y="35" width="12" height="38" fill="#10b981" rx="1"/>
+              <text x="490" y="265" font-family="JetBrains Mono" font-size="8" fill="#10b981">CONTINUATION</text>
+              <!-- Extension targets -->
+              <line x1="530" y1="20" x2="600" y2="20" stroke="#10b98188" stroke-width="1.5"/>
+              <text x="540" y="15" font-family="JetBrains Mono" font-size="8" fill="#10b981">TP (-0.27 ext)</text>
+            </svg>
+            <div class="dia-label">OTE Zone (62%–79%) — Bullish Pullback Entry</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="ot-setup">
+        <div class="s-card">
+          <h2>Setup Conditions</h2>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Clear Impulse Leg:</strong> Price must have made a strong, clean move with displacement — not a choppy grind. The impulse creates the dealing range you'll draw Fibonacci on.</div></li>
+            <li><span class="step-num">2</span><div><strong>Market Structure Confirmation:</strong> Bullish OTE needs a bullish MSS (break above a recent swing high). Bearish OTE needs a bearish MSS.</div></li>
+            <li><span class="step-num">3</span><div><strong>Draw Fibonacci:</strong> Bullish = swing low to swing high. Bearish = swing high to swing low. Body-to-body (ignoring wicks) gives cleaner levels.</div></li>
+            <li><span class="step-num">4</span><div><strong>Price Must Cross Below 50% (EQ):</strong> The retracement must go deeper than equilibrium. If price only pulls back to 40% and reverses, the OTE is not valid — the risk is too large relative to reward.</div></li>
+          </ol>
+          <div class="s-tip">
+            <div class="lbl">Pro Tip</div>
+            <p>The best OTE setups have an Order Block or FVG sitting right inside the 62-79% zone. When the OTE level aligns with a PD array, you get a double-confluence entry that institutions are likely using too.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="ot-entry">
+        <div class="s-card bull">
+          <h2>Entry Model</h2>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Wait for Retracement:</strong> Let price pull back into the OTE zone (62-79%). Don't jump in early at 50%.</div></li>
+            <li><span class="step-num">2</span><div><strong>Find the PD Array:</strong> Inside the OTE zone, look for an Order Block or FVG. This is your precision entry point.</div></li>
+            <li><span class="step-num">3</span><div><strong>Confirmation:</strong> Wait for a rejection candle (bullish engulfing, pin bar) or an LTF market structure shift inside the OTE zone.</div></li>
+            <li><span class="step-num">4</span><div><strong>Entry:</strong> Enter at the OB/FVG retest. The 0.705 level (sweet spot) is the ideal entry.</div></li>
+            <li><span class="step-num">5</span><div><strong>SL:</strong> Just below the swing low (bullish) or above the swing high (bearish) — the 100% Fibonacci level.</div></li>
+            <li><span class="step-num">6</span><div><strong>TP1:</strong> -0.27 Fibonacci extension. <strong>TP2:</strong> -0.62 Fibonacci extension.</div></li>
+          </ol>
+          <div class="rr-box">Min R:R — 1:2 | Sweet Spot Entry (0.705) often gives 1:3+</div>
+          <div class="s-tip">
+            <div class="lbl">Common Mistake</div>
+            <p>Drawing Fibonacci on a weak, choppy leg instead of a clear impulse with displacement. OTE is a location tool, not a signal — context (market structure + liquidity) comes first, Fibonacci comes second.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="ot-tf">
+        <div class="s-card">
+          <h2>Timeframe Setup</h2>
+          <table class="tf-tbl">
+            <thead><tr><th>Purpose</th><th>Timeframe</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Dealing Range</td><td>4H / Daily</td><td>Identify the impulse leg</td></tr>
+              <tr><td>OTE Zone</td><td>1H / 15m</td><td>Draw fib, find PD arrays</td></tr>
+              <tr><td>Entry</td><td>5m / 1m</td><td>MSS + rejection confirmation</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:12px;">Best time to trade OTE: <strong>8:30-11:00 AM EST</strong> during the NY killzone when liquidity is highest and retracements are most likely to hold.</p>
+        </div>
+      </div>
+    </div><!-- end strat-ote -->
+
+    <!-- ─── POWER OF 3 / AMD Strategy ─── -->
+    <div class="strat-panel" id="strat-po3-amd">
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-st="po-overview">Overview</button>
+        <button class="sub-tab" data-st="po-phases">3 Phases</button>
+        <button class="sub-tab" data-st="po-entry">Entry</button>
+        <button class="sub-tab" data-st="po-tf">Timeframes</button>
+      </div>
+
+      <div class="sub-panel active" id="po-overview">
+        <div class="s-card">
+          <h2>What is Power of 3?</h2>
+          <p>Power of 3 (PO3) is the <strong>macro framework</strong> that explains how every trading day unfolds. It breaks the day into three phases — Accumulation, Manipulation, Distribution — that map to specific sessions. While other strategies tell you where to enter, PO3 tells you <strong>why</strong> the market is moving and <strong>when</strong> each phase transitions.</p>
+          <p>Think of it as the Wyckoff cycle compressed into a single trading day. Asian session = accumulation. London open = manipulation. NY session = distribution. Once you see this rhythm, you stop getting trapped by fake moves.</p>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="pg1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="260" fill="#070b14"/><rect width="680" height="260" fill="url(#pg1)"/>
+              <!-- Session zones -->
+              <rect x="30" y="30" width="180" height="185" fill="#3b82f608" stroke="#3b82f622" stroke-width="1" rx="4"/>
+              <text x="120" y="22" font-family="JetBrains Mono" font-size="9" fill="#3b82f6" font-weight="600" text-anchor="middle">ASIAN SESSION</text>
+              <rect x="220" y="30" width="170" height="185" fill="#f43f5e08" stroke="#f43f5e22" stroke-width="1" rx="4"/>
+              <text x="305" y="22" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" font-weight="600" text-anchor="middle">LONDON OPEN</text>
+              <rect x="400" y="30" width="250" height="185" fill="#10b98108" stroke="#10b98122" stroke-width="1" rx="4"/>
+              <text x="525" y="22" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="600" text-anchor="middle">NEW YORK SESSION</text>
+              <!-- Phase labels -->
+              <text x="120" y="230" font-family="JetBrains Mono" font-size="10" fill="#3b82f6" font-weight="700" text-anchor="middle">ACCUMULATION</text>
+              <text x="305" y="230" font-family="JetBrains Mono" font-size="10" fill="#f43f5e" font-weight="700" text-anchor="middle">MANIPULATION</text>
+              <text x="525" y="230" font-family="JetBrains Mono" font-size="10" fill="#10b981" font-weight="700" text-anchor="middle">DISTRIBUTION</text>
+              <!-- Opening price line -->
+              <line x1="30" y1="120" x2="650" y2="120" stroke="#f59e0b44" stroke-width="1" stroke-dasharray="5,4"/>
+              <text x="655" y="124" font-family="JetBrains Mono" font-size="7" fill="#f59e0b">OPEN</text>
+              <!-- Accumulation: choppy range -->
+              <rect x="55" y="95" width="130" height="50" fill="#3b82f60a" rx="2"/>
+              <line x1="75" y1="105" x2="75" y2="135" stroke="#5a6a82" stroke-width="1"/><rect x="70" y="108" width="10" height="18" fill="#10b981" rx="1"/>
+              <line x1="100" y1="100" x2="100" y2="138" stroke="#5a6a82" stroke-width="1"/><rect x="95" y="115" width="10" height="15" fill="#f43f5e" rx="1"/>
+              <line x1="125" y1="103" x2="125" y2="140" stroke="#5a6a82" stroke-width="1"/><rect x="120" y="106" width="10" height="22" fill="#10b981" rx="1"/>
+              <line x1="150" y1="98" x2="150" y2="137" stroke="#5a6a82" stroke-width="1"/><rect x="145" y="110" width="10" height="18" fill="#f43f5e" rx="1"/>
+              <!-- Manipulation: fake move DOWN (bullish day) -->
+              <line x1="240" y1="115" x2="240" y2="158" stroke="#5a6a82" stroke-width="1"/><rect x="235" y="118" width="10" height="28" fill="#f43f5e" rx="1"/>
+              <line x1="270" y1="130" x2="270" y2="185" stroke="#5a6a82" stroke-width="1"/><rect x="265" y="135" width="10" height="35" fill="#f43f5e" rx="1"/>
+              <text x="290" y="182" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">FAKE MOVE</text>
+              <text x="290" y="194" font-family="JetBrains Mono" font-size="7" fill="#f43f5e88">stops hunted</text>
+              <!-- Reversal candle -->
+              <line x1="320" y1="85" x2="320" y2="175" stroke="#5a6a82" stroke-width="1"/><rect x="315" y="90" width="10" height="60" fill="#10b981" rx="1"/>
+              <!-- Distribution: real move UP -->
+              <line x1="420" y1="55" x2="420" y2="120" stroke="#5a6a82" stroke-width="1"/><rect x="415" y="60" width="10" height="42" fill="#10b981" rx="1"/>
+              <line x1="460" y1="45" x2="460" y2="88" stroke="#5a6a82" stroke-width="1"/><rect x="455" y="48" width="10" height="28" fill="#10b981" rx="1"/>
+              <line x1="500" y1="38" x2="500" y2="72" stroke="#5a6a82" stroke-width="1"/><rect x="495" y="40" width="10" height="22" fill="#10b981" rx="1"/>
+              <line x1="540" y1="50" x2="540" y2="68" stroke="#5a6a82" stroke-width="1"/><rect x="535" y="52" width="10" height="10" fill="#f43f5e" rx="1"/>
+              <line x1="575" y1="35" x2="575" y2="62" stroke="#5a6a82" stroke-width="1"/><rect x="570" y="38" width="10" height="16" fill="#10b981" rx="1"/>
+              <text x="525" y="250" font-family="JetBrains Mono" font-size="8" fill="#10b981">THE REAL MOVE</text>
+            </svg>
+            <div class="dia-label">Power of 3 — Bullish Day (Bearish Manipulation into Bullish Distribution)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="po-phases">
+        <div class="s-card">
+          <h2>The 3 Phases Explained</h2>
+          <h3>Phase 1: Accumulation</h3>
+          <p>Happens during the <strong>Asian session</strong> (roughly 8 PM – 2 AM EST). Price moves sideways in a tight range. Smart money is quietly building positions near the daily open price. Retail traders see "nothing happening" and look away. That's the point — positions are being loaded without moving price.</p>
+          <p><strong>What to look for:</strong> A clear horizontal range. Mark the high and low — these become the liquidity targets for the next phase.</p>
+
+          <h3>Phase 2: Manipulation</h3>
+          <p>Happens at the <strong>London open</strong> (2-5 AM EST). Price aggressively breaks one side of the accumulation range. On a bullish day, it sweeps below the Asian low. On a bearish day, it spikes above the Asian high. This is the Judas Swing — the fake move designed to trigger stops and trap breakout traders.</p>
+          <p><strong>What to look for:</strong> A sweep of the Asian range high/low followed by a strong reversal with displacement. The manipulation leg creates FVGs and OBs for your entry.</p>
+
+          <h3>Phase 3: Distribution</h3>
+          <p>Happens during the <strong>NY session</strong> (8 AM – 2 PM EST). This is the REAL move. After trapping traders with the fake breakout, smart money drives price in the intended direction — toward the day's target (PDH/PDL, weekly level, or unfilled FVG). This phase typically forms 60-80% of the daily candle's body.</p>
+          <p><strong>What to look for:</strong> Strong directional movement with follow-through. This is where you ride the trade to your TP.</p>
+        </div>
+
+        <div class="s-card gold">
+          <h2>Bullish vs Bearish Day</h2>
+          <div class="cmp-grid">
+            <div class="cmp-box tbs">
+              <h4>Bullish PO3</h4>
+              <p>Asian range forms → London sweeps BELOW range (manipulation down) → NY drives price UP (distribution up). Daily candle opens near high, wicks down, closes near high.</p>
+            </div>
+            <div class="cmp-box tws">
+              <h4>Bearish PO3</h4>
+              <p>Asian range forms → London sweeps ABOVE range (manipulation up) → NY drives price DOWN (distribution down). Daily candle opens near low, wicks up, closes near low.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="po-entry">
+        <div class="s-card bear">
+          <h2>Entry Model</h2>
+          <p>You <strong>don't trade the accumulation or manipulation phases</strong>. You trade the transition from manipulation to distribution. Here's how:</p>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Establish Daily Bias:</strong> Use HTF (Daily/4H) to determine if the day is likely bullish or bearish. Look at the previous day's close, weekly structure, and draw on liquidity.</div></li>
+            <li><span class="step-num">2</span><div><strong>Mark Asian Range:</strong> Identify the accumulation zone high/low during the Asian session (8 PM – 2 AM EST).</div></li>
+            <li><span class="step-num">3</span><div><strong>Wait for the Sweep:</strong> During London open, watch for price to sweep one side of the Asian range. Bullish bias? Wait for a sweep BELOW the Asian low.</div></li>
+            <li><span class="step-num">4</span><div><strong>Confirm MSS/Displacement:</strong> After the sweep, drop to 5m/15m and look for a Market Structure Shift in the direction of your bias. The displacement creates FVGs.</div></li>
+            <li><span class="step-num">5</span><div><strong>Enter at FVG/OB:</strong> Enter on the retrace to the FVG or OB created by the displacement. SL below the manipulation low (bullish) or above the manipulation high (bearish).</div></li>
+            <li><span class="step-num">6</span><div><strong>TP:</strong> Target the opposite side — PDH if bullish, PDL if bearish, or the next significant liquidity pool.</div></li>
+          </ol>
+          <div class="rr-box">Target R:R — 1:2 to 1:4 | Distribution leg = the daily body</div>
+          <div class="s-tip">
+            <div class="lbl">Critical Rule</div>
+            <p>If a lower-timeframe PO3 aligns with the higher-timeframe draw on liquidity, the distribution move tends to have clean follow-through. If it doesn't align, you're trading against the current — expect chop.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="po-tf">
+        <div class="s-card">
+          <h2>Timeframe & Session Map</h2>
+          <table class="tf-tbl">
+            <thead><tr><th>Phase</th><th>Session (EST)</th><th>Timeframe</th></tr></thead>
+            <tbody>
+              <tr><td>Accumulation</td><td>8 PM – 2 AM</td><td>1H (mark range)</td></tr>
+              <tr><td>Manipulation</td><td>2 AM – 5 AM</td><td>15m (spot sweep)</td></tr>
+              <tr><td>Distribution</td><td>8 AM – 2 PM</td><td>5m/1m (entry)</td></tr>
+            </tbody>
+          </table>
+
+          <h3>PO3 as a Framework, Not Just a Strategy</h3>
+          <p>PO3/AMD is the <strong>container</strong> that holds other ICT entry models. Once you identify which phase the market is in, you use specific tools:</p>
+          <div class="chip-row">
+            <span class="chip gd">Silver Bullet → Distribution entry</span>
+            <span class="chip pr">OTE → Pullback during distribution</span>
+            <span class="chip bl">CRT+TBS → Manipulation identification</span>
+          </div>
+          <p style="margin-top:10px;">The power of PO3 is knowing WHEN to deploy each tool. During accumulation, you wait. During manipulation, you identify the trap. During distribution, you execute with Silver Bullet, OTE, or whatever entry model suits the setup.</p>
+
+          <div class="s-tip">
+            <div class="lbl">How They All Connect</div>
+            <p><strong>PO3</strong> tells you the daily script. <strong>CRT</strong> identifies the manipulation candle. <strong>TBS</strong> confirms the trap. <strong>OTE</strong> finds the pullback entry. <strong>Silver Bullet</strong> times the execution window. Master the framework first, then layer in the entry models.</p>
+          </div>
+        </div>
+      </div>
+    </div><!-- end strat-po3-amd -->
 
   </div><!-- end strategies panel -->
 
