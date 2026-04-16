@@ -509,6 +509,7 @@ body::after {
         <option value="silver-bullet">ICT Silver Bullet</option>
         <option value="ote">ICT Optimal Trade Entry (OTE)</option>
         <option value="po3-amd">Power of 3 / AMD</option>
+        <option value="frvp">Fixed Range Volume Profile</option>
       </select>
     </div>
 
@@ -1278,6 +1279,440 @@ body::after {
         </div>
       </div>
     </div><!-- end strat-po3-amd -->
+
+    <!-- ─── FIXED RANGE VOLUME PROFILE Strategy ─── -->
+    <div class="strat-panel" id="strat-frvp">
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-st="vp-overview">Overview</button>
+        <button class="sub-tab" data-st="vp-components">5 Components</button>
+        <button class="sub-tab" data-st="vp-drawing">Where to Draw</button>
+        <button class="sub-tab" data-st="vp-strategies">3 Strategies</button>
+        <button class="sub-tab" data-st="vp-confluence">ICT Confluence</button>
+        <button class="sub-tab" data-st="vp-shapes">Shape Reading</button>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="sub-panel active" id="vp-overview">
+        <div class="s-card">
+          <h2>What is Fixed Range Volume Profile?</h2>
+          <p>Most volume indicators show you how much was traded over <strong>TIME</strong> (those bars at the bottom of your chart). Volume Profile flips that — it shows how much was traded at each <strong>PRICE LEVEL</strong>, displayed as a horizontal histogram on the side of your chart.</p>
+          <p>The "Fixed Range" part means YOU choose the start and end points. You draw it over a specific price leg, consolidation, or session — and it reveals exactly where the heavy trading happened within that range.</p>
+          <p>Think of it as an <strong>X-ray of price action</strong>. Candles tell you what price did. Volume Profile tells you what traders actually COMMITTED money to.</p>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="vg1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="300" fill="#070b14"/><rect width="680" height="300" fill="url(#vg1)"/>
+              <text x="340" y="18" font-family="JetBrains Mono" font-size="10" fill="#3b82f6" font-weight="600" text-anchor="middle">FIXED RANGE VOLUME PROFILE — ANATOMY</text>
+
+              <!-- Profile histogram (left side) -->
+              <rect x="40" y="35" width="15" height="8" fill="#3b82f644" rx="1"/>
+              <rect x="40" y="45" width="35" height="8" fill="#3b82f644" rx="1"/>
+              <rect x="40" y="55" width="25" height="8" fill="#3b82f644" rx="1"/>
+              <rect x="40" y="65" width="18" height="8" fill="#3b82f644" rx="1"/>
+              <!-- VAH zone start -->
+              <rect x="40" y="75" width="55" height="8" fill="#f59e0b44" rx="1"/>
+              <rect x="40" y="85" width="70" height="8" fill="#f59e0b55" rx="1"/>
+              <rect x="40" y="95" width="85" height="8" fill="#f59e0b55" rx="1"/>
+              <rect x="40" y="105" width="100" height="8" fill="#f59e0b66" rx="1"/>
+              <rect x="40" y="115" width="120" height="8" fill="#f59e0b77" rx="1"/>
+              <!-- HVN cluster -->
+              <rect x="40" y="125" width="150" height="8" fill="#10b98188" rx="1"/>
+              <rect x="40" y="135" width="175" height="10" fill="#10b981cc" rx="1"/>
+              <!-- POC - biggest bar -->
+              <rect x="40" y="147" width="200" height="12" fill="#10b981" rx="1"/>
+              <rect x="40" y="161" width="170" height="8" fill="#10b98188" rx="1"/>
+              <rect x="40" y="171" width="140" height="8" fill="#10b98177" rx="1"/>
+              <!-- LVN - thin gap -->
+              <rect x="40" y="181" width="30" height="8" fill="#f43f5e44" rx="1"/>
+              <rect x="40" y="191" width="20" height="8" fill="#f43f5e33" rx="1"/>
+              <!-- Another HVN -->
+              <rect x="40" y="201" width="110" height="8" fill="#f59e0b55" rx="1"/>
+              <rect x="40" y="211" width="95" height="8" fill="#f59e0b44" rx="1"/>
+              <!-- VAL zone end -->
+              <rect x="40" y="221" width="60" height="8" fill="#f59e0b44" rx="1"/>
+              <rect x="40" y="231" width="40" height="8" fill="#3b82f644" rx="1"/>
+              <rect x="40" y="241" width="25" height="8" fill="#3b82f644" rx="1"/>
+              <rect x="40" y="251" width="12" height="8" fill="#3b82f644" rx="1"/>
+
+              <!-- Labels -->
+              <!-- POC -->
+              <line x1="245" y1="153" x2="290" y2="153" stroke="#10b981" stroke-width="1.5"/>
+              <rect x="295" y="143" width="95" height="22" fill="#10b98122" stroke="#10b981" stroke-width="1" rx="4"/>
+              <text x="310" y="158" font-family="JetBrains Mono" font-size="10" fill="#10b981" font-weight="700">POC</text>
+              <text x="340" y="158" font-family="Outfit" font-size="9" fill="#10b98188">highest vol</text>
+
+              <!-- VAH -->
+              <line x1="60" y1="75" x2="420" y2="75" stroke="#f59e0b88" stroke-width="1" stroke-dasharray="5,3"/>
+              <text x="425" y="79" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600">VAH</text>
+              <text x="460" y="79" font-family="Outfit" font-size="9" fill="#f59e0b88">value area high</text>
+
+              <!-- VAL -->
+              <line x1="60" y1="228" x2="420" y2="228" stroke="#f59e0b88" stroke-width="1" stroke-dasharray="5,3"/>
+              <text x="425" y="232" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600">VAL</text>
+              <text x="460" y="232" font-family="Outfit" font-size="9" fill="#f59e0b88">value area low</text>
+
+              <!-- Value Area bracket -->
+              <line x1="415" y1="78" x2="415" y2="225" stroke="#f59e0b44" stroke-width="1"/>
+              <text x="400" y="155" font-family="JetBrains Mono" font-size="8" fill="#f59e0b66" transform="rotate(-90, 408, 155)">70% VOLUME</text>
+
+              <!-- HVN label -->
+              <line x1="180" y1="135" x2="295" y2="115" stroke="#a78bfa88" stroke-width="1"/>
+              <text x="300" y="112" font-family="JetBrains Mono" font-size="9" fill="#a78bfa">HVN</text>
+              <text x="330" y="112" font-family="Outfit" font-size="8" fill="#a78bfa88">thick = strong S/R</text>
+
+              <!-- LVN label -->
+              <line x1="55" y1="186" x2="295" y2="186" stroke="#f43f5e88" stroke-width="1"/>
+              <text x="300" y="183" font-family="JetBrains Mono" font-size="9" fill="#f43f5e">LVN</text>
+              <text x="330" y="183" font-family="Outfit" font-size="8" fill="#f43f5e88">thin = air pocket</text>
+
+              <!-- Price candles on right side -->
+              <line x1="500" y1="250" x2="500" y2="200" stroke="#5a6a82" stroke-width="1"/><rect x="495" y="210" width="10" height="30" fill="#10b981" rx="1"/>
+              <line x1="530" y1="230" x2="530" y2="170" stroke="#5a6a82" stroke-width="1"/><rect x="525" y="180" width="10" height="35" fill="#10b981" rx="1"/>
+              <line x1="560" y1="195" x2="560" y2="130" stroke="#5a6a82" stroke-width="1"/><rect x="555" y="140" width="10" height="40" fill="#10b981" rx="1"/>
+              <line x1="590" y1="150" x2="590" y2="90" stroke="#5a6a82" stroke-width="1"/><rect x="585" y="95" width="10" height="38" fill="#10b981" rx="1"/>
+              <line x1="620" y1="110" x2="620" y2="60" stroke="#5a6a82" stroke-width="1"/><rect x="615" y="65" width="10" height="30" fill="#10b981" rx="1"/>
+
+              <text x="560" y="275" font-family="JetBrains Mono" font-size="8" fill="#5a6a82">PRICE ACTION</text>
+              <text x="120" y="275" font-family="JetBrains Mono" font-size="8" fill="#5a6a82">VOLUME HISTOGRAM</text>
+            </svg>
+            <div class="dia-label">Fixed Range Volume Profile — Key Components</div>
+          </div>
+
+          <p>The core principle: <strong>price gravitates toward areas of HIGH volume (where institutions transacted heavily) and moves quickly through areas of LOW volume (where there's no support/resistance).</strong></p>
+        </div>
+      </div>
+
+      <!-- 5 COMPONENTS -->
+      <div class="sub-panel" id="vp-components">
+        <div class="s-card bull">
+          <h2>The 5 Key Components</h2>
+
+          <h3>1. Point of Control (POC)</h3>
+          <p>The price level with the <strong>highest traded volume</strong> in the entire range. Think of it as the "fairest price" where both buyers and sellers agreed the most. Price gets pulled back to the POC like a magnet.</p>
+          <div class="chip-row"><span class="chip gr">Acts as strong S/R</span><span class="chip bl">Magnet for retests</span><span class="chip gd">Institutional acceptance</span></div>
+          <p>In an uptrend, POC acts as support on pullbacks. In a downtrend, it acts as resistance on rallies. A "Naked POC" (one that hasn't been retested yet) is especially powerful.</p>
+
+          <h3>2. Value Area High (VAH)</h3>
+          <p>The upper boundary of the Value Area — the price range containing <strong>70% of total traded volume</strong>. Acts like a ceiling. If price is above VAH, bulls are firmly in control. If it rejects from VAH, sellers are stepping in.</p>
+
+          <h3>3. Value Area Low (VAL)</h3>
+          <p>The lower boundary of that same 70% zone. Acts like a floor. Buyers typically defend VAL. A clean break below it signals bearish control. Together, VAH and VAL create a "value fence" that contains the majority of market activity.</p>
+
+          <h3>4. High Volume Nodes (HVN)</h3>
+          <p>The thick, fat bulges in the histogram. These are prices where <strong>massive trading activity</strong> happened. HVNs act like speed bumps — price stalls, rotates, or bounces at these levels because many traders have positions there and will defend them.</p>
+          <div class="chip-row"><span class="chip pr">Strong S/R zones</span><span class="chip bl">Price consolidates here</span><span class="chip gd">Use as SL placement</span></div>
+
+          <h3>5. Low Volume Nodes (LVN)</h3>
+          <p>The thin, hollow gaps in the histogram. These are prices where <strong>almost nobody traded</strong>. LVNs are "air pockets" — price falls or rises through them fast because there's nothing to stop it. Use LVNs as targets (price will fly through them) not as entry points.</p>
+
+          <div class="s-tip">
+            <div class="lbl">Key Insight</div>
+            <p>HVNs = speed bumps (price slows down). LVNs = air pockets (price accelerates). Your entries should be at HVNs. Your targets should be the LVNs or the next HVN on the other side.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHERE TO DRAW -->
+      <div class="sub-panel" id="vp-drawing">
+        <div class="s-card purple">
+          <h2>Where to Draw Your Fixed Range</h2>
+          <p>This is the most critical decision. FRVP should only be applied to <strong>completed price legs or ranges</strong>. Don't draw it on a move that's still developing — the levels will keep shifting and give unreliable references.</p>
+
+          <h3>Best Anchoring Points</h3>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Previous Day's Full Range:</strong> Open to close of yesterday's candle. Gives you yesterday's POC/VAH/VAL as today's key levels. This is the bread-and-butter for day traders.</div></li>
+            <li><span class="step-num">2</span><div><strong>Completed Impulse Leg:</strong> Swing low to swing high (or vice versa). Reveals where institutions loaded positions during the move. Great for finding pullback entry levels.</div></li>
+            <li><span class="step-num">3</span><div><strong>Consolidation Before Breakout:</strong> Draw it over the range/chop zone before a breakout. Shows the "acceptance zone" — the POC becomes the most important retest level if price returns.</div></li>
+            <li><span class="step-num">4</span><div><strong>Asian Session Range:</strong> For intraday trading, anchor to the Asian session (8 PM – 2 AM EST). Reveals where overnight orders clustered. POC of Asia = key level for London/NY.</div></li>
+            <li><span class="step-num">5</span><div><strong>Weekly Range:</strong> For swing trading, draw the FRVP on the full weekly candle. Gives macro institutional levels that hold for days.</div></li>
+          </ol>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="vg2" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="220" fill="#070b14"/><rect width="680" height="220" fill="url(#vg2)"/>
+              <!-- 3 examples side by side -->
+              <!-- Example 1: Previous day range -->
+              <rect x="20" y="25" width="195" height="175" fill="#3b82f608" stroke="#3b82f622" stroke-width="1" rx="4"/>
+              <text x="117" y="18" font-family="JetBrains Mono" font-size="8" fill="#3b82f6" font-weight="600" text-anchor="middle">PREVIOUS DAY RANGE</text>
+              <line x1="35" y1="55" x2="35" y2="170" stroke="#5a6a82" stroke-width="1"/><rect x="30" y="60" width="10" height="80" fill="#f43f5e" rx="1"/>
+              <line x1="55" y1="70" x2="55" y2="175" stroke="#5a6a82" stroke-width="1"/><rect x="50" y="90" width="10" height="65" fill="#10b981" rx="1"/>
+              <line x1="75" y1="65" x2="75" y2="155" stroke="#5a6a82" stroke-width="1"/><rect x="70" y="75" width="10" height="55" fill="#f43f5e" rx="1"/>
+              <line x1="95" y1="80" x2="95" y2="165" stroke="#5a6a82" stroke-width="1"/><rect x="90" y="95" width="10" height="50" fill="#10b981" rx="1"/>
+              <!-- Mini profile bars -->
+              <rect x="120" y="60" width="30" height="5" fill="#3b82f644" rx="1"/>
+              <rect x="120" y="80" width="55" height="5" fill="#10b98166" rx="1"/>
+              <rect x="120" y="100" width="75" height="7" fill="#10b981" rx="1"/>
+              <rect x="120" y="120" width="50" height="5" fill="#f59e0b44" rx="1"/>
+              <rect x="120" y="140" width="35" height="5" fill="#3b82f644" rx="1"/>
+              <text x="200" y="105" font-family="JetBrains Mono" font-size="7" fill="#10b981">POC</text>
+
+              <!-- Example 2: Impulse leg -->
+              <rect x="245" y="25" width="195" height="175" fill="#10b98108" stroke="#10b98122" stroke-width="1" rx="4"/>
+              <text x="342" y="18" font-family="JetBrains Mono" font-size="8" fill="#10b981" font-weight="600" text-anchor="middle">IMPULSE LEG</text>
+              <line x1="260" y1="175" x2="280" y2="145" stroke="#10b981" stroke-width="1.5"/>
+              <line x1="280" y1="145" x2="300" y2="155" stroke="#10b981" stroke-width="1.5"/>
+              <line x1="300" y1="155" x2="320" y2="100" stroke="#10b981" stroke-width="1.5"/>
+              <line x1="320" y1="100" x2="340" y2="70" stroke="#10b981" stroke-width="1.5"/>
+              <line x1="340" y1="70" x2="360" y2="50" stroke="#10b981" stroke-width="1.5"/>
+              <!-- Mini profile -->
+              <rect x="375" y="55" width="25" height="5" fill="#3b82f644" rx="1"/>
+              <rect x="375" y="80" width="40" height="5" fill="#f59e0b44" rx="1"/>
+              <rect x="375" y="100" width="55" height="7" fill="#10b981" rx="1"/>
+              <rect x="375" y="125" width="35" height="5" fill="#f59e0b44" rx="1"/>
+              <rect x="375" y="150" width="20" height="5" fill="#3b82f644" rx="1"/>
+              <text x="435" y="105" font-family="JetBrains Mono" font-size="7" fill="#10b981">POC</text>
+
+              <!-- Example 3: Consolidation -->
+              <rect x="470" y="25" width="195" height="175" fill="#f59e0b08" stroke="#f59e0b22" stroke-width="1" rx="4"/>
+              <text x="567" y="18" font-family="JetBrains Mono" font-size="8" fill="#f59e0b" font-weight="600" text-anchor="middle">CONSOLIDATION RANGE</text>
+              <rect x="485" y="85" width="100" height="75" fill="#f59e0b08" stroke="#f59e0b33" stroke-width="1" stroke-dasharray="4,3" rx="3"/>
+              <line x1="495" y1="100" x2="495" y2="145" stroke="#5a6a82" stroke-width="1"/><rect x="490" y="105" width="10" height="25" fill="#10b981" rx="1"/>
+              <line x1="515" y1="95" x2="515" y2="150" stroke="#5a6a82" stroke-width="1"/><rect x="510" y="110" width="10" height="28" fill="#f43f5e" rx="1"/>
+              <line x1="535" y1="90" x2="535" y2="148" stroke="#5a6a82" stroke-width="1"/><rect x="530" y="98" width="10" height="30" fill="#10b981" rx="1"/>
+              <line x1="555" y1="88" x2="555" y2="152" stroke="#5a6a82" stroke-width="1"/><rect x="550" y="100" width="10" height="35" fill="#f43f5e" rx="1"/>
+              <line x1="575" y1="92" x2="575" y2="60" stroke="#5a6a82" stroke-width="1"/><rect x="570" y="65" width="10" height="22" fill="#10b981" rx="1"/>
+              <text x="585" y="57" font-family="JetBrains Mono" font-size="7" fill="#10b981">BREAKOUT</text>
+              <!-- Mini profile -->
+              <rect x="600" y="90" width="45" height="5" fill="#f59e0b44" rx="1"/>
+              <rect x="600" y="110" width="55" height="7" fill="#f59e0b" rx="1"/>
+              <rect x="600" y="130" width="40" height="5" fill="#f59e0b44" rx="1"/>
+              <text x="660" y="115" font-family="JetBrains Mono" font-size="7" fill="#f59e0b">POC</text>
+            </svg>
+            <div class="dia-label">3 Best FRVP Anchoring Methods</div>
+          </div>
+
+          <div class="s-tip">
+            <div class="lbl">Pro Tip</div>
+            <p>After drawing your FRVP, look for horizontal price levels that align with the profile's VAH, VAL, POC, or HVNs. This "level stacking" approach ensures your S/R zones are validated by both price action AND volume — far more reliable than eyeballing.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 STRATEGIES -->
+      <div class="sub-panel" id="vp-strategies">
+        <div class="s-card bull">
+          <h2>Strategy 1: POC Bounce (Mean Reversion)</h2>
+          <p>The highest-probability FRVP setup. Price drifts away from the POC, then returns to retest it. In a trending market, POC acts as support (uptrend) or resistance (downtrend).</p>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Draw FRVP</strong> on the previous day's range or a completed impulse leg.</div></li>
+            <li><span class="step-num">2</span><div><strong>Wait for price to pull back</strong> toward the POC.</div></li>
+            <li><span class="step-num">3</span><div><strong>Look for rejection:</strong> Bullish engulfing, pin bar, or LTF Market Structure Shift at the POC.</div></li>
+            <li><span class="step-num">4</span><div><strong>Enter</strong> in the direction of the prevailing trend.</div></li>
+            <li><span class="step-num">5</span><div><strong>SL:</strong> 10-15 ticks beyond the POC or the next HVN behind you.</div></li>
+            <li><span class="step-num">6</span><div><strong>TP:</strong> Next HVN or VAH/VAL on the opposite side of your entry.</div></li>
+          </ol>
+          <div class="rr-box">Best in: Trending markets | R:R: 1:2 to 1:3</div>
+        </div>
+
+        <div class="s-card gold">
+          <h2>Strategy 2: Value Area Breakout</h2>
+          <p>When price closes outside the Value Area, it signals the market is accepting new prices. This is a breakout-continuation setup.</p>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Draw FRVP</strong> on the consolidation range before the breakout.</div></li>
+            <li><span class="step-num">2</span><div><strong>Wait for a candle to CLOSE</strong> above VAH (bullish) or below VAL (bearish) — not just wick past it.</div></li>
+            <li><span class="step-num">3</span><div><strong>Confirm with volume surge</strong> on the breakout candle. Tiny candles that snap back inside = fakeout. Avoid.</div></li>
+            <li><span class="step-num">4</span><div><strong>Enter</strong> on a retest of the broken VAH/VAL level (it flips from resistance to support or vice versa).</div></li>
+            <li><span class="step-num">5</span><div><strong>SL:</strong> Back inside the Value Area. If it re-enters, the breakout failed.</div></li>
+            <li><span class="step-num">6</span><div><strong>TP:</strong> Next major HVN, or a measured move equal to the Value Area width.</div></li>
+          </ol>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="vg3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="240" fill="#070b14"/><rect width="680" height="240" fill="url(#vg3)"/>
+              <!-- Value Area zone -->
+              <rect x="30" y="80" width="400" height="90" fill="#f59e0b0a" rx="3"/>
+              <line x1="30" y1="80" x2="430" y2="80" stroke="#f59e0b88" stroke-width="1.5" stroke-dasharray="6,3"/>
+              <text x="435" y="84" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600">VAH</text>
+              <line x1="30" y1="170" x2="430" y2="170" stroke="#f59e0b88" stroke-width="1.5" stroke-dasharray="6,3"/>
+              <text x="435" y="174" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600">VAL</text>
+              <line x1="30" y1="125" x2="430" y2="125" stroke="#10b98166" stroke-width="1" stroke-dasharray="3,4"/>
+              <text x="435" y="129" font-family="JetBrains Mono" font-size="8" fill="#10b981">POC</text>
+              <!-- Choppy candles inside VA -->
+              <line x1="60" y1="95" x2="60" y2="155" stroke="#5a6a82" stroke-width="1"/><rect x="55" y="100" width="10" height="35" fill="#10b981" rx="1"/>
+              <line x1="95" y1="90" x2="95" y2="160" stroke="#5a6a82" stroke-width="1"/><rect x="90" y="110" width="10" height="35" fill="#f43f5e" rx="1"/>
+              <line x1="130" y1="100" x2="130" y2="158" stroke="#5a6a82" stroke-width="1"/><rect x="125" y="105" width="10" height="38" fill="#10b981" rx="1"/>
+              <line x1="165" y1="92" x2="165" y2="150" stroke="#5a6a82" stroke-width="1"/><rect x="160" y="108" width="10" height="28" fill="#f43f5e" rx="1"/>
+              <!-- Breakout candle above VAH -->
+              <line x1="230" y1="55" x2="230" y2="115" stroke="#5a6a82" stroke-width="1"/><rect x="225" y="60" width="10" height="40" fill="#10b981" rx="1"/>
+              <text x="245" y="72" font-family="JetBrains Mono" font-size="8" fill="#10b981">BODY CLOSES</text>
+              <text x="245" y="84" font-family="JetBrains Mono" font-size="8" fill="#10b981">ABOVE VAH</text>
+              <!-- Retest of VAH as support -->
+              <line x1="300" y1="60" x2="300" y2="95" stroke="#5a6a82" stroke-width="1"/><rect x="295" y="68" width="10" height="18" fill="#f43f5e" rx="1"/>
+              <line x1="340" y1="65" x2="340" y2="88" stroke="#5a6a82" stroke-width="1"/><rect x="335" y="72" width="10" height="10" fill="#f43f5e" rx="1"/>
+              <!-- Entry -->
+              <rect x="360" y="74" width="50" height="18" fill="#10b98133" stroke="#10b981" stroke-width="1" rx="3"/>
+              <text x="368" y="87" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="700">ENTRY</text>
+              <text x="360" y="100" font-family="JetBrains Mono" font-size="7" fill="#5a6a82">retest VAH as support</text>
+              <!-- Continuation -->
+              <line x1="430" y1="35" x2="430" y2="72" stroke="#5a6a82" stroke-width="1"/><rect x="425" y="40" width="10" height="22" fill="#10b981" rx="1"/>
+              <line x1="470" y1="20" x2="470" y2="55" stroke="#5a6a82" stroke-width="1"/><rect x="465" y="25" width="10" height="18" fill="#10b981" rx="1"/>
+              <!-- SL -->
+              <line x1="340" y1="125" x2="450" y2="125" stroke="#f43f5e66" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="455" y="129" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">SL (inside VA)</text>
+              <!-- TP -->
+              <line x1="460" y1="28" x2="550" y2="28" stroke="#10b98188" stroke-width="1.5"/>
+              <text x="555" y="32" font-family="JetBrains Mono" font-size="8" fill="#10b981">TP (next HVN)</text>
+            </svg>
+            <div class="dia-label">Value Area Breakout — Bullish (Close Above VAH, Retest, Continue)</div>
+          </div>
+          <div class="rr-box">Best in: Breakout markets | R:R: 1:2 to 1:3</div>
+        </div>
+
+        <div class="s-card bear">
+          <h2>Strategy 3: LVN Breakout (Momentum Play)</h2>
+          <p>LVNs are air pockets where almost nobody traded. When price enters an LVN, it <strong>accelerates</strong> because there's no volume to stop it. This is a momentum continuation setup.</p>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Identify an HVN</strong> (consolidation zone) sitting next to an LVN (thin gap in the profile).</div></li>
+            <li><span class="step-num">2</span><div><strong>Wait for price to break out</strong> of the HVN and into the LVN.</div></li>
+            <li><span class="step-num">3</span><div><strong>Enter</strong> in the direction of the breakout. Price will slice through the LVN quickly.</div></li>
+            <li><span class="step-num">4</span><div><strong>SL:</strong> Back inside the HVN you just broke out of.</div></li>
+            <li><span class="step-num">5</span><div><strong>TP:</strong> The next HVN on the other side of the LVN — price will stall there.</div></li>
+          </ol>
+          <div class="rr-box">Best in: Momentum/trending | R:R: 1:2 to 1:4</div>
+
+          <div class="s-tip">
+            <div class="lbl">Why It Works</div>
+            <p>HVNs are where traders have positions and will defend them. LVNs are empty zones — no positions to defend, no orders to absorb. When price leaves the crowded HVN and enters the empty LVN, it's like stepping off a busy road onto an open highway. Speed increases immediately.</p>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <h2>Quick Reference Table</h2>
+          <table class="tf-tbl">
+            <thead><tr><th>Setup</th><th>Entry</th><th>SL</th><th>TP</th></tr></thead>
+            <tbody>
+              <tr><td>POC Bounce</td><td style="color:var(--tx-2)">Rejection at POC</td><td style="color:var(--tx-2)">Beyond next HVN</td><td style="color:var(--tx-2)">Opposite VA boundary</td></tr>
+              <tr><td>VA Breakout</td><td style="color:var(--tx-2)">Retest broken VAH/VAL</td><td style="color:var(--tx-2)">Inside the VA</td><td style="color:var(--tx-2)">Next HVN</td></tr>
+              <tr><td>LVN Momentum</td><td style="color:var(--tx-2)">Break from HVN into LVN</td><td style="color:var(--tx-2)">Back in HVN</td><td style="color:var(--tx-2)">Next HVN</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ICT CONFLUENCE -->
+      <div class="sub-panel" id="vp-confluence">
+        <div class="s-card gold">
+          <h2>FRVP + ICT Confluence (The Power Combo)</h2>
+          <p>Volume Profile and Smart Money Concepts are complementary. ICT identifies <strong>where</strong> institutional orders were placed. Volume Profile confirms <strong>how much</strong> institutional activity occurred there. When they overlap, you get the highest-conviction setups possible.</p>
+
+          <h3>Order Block + HVN</h3>
+          <p>An order block sitting right on a high volume node means the institutional footprint is <strong>validated by actual volume data</strong>. This is an ultra-strong S/R zone. When price returns to an OB+HVN confluence, expect a powerful reaction.</p>
+
+          <h3>FVG + LVN</h3>
+          <p>An FVG that coincides with an LVN is a <strong>double-confirmed inefficiency</strong> — both price action and volume data agree this zone was traversed without equilibrium. Price will fly through this zone on retest. Great for momentum entries and targets.</p>
+
+          <h3>POC + OTE (62-79% Fib)</h3>
+          <p>When the POC aligns with the Fibonacci OTE zone, you have <strong>institutional + mathematical confluence</strong>. The POC is where the most volume traded. The OTE is where smart money mathematically reloads. Together = A+ pullback entry.</p>
+
+          <h3>VAH/VAL + PDH/PDL</h3>
+          <p>When the Value Area boundary matches a Previous Day High/Low, the <strong>liquidity at that level is massive</strong>. Retail stops are clustered at PDH/PDL, and institutional volume is clustered at VAH/VAL. When they're the same level, the reaction is amplified.</p>
+
+          <h3>CRT Sweep + LVN</h3>
+          <p>If the CRT manipulation candle sweeps through an LVN (air pocket), the sweep was <strong>fast and aggressive</strong> — there was no volume to slow it down. This means more traders got trapped more quickly, making the reversal higher probability.</p>
+
+          <div class="chip-row">
+            <span class="chip gr">OB + HVN = A+ reversal</span>
+            <span class="chip rd">FVG + LVN = fast move zone</span>
+            <span class="chip pr">POC + OTE = best pullback</span>
+            <span class="chip gd">VAH/VAL + PDH/PDL = mega level</span>
+            <span class="chip bl">CRT sweep + LVN = deep trap</span>
+          </div>
+
+          <div class="s-tip">
+            <div class="lbl">How to Use This</div>
+            <p>After you identify any ICT setup (CRT, Silver Bullet, OTE, etc.), overlay a Fixed Range Volume Profile on the relevant price leg. If your ICT level aligns with a POC, HVN, VAH, or VAL — you've just added volume-confirmed confluence. Take only those trades where ICT + Volume Profile agree. Your win rate will improve significantly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHAPE READING -->
+      <div class="sub-panel" id="vp-shapes">
+        <div class="s-card">
+          <h2>Volume Profile Shape Reading</h2>
+          <p>The shape of the histogram tells you market sentiment at a glance. Before looking at specific levels, read the shape first to understand the overall context.</p>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="vg4" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="280" fill="#070b14"/><rect width="680" height="280" fill="url(#vg4)"/>
+
+              <!-- D-Shape (Bell Curve) -->
+              <rect x="20" y="20" width="145" height="245" fill="#3b82f608" stroke="#3b82f622" stroke-width="1" rx="4"/>
+              <text x="92" y="15" font-family="JetBrains Mono" font-size="9" fill="#3b82f6" font-weight="600" text-anchor="middle">D-SHAPE</text>
+              <rect x="35" y="40" width="15" height="6" fill="#3b82f644" rx="1"/>
+              <rect x="35" y="55" width="30" height="6" fill="#3b82f644" rx="1"/>
+              <rect x="35" y="70" width="50" height="6" fill="#3b82f666" rx="1"/>
+              <rect x="35" y="85" width="75" height="6" fill="#3b82f688" rx="1"/>
+              <rect x="35" y="100" width="100" height="6" fill="#3b82f6aa" rx="1"/>
+              <rect x="35" y="115" width="110" height="8" fill="#3b82f6" rx="1"/>
+              <rect x="35" y="130" width="100" height="6" fill="#3b82f6aa" rx="1"/>
+              <rect x="35" y="145" width="75" height="6" fill="#3b82f688" rx="1"/>
+              <rect x="35" y="160" width="50" height="6" fill="#3b82f666" rx="1"/>
+              <rect x="35" y="175" width="30" height="6" fill="#3b82f644" rx="1"/>
+              <rect x="35" y="190" width="15" height="6" fill="#3b82f644" rx="1"/>
+              <text x="92" y="220" font-family="Outfit" font-size="9" fill="#3b82f6" text-anchor="middle">Balanced / Range</text>
+              <text x="92" y="235" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Trade mean reversion</text>
+              <text x="92" y="250" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">to POC, fade extremes</text>
+
+              <!-- P-Shape -->
+              <rect x="185" y="20" width="145" height="245" fill="#10b98108" stroke="#10b98122" stroke-width="1" rx="4"/>
+              <text x="257" y="15" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="600" text-anchor="middle">P-SHAPE</text>
+              <rect x="200" y="40" width="100" height="8" fill="#10b981" rx="1"/>
+              <rect x="200" y="55" width="95" height="6" fill="#10b981aa" rx="1"/>
+              <rect x="200" y="70" width="80" height="6" fill="#10b98188" rx="1"/>
+              <rect x="200" y="85" width="60" height="6" fill="#10b98166" rx="1"/>
+              <rect x="200" y="100" width="40" height="6" fill="#10b98144" rx="1"/>
+              <rect x="200" y="115" width="25" height="6" fill="#10b98133" rx="1"/>
+              <rect x="200" y="130" width="15" height="6" fill="#10b98122" rx="1"/>
+              <rect x="200" y="145" width="10" height="6" fill="#10b98111" rx="1"/>
+              <text x="257" y="220" font-family="Outfit" font-size="9" fill="#10b981" text-anchor="middle">Bullish</text>
+              <text x="257" y="235" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Buy dips to POC/VAL</text>
+              <text x="257" y="250" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Target above VAH</text>
+
+              <!-- b-Shape -->
+              <rect x="350" y="20" width="145" height="245" fill="#f43f5e08" stroke="#f43f5e22" stroke-width="1" rx="4"/>
+              <text x="422" y="15" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" font-weight="600" text-anchor="middle">b-SHAPE</text>
+              <rect x="365" y="40" width="10" height="6" fill="#f43f5e11" rx="1"/>
+              <rect x="365" y="55" width="15" height="6" fill="#f43f5e22" rx="1"/>
+              <rect x="365" y="70" width="25" height="6" fill="#f43f5e33" rx="1"/>
+              <rect x="365" y="85" width="40" height="6" fill="#f43f5e44" rx="1"/>
+              <rect x="365" y="100" width="60" height="6" fill="#f43f5e66" rx="1"/>
+              <rect x="365" y="115" width="80" height="6" fill="#f43f5e88" rx="1"/>
+              <rect x="365" y="130" width="95" height="6" fill="#f43f5eaa" rx="1"/>
+              <rect x="365" y="145" width="100" height="8" fill="#f43f5e" rx="1"/>
+              <text x="422" y="220" font-family="Outfit" font-size="9" fill="#f43f5e" text-anchor="middle">Bearish</text>
+              <text x="422" y="235" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Short rallies to POC/VAH</text>
+              <text x="422" y="250" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Target below VAL</text>
+
+              <!-- Thin -->
+              <rect x="515" y="20" width="145" height="245" fill="#f59e0b08" stroke="#f59e0b22" stroke-width="1" rx="4"/>
+              <text x="587" y="15" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600" text-anchor="middle">THIN</text>
+              <rect x="530" y="40" width="30" height="6" fill="#f59e0b44" rx="1"/>
+              <rect x="530" y="55" width="35" height="6" fill="#f59e0b44" rx="1"/>
+              <rect x="530" y="70" width="28" height="6" fill="#f59e0b44" rx="1"/>
+              <rect x="530" y="85" width="32" height="6" fill="#f59e0b44" rx="1"/>
+              <rect x="530" y="100" width="40" height="6" fill="#f59e0b55" rx="1"/>
+              <rect x="530" y="115" width="35" height="6" fill="#f59e0b44" rx="1"/>
+              <rect x="530" y="130" width="30" height="6" fill="#f59e0b44" rx="1"/>
+              <rect x="530" y="145" width="33" height="6" fill="#f59e0b44" rx="1"/>
+              <text x="587" y="220" font-family="Outfit" font-size="9" fill="#f59e0b" text-anchor="middle">Strong Trend</text>
+              <text x="587" y="235" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Trade with momentum</text>
+              <text x="587" y="250" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Don't fade this move</text>
+            </svg>
+            <div class="dia-label">4 Volume Profile Shapes — Read Sentiment at a Glance</div>
+          </div>
+
+          <div class="s-tip">
+            <div class="lbl">Shape → Strategy</div>
+            <p><strong>D-shape:</strong> Range-bound. Use POC bounce and VA boundary fades. <strong>P-shape:</strong> Bullish. Buy pullbacks to POC, don't short. <strong>b-shape:</strong> Bearish. Short rallies to POC, don't go long. <strong>Thin:</strong> Strong trend in progress. Don't fight it — only trade with the direction and use LVN breakout strategy.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end strat-frvp -->
 
   </div><!-- end strategies panel -->
 
