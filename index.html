@@ -510,6 +510,7 @@ body::after {
         <option value="ote">ICT Optimal Trade Entry (OTE)</option>
         <option value="po3-amd">Power of 3 / AMD</option>
         <option value="frvp">Fixed Range Volume Profile</option>
+        <option value="smt">SMT Divergence</option>
       </select>
     </div>
 
@@ -1713,6 +1714,373 @@ body::after {
       </div>
 
     </div><!-- end strat-frvp -->
+
+    <!-- ─── SMT DIVERGENCE Strategy ─── -->
+    <div class="strat-panel" id="strat-smt">
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-st="sm-overview">Overview</button>
+        <button class="sub-tab" data-st="sm-pairs">Correlated Pairs</button>
+        <button class="sub-tab" data-st="sm-types">Bull vs Bear</button>
+        <button class="sub-tab" data-st="sm-entry">How to Trade</button>
+        <button class="sub-tab" data-st="sm-confluence">ICT Confluence</button>
+        <button class="sub-tab" data-st="sm-tf">Timeframes</button>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="sub-panel active" id="sm-overview">
+        <div class="s-card">
+          <h2>What is SMT Divergence?</h2>
+          <p>SMT stands for <strong>Smart Money Technique</strong>. SMT Divergence occurs when two correlated assets that normally move together suddenly move in opposite directions. One makes a new high while the other fails to confirm — or one makes a new low while the other doesn't. This "breakdown in sync" reveals that <strong>smart money is manipulating one of the assets</strong> to grab liquidity before the real move.</p>
+          <p>Think of it like two friends who always walk the same direction. If one suddenly turns around while the other keeps going, something is off. That "something" is institutional activity — and it signals a potential reversal.</p>
+          <p>Originally developed by ICT for NQ (Nasdaq) and ES (S&P 500), SMT Divergence has been proven across forex pairs, metals, and crypto.</p>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="sm1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="260" fill="#070b14"/><rect width="680" height="260" fill="url(#sm1)"/>
+              <text x="340" y="18" font-family="JetBrains Mono" font-size="10" fill="#3b82f6" font-weight="600" text-anchor="middle">SMT DIVERGENCE — CORE CONCEPT</text>
+
+              <!-- Asset A side -->
+              <rect x="30" y="30" width="300" height="195" fill="#10b98108" stroke="#10b98122" stroke-width="1" rx="4"/>
+              <text x="180" y="50" font-family="JetBrains Mono" font-size="10" fill="#10b981" font-weight="600" text-anchor="middle">ASSET A (e.g. EUR/USD)</text>
+              <!-- Price making lower low -->
+              <polyline points="60,80 100,110 140,90 180,130 220,100 260,150 300,120" fill="none" stroke="#10b981" stroke-width="2"/>
+              <circle cx="260" cy="150" r="5" fill="#f43f5e" stroke="#f43f5e" stroke-width="1"/>
+              <text x="268" y="168" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" font-weight="600">LOWER LOW ✗</text>
+              <!-- Previous low marker -->
+              <circle cx="180" cy="130" r="4" fill="none" stroke="#5a6a82" stroke-width="1"/>
+              <text x="155" y="146" font-family="JetBrains Mono" font-size="7" fill="#5a6a82">prev low</text>
+
+              <!-- Asset B side -->
+              <rect x="350" y="30" width="300" height="195" fill="#3b82f608" stroke="#3b82f622" stroke-width="1" rx="4"/>
+              <text x="500" y="50" font-family="JetBrains Mono" font-size="10" fill="#3b82f6" font-weight="600" text-anchor="middle">ASSET B (e.g. GBP/USD)</text>
+              <!-- Price making higher low -->
+              <polyline points="380,80 420,110 460,90 500,125 540,100 580,118 620,105" fill="none" stroke="#3b82f6" stroke-width="2"/>
+              <circle cx="580" cy="118" r="5" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+              <text x="530" y="138" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="600">HIGHER LOW ✓</text>
+              <!-- Previous low marker -->
+              <circle cx="500" cy="125" r="4" fill="none" stroke="#5a6a82" stroke-width="1"/>
+              <text x="475" y="141" font-family="JetBrains Mono" font-size="7" fill="#5a6a82">prev low</text>
+
+              <!-- Divergence arrow connecting both -->
+              <line x1="260" y1="190" x2="580" y2="190" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,3"/>
+              <rect x="340" y="180" width="140" height="22" fill="#f59e0b22" stroke="#f59e0b" stroke-width="1" rx="4"/>
+              <text x="410" y="195" font-family="JetBrains Mono" font-size="10" fill="#f59e0b" font-weight="700" text-anchor="middle">DIVERGENCE!</text>
+
+              <!-- Bottom label -->
+              <text x="340" y="245" font-family="JetBrains Mono" font-size="9" fill="#5a6a82" text-anchor="middle">A makes lower low, B doesn't → BULLISH SMT → expect reversal UP</text>
+            </svg>
+            <div class="dia-label">Bullish SMT Divergence — Asset A Sweeps Low, Asset B Holds</div>
+          </div>
+
+          <p><strong>Key insight:</strong> SMT Divergence is NOT an entry signal by itself — it's a <strong>bias tool</strong>. It tells you the DIRECTION. You then use other ICT tools (FVG, OB, MSS) for the actual entry.</p>
+        </div>
+      </div>
+
+      <!-- CORRELATED PAIRS -->
+      <div class="sub-panel" id="sm-pairs">
+        <div class="s-card purple">
+          <h2>Correlated Pairs to Watch</h2>
+          <p>SMT only works between assets that have a <strong>high historical correlation</strong>. Using mismatched pairs will give meaningless signals. Here are the proven pairs organized by market:</p>
+
+          <h3>Forex — Positive Correlation (Move Together)</h3>
+          <div class="chip-row">
+            <span class="chip bl">EUR/USD ↔ GBP/USD</span>
+            <span class="chip bl">AUD/USD ↔ NZD/USD</span>
+          </div>
+          <p>These pairs share the USD as the quote currency. When EUR/USD rises, GBP/USD usually rises too. If one makes a new high and the other doesn't — that's your divergence.</p>
+
+          <h3>Forex — Negative Correlation (Move Opposite)</h3>
+          <div class="chip-row">
+            <span class="chip rd">EUR/USD ↔ DXY (Dollar Index)</span>
+            <span class="chip rd">GBP/USD ↔ DXY</span>
+            <span class="chip rd">USD/JPY ↔ DXY (positive with DXY)</span>
+          </div>
+          <p>DXY moves inversely to EUR/USD and GBP/USD. If EUR/USD makes a lower low, DXY should make a higher high. If DXY fails to make a higher high — that's a bullish SMT divergence on EUR/USD.</p>
+
+          <h3>Indices — Positive Correlation</h3>
+          <div class="chip-row">
+            <span class="chip gd">NQ (Nasdaq 100) ↔ ES (S&P 500)</span>
+            <span class="chip gd">ES ↔ YM (Dow Jones)</span>
+          </div>
+          <p>NQ and ES are the most popular pair for index SMT. Tech-heavy Nasdaq often leads or lags the broader S&P. If NQ makes a higher high but ES doesn't, NQ may be extended and due for a reversal.</p>
+
+          <h3>Crypto — Positive Correlation</h3>
+          <div class="chip-row">
+            <span class="chip pr">BTC (Bitcoin) ↔ ETH (Ethereum)</span>
+          </div>
+          <p>BTC and ETH typically move together. If BTC dumps to a new low but ETH holds a higher low, smart money may be accumulating ETH — signaling a bullish reversal for the entire crypto market.</p>
+
+          <h3>Crypto — Negative Correlation</h3>
+          <div class="chip-row">
+            <span class="chip rd">BTC ↔ DXY</span>
+          </div>
+          <p>When the dollar strengthens, crypto typically weakens. If BTC makes a lower low but DXY fails to make a higher high, the selling pressure in crypto may be exhausted.</p>
+
+          <h3>Metals — Positive Correlation</h3>
+          <div class="chip-row">
+            <span class="chip gd">XAU/USD (Gold) ↔ XAG/USD (Silver)</span>
+          </div>
+          <p>Gold and Silver move together. If Gold makes a higher high but Silver doesn't — Gold may be trapping breakout buyers before reversing.</p>
+
+          <h3>Finding the Stronger/Weaker Asset</h3>
+          <p>When you spot a divergence, <strong>trade the stronger asset</strong>. If EUR/USD makes a lower low but GBP/USD holds a higher low (bullish divergence), GBP/USD is the stronger pair — enter long on GBP/USD, not EUR/USD. You can also check EUR/GBP to confirm which pair has relative strength.</p>
+        </div>
+      </div>
+
+      <!-- BULL vs BEAR -->
+      <div class="sub-panel" id="sm-types">
+        <div class="s-card bull">
+          <h2>Bullish SMT Divergence</h2>
+          <p>Occurs when both correlated assets are in a downtrend, and at a swing low:</p>
+          <ol class="step-list">
+            <li><span class="step-num">A</span><div><strong>Asset A makes a LOWER LOW</strong> — breaking below the previous swing low (liquidity grab below).</div></li>
+            <li><span class="step-num">B</span><div><strong>Asset B makes a HIGHER LOW</strong> — it fails to break its previous low. It holds strength.</div></li>
+          </ol>
+          <p>This divergence suggests that the lower low on Asset A is a <strong>liquidity grab / stop hunt</strong> — not a genuine continuation. Smart money is accumulating, and a bullish reversal is likely.</p>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="sm2" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="200" fill="#070b14"/><rect width="680" height="200" fill="url(#sm2)"/>
+              <!-- Asset A: EUR/USD making lower low -->
+              <text x="170" y="18" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" font-weight="600" text-anchor="middle">EUR/USD — makes LOWER LOW</text>
+              <polyline points="40,50 80,80 120,55 160,100 200,70 240,120 280,85" fill="none" stroke="#f43f5e" stroke-width="2"/>
+              <line x1="160" y1="100" x2="300" y2="100" stroke="#5a6a8244" stroke-width="1" stroke-dasharray="3,3"/>
+              <circle cx="240" cy="120" r="6" fill="none" stroke="#f43f5e" stroke-width="2"/>
+              <text x="250" y="140" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">LL ↓</text>
+              <!-- Asset B: GBP/USD making higher low -->
+              <text x="510" y="18" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="600" text-anchor="middle">GBP/USD — makes HIGHER LOW</text>
+              <polyline points="380,50 420,80 460,55 500,95 540,70 580,88 620,60" fill="none" stroke="#10b981" stroke-width="2"/>
+              <line x1="500" y1="95" x2="640" y2="95" stroke="#5a6a8244" stroke-width="1" stroke-dasharray="3,3"/>
+              <circle cx="580" cy="88" r="6" fill="none" stroke="#10b981" stroke-width="2"/>
+              <text x="590" y="108" font-family="JetBrains Mono" font-size="8" fill="#10b981">HL ↑</text>
+              <!-- Result -->
+              <rect x="220" y="158" width="240" height="28" fill="#10b98122" stroke="#10b981" stroke-width="1" rx="5"/>
+              <text x="340" y="177" font-family="JetBrains Mono" font-size="10" fill="#10b981" font-weight="700" text-anchor="middle">BULLISH REVERSAL EXPECTED</text>
+            </svg>
+            <div class="dia-label">Bullish SMT — EUR/USD sweeps low, GBP/USD holds = expect UP move</div>
+          </div>
+        </div>
+
+        <div class="s-card bear">
+          <h2>Bearish SMT Divergence</h2>
+          <p>Occurs when both correlated assets are in an uptrend, and at a swing high:</p>
+          <ol class="step-list">
+            <li><span class="step-num">A</span><div><strong>Asset A makes a HIGHER HIGH</strong> — breaking above the previous swing high (liquidity grab above).</div></li>
+            <li><span class="step-num">B</span><div><strong>Asset B makes a LOWER HIGH</strong> — it fails to break its previous high. Momentum is weakening.</div></li>
+          </ol>
+          <p>This divergence suggests the higher high on Asset A is a <strong>liquidity grab / stop hunt</strong> above resistance. Smart money is distributing, and a bearish reversal is likely.</p>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="sm3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="200" fill="#070b14"/><rect width="680" height="200" fill="url(#sm3)"/>
+              <!-- Asset A: NQ making higher high -->
+              <text x="170" y="18" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" font-weight="600" text-anchor="middle">NQ (Nasdaq) — makes HIGHER HIGH</text>
+              <polyline points="40,150 80,120 120,140 160,90 200,115 240,65 280,100" fill="none" stroke="#f43f5e" stroke-width="2"/>
+              <line x1="160" y1="90" x2="300" y2="90" stroke="#5a6a8244" stroke-width="1" stroke-dasharray="3,3"/>
+              <circle cx="240" cy="65" r="6" fill="none" stroke="#f43f5e" stroke-width="2"/>
+              <text x="250" y="58" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">HH ↑</text>
+              <!-- Asset B: ES making lower high -->
+              <text x="510" y="18" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="600" text-anchor="middle">ES (S&P 500) — makes LOWER HIGH</text>
+              <polyline points="380,150 420,120 460,140 500,95 540,118 580,102 620,130" fill="none" stroke="#3b82f6" stroke-width="2"/>
+              <line x1="500" y1="95" x2="640" y2="95" stroke="#5a6a8244" stroke-width="1" stroke-dasharray="3,3"/>
+              <circle cx="580" cy="102" r="6" fill="none" stroke="#3b82f6" stroke-width="2"/>
+              <text x="590" y="95" font-family="JetBrains Mono" font-size="8" fill="#3b82f6">LH ↓</text>
+              <!-- Result -->
+              <rect x="220" y="158" width="240" height="28" fill="#f43f5e22" stroke="#f43f5e" stroke-width="1" rx="5"/>
+              <text x="340" y="177" font-family="JetBrains Mono" font-size="10" fill="#f43f5e" font-weight="700" text-anchor="middle">BEARISH REVERSAL EXPECTED</text>
+            </svg>
+            <div class="dia-label">Bearish SMT — NQ makes new high, ES fails = expect DOWN move</div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <h2>Negative Correlation SMT (DXY)</h2>
+          <p>When using inversely correlated assets (like EUR/USD vs DXY), the logic flips:</p>
+          <ol class="step-list">
+            <li><span class="step-num">→</span><div><strong>Bullish EUR/USD SMT:</strong> EUR/USD makes a lower low, but DXY fails to make a higher high. The dollar weakness confirms the EUR sweep was fake.</div></li>
+            <li><span class="step-num">→</span><div><strong>Bearish EUR/USD SMT:</strong> EUR/USD makes a higher high, but DXY fails to make a lower low. The dollar strength underneath confirms the EUR push was a trap.</div></li>
+          </ol>
+          <div class="s-tip">
+            <div class="lbl">Pro Tip</div>
+            <p>DXY is the "truth detector." When your forex pair makes a new extreme but DXY doesn't confirm it with the opposite move, the market is lying. Trade accordingly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOW TO TRADE -->
+      <div class="sub-panel" id="sm-entry">
+        <div class="s-card gold">
+          <h2>How to Trade SMT Divergence</h2>
+          <p>SMT Divergence is a <strong>directional bias tool</strong>, not a standalone entry signal. Here's the complete workflow:</p>
+
+          <h3>Step-by-Step Process</h3>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Open Two Charts Side by Side:</strong> Pull up your correlated pair (e.g., EUR/USD and GBP/USD) on the same timeframe. Sync them so you're comparing apples to apples.</div></li>
+            <li><span class="step-num">2</span><div><strong>Identify Key Swing Points:</strong> Mark recent swing highs and swing lows on BOTH charts. Look for equal highs/lows or areas where liquidity is clustered (PDH/PDL, session highs/lows).</div></li>
+            <li><span class="step-num">3</span><div><strong>Watch for the Divergence:</strong> When price approaches a key level, does one asset make a new extreme while the other fails? If yes — you have SMT Divergence.</div></li>
+            <li><span class="step-num">4</span><div><strong>Determine Which Asset to Trade:</strong> Trade the STRONGER asset. Bullish SMT? Go long on the pair that held the higher low. Bearish SMT? Go short on the pair that made the lower high.</div></li>
+            <li><span class="step-num">5</span><div><strong>Confirm with ICT Entry:</strong> Drop to LTF and look for a Market Structure Shift, FVG, or Order Block in the direction of your SMT bias. This is your actual entry trigger.</div></li>
+            <li><span class="step-num">6</span><div><strong>Execute:</strong> Enter at the FVG/OB retest. SL beyond the swing point of the divergence. TP at the next liquidity pool or opposing swing.</div></li>
+          </ol>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="sm4" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="240" fill="#070b14"/><rect width="680" height="240" fill="url(#sm4)"/>
+              <text x="340" y="16" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" font-weight="600" text-anchor="middle">SMT TRADE WORKFLOW</text>
+              <!-- Step boxes -->
+              <rect x="20" y="30" width="105" height="50" fill="#3b82f611" stroke="#3b82f644" stroke-width="1" rx="5"/>
+              <text x="72" y="50" font-family="JetBrains Mono" font-size="8" fill="#3b82f6" font-weight="600" text-anchor="middle">1. COMPARE</text>
+              <text x="72" y="65" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">2 correlated charts</text>
+              <path d="M 130 55 L 150 55" stroke="#5a6a82" stroke-width="1" marker-end="url(#aGy)"/>
+
+              <rect x="155" y="30" width="105" height="50" fill="#a78bfa11" stroke="#a78bfa44" stroke-width="1" rx="5"/>
+              <text x="207" y="50" font-family="JetBrains Mono" font-size="8" fill="#a78bfa" font-weight="600" text-anchor="middle">2. SPOT SMT</text>
+              <text x="207" y="65" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">HH/LL mismatch</text>
+              <path d="M 265 55 L 285 55" stroke="#5a6a82" stroke-width="1" marker-end="url(#aGy)"/>
+
+              <rect x="290" y="30" width="105" height="50" fill="#f59e0b11" stroke="#f59e0b44" stroke-width="1" rx="5"/>
+              <text x="342" y="50" font-family="JetBrains Mono" font-size="8" fill="#f59e0b" font-weight="600" text-anchor="middle">3. SET BIAS</text>
+              <text x="342" y="65" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Bull or Bear</text>
+              <path d="M 400 55 L 420 55" stroke="#5a6a82" stroke-width="1" marker-end="url(#aGy)"/>
+
+              <rect x="425" y="30" width="105" height="50" fill="#f43f5e11" stroke="#f43f5e44" stroke-width="1" rx="5"/>
+              <text x="477" y="50" font-family="JetBrains Mono" font-size="8" fill="#f43f5e" font-weight="600" text-anchor="middle">4. LTF CONFIRM</text>
+              <text x="477" y="65" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">MSS + FVG/OB</text>
+              <path d="M 535 55 L 555 55" stroke="#5a6a82" stroke-width="1" marker-end="url(#aGy)"/>
+
+              <rect x="560" y="30" width="100" height="50" fill="#10b98111" stroke="#10b98144" stroke-width="1" rx="5"/>
+              <text x="610" y="50" font-family="JetBrains Mono" font-size="8" fill="#10b981" font-weight="600" text-anchor="middle">5. EXECUTE</text>
+              <text x="610" y="65" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Entry at retest</text>
+
+              <!-- Example trade below -->
+              <text x="340" y="108" font-family="JetBrains Mono" font-size="9" fill="#3b82f6" font-weight="600" text-anchor="middle">EXAMPLE: BTC/ETH Bullish SMT</text>
+              <rect x="30" y="118" width="295" height="105" fill="#0c1220" stroke="#1c2a44" stroke-width="1" rx="4"/>
+              <text x="45" y="136" font-family="JetBrains Mono" font-size="8" fill="#f43f5e">BTC: $60,000 → $58,500 (LOWER LOW)</text>
+              <polyline points="45,155 85,165 125,150 165,180 205,160 245,192 285,170" fill="none" stroke="#f43f5e" stroke-width="1.5"/>
+              <circle cx="245" cy="192" r="4" fill="#f43f5e"/>
+
+              <rect x="355" y="118" width="295" height="105" fill="#0c1220" stroke="#1c2a44" stroke-width="1" rx="4"/>
+              <text x="370" y="136" font-family="JetBrains Mono" font-size="8" fill="#10b981">ETH: $3,200 → $3,150 (HIGHER LOW)</text>
+              <polyline points="370,155 410,165 450,150 490,175 530,160 570,168 610,148" fill="none" stroke="#10b981" stroke-width="1.5"/>
+              <circle cx="570" cy="168" r="4" fill="#10b981"/>
+
+              <text x="340" y="235" font-family="JetBrains Mono" font-size="9" fill="#10b981" text-anchor="middle">→ Go LONG ETH (stronger). BTC sweep = liquidity grab. Expect reversal UP.</text>
+            </svg>
+            <div class="dia-label">SMT Trade Workflow with BTC/ETH Example</div>
+          </div>
+
+          <div class="rr-box">SMT = Bias | ICT Entry = Trigger | R:R: 1:2 to 1:4</div>
+        </div>
+
+        <div class="s-card">
+          <h2>Entry, SL & TP Rules</h2>
+          <table class="tf-tbl">
+            <thead><tr><th>Component</th><th>Bullish SMT</th><th>Bearish SMT</th></tr></thead>
+            <tbody>
+              <tr><td>Bias</td><td style="color:var(--bull)">Long (buy)</td><td style="color:var(--bear)">Short (sell)</td></tr>
+              <tr><td>Trade Asset</td><td style="color:var(--tx-2)">Pair that held higher low</td><td style="color:var(--tx-2)">Pair that made lower high</td></tr>
+              <tr><td>Entry Trigger</td><td style="color:var(--tx-2)">LTF MSS + FVG/OB retest</td><td style="color:var(--tx-2)">LTF MSS + FVG/OB retest</td></tr>
+              <tr><td>Stop Loss</td><td style="color:var(--tx-2)">Below the divergence low</td><td style="color:var(--tx-2)">Above the divergence high</td></tr>
+              <tr><td>Take Profit</td><td style="color:var(--tx-2)">Next BSL / opposing swing</td><td style="color:var(--tx-2)">Next SSL / opposing swing</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ICT CONFLUENCE -->
+      <div class="sub-panel" id="sm-confluence">
+        <div class="s-card gold">
+          <h2>SMT + ICT Confluence</h2>
+          <p>SMT Divergence becomes exponentially more powerful when it aligns with other ICT concepts. Here's how to stack confluences:</p>
+
+          <h3>SMT + Liquidity Sweep</h3>
+          <p>The most common setup. Asset A sweeps a key liquidity level (PDH/PDL, session high/low) but Asset B doesn't confirm. The sweep on Asset A = stop hunt. Enter on Asset B after the MSS.</p>
+
+          <h3>SMT + Order Block</h3>
+          <p>If the SMT divergence forms right at an Order Block on the HTF, the reversal conviction doubles. The OB provides the exact entry zone. The SMT confirms the direction.</p>
+
+          <h3>SMT + Fair Value Gap</h3>
+          <p>After the divergence, look for an FVG on the LTF of the stronger asset. The FVG created by the displacement following the SMT is your precision entry point.</p>
+
+          <h3>SMT + CRT / Turtle Soup</h3>
+          <p>If one asset shows a CRT manipulation candle while the correlated asset doesn't confirm the sweep — that's SMT + CRT confluence. The manipulation is confirmed as fake by the divergence.</p>
+
+          <h3>SMT + Power of 3 (AMD)</h3>
+          <p>During the PO3 manipulation phase, check the correlated asset. If the manipulation move on Asset A (sweep of Asian range) isn't confirmed by Asset B, PO3 manipulation is validated by SMT divergence — very high probability.</p>
+
+          <h3>SMT + Volume Profile (POC/HVN)</h3>
+          <p>If the SMT divergence forms at a key volume level (POC, HVN, VAH/VAL), you have triple confluence: structural divergence + institutional direction + volume-validated level.</p>
+
+          <div class="chip-row">
+            <span class="chip gr">SMT + Liq Sweep = stop hunt confirmed</span>
+            <span class="chip bl">SMT + OB = precision reversal</span>
+            <span class="chip pr">SMT + FVG = LTF entry zone</span>
+            <span class="chip gd">SMT + PO3 = manipulation validated</span>
+            <span class="chip rd">SMT + CRT = fake breakout confirmed</span>
+          </div>
+
+          <div class="s-tip">
+            <div class="lbl">The Golden Rule</div>
+            <p>Never trade SMT alone. Always pair it with at least ONE other ICT concept for confirmation. SMT tells you WHERE to look. FVG/OB/MSS tells you WHEN to enter. Together they form the complete trade.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMEFRAMES -->
+      <div class="sub-panel" id="sm-tf">
+        <div class="s-card">
+          <h2>Timeframes & Best Practices</h2>
+
+          <h3>Timeframe Pairing</h3>
+          <table class="tf-tbl">
+            <thead><tr><th>SMT Detection</th><th>Entry Confirmation</th><th>Best For</th></tr></thead>
+            <tbody>
+              <tr><td>Daily / 4H</td><td style="color:var(--gold)">1H / 15m</td><td style="color:var(--tx-2)">Swing trading</td></tr>
+              <tr><td>1H / 15m</td><td style="color:var(--gold)">5m / 1m</td><td style="color:var(--tx-2)">Day trading</td></tr>
+              <tr><td>5m</td><td style="color:var(--gold)">1m</td><td style="color:var(--tx-2)">Scalping</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Best Session Times</h3>
+          <p>SMT Divergence is most reliable during high-volume sessions when institutional algorithms are active:</p>
+          <div class="ses-row">
+            <span class="ses-tag">London Open (2-5 AM EST)</span>
+            <span class="ses-tag">NY Open (8:30-11 AM EST)</span>
+            <span class="ses-tag">NY PM (1:30-3 PM EST)</span>
+          </div>
+
+          <h3>High vs Low Probability SMT</h3>
+          <div class="cmp-grid">
+            <div class="cmp-box tbs">
+              <h4>High Probability</h4>
+              <p>SMT at a key liquidity level (PDH/PDL, session H/L). Divergence is clear and obvious. Forms during a killzone. Confirmed by LTF MSS. Multiple confluences stack.</p>
+            </div>
+            <div class="cmp-box tws">
+              <h4>Low Probability</h4>
+              <p>SMT in the middle of nowhere (no key level). Divergence is tiny/unclear. Forms outside killzones. No LTF confirmation. No additional confluence.</p>
+            </div>
+          </div>
+
+          <h3>Common Mistakes to Avoid</h3>
+          <ol class="step-list">
+            <li><span class="step-num">✗</span><div><strong>Using non-correlated pairs:</strong> Random pairs will show random divergences. Stick to the proven correlation pairs listed above.</div></li>
+            <li><span class="step-num">✗</span><div><strong>Trading SMT alone:</strong> Divergence is a bias tool, not an entry signal. Always wait for LTF confirmation (MSS, FVG, OB).</div></li>
+            <li><span class="step-num">✗</span><div><strong>Different timeframes:</strong> Both assets MUST be on the same timeframe. Comparing 1H EUR/USD with 4H GBP/USD is meaningless.</div></li>
+            <li><span class="step-num">✗</span><div><strong>Ignoring context:</strong> SMT at a random level is noise. SMT at PDH/PDL, session extremes, or Order Blocks is signal.</div></li>
+          </ol>
+
+          <div class="s-tip">
+            <div class="lbl">How SMT Fits the Big Picture</div>
+            <p><strong>PO3</strong> tells you the daily script. <strong>SMT</strong> confirms the manipulation is fake. <strong>CRT/TBS</strong> identifies the trap candle. <strong>OTE/Silver Bullet</strong> provides the precise entry. <strong>Volume Profile</strong> validates with real volume data. Layer them together and you have the complete institutional toolkit.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end strat-smt -->
 
   </div><!-- end strategies panel -->
 
