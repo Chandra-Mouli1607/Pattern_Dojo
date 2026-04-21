@@ -481,6 +481,7 @@ body::after {
   <!-- Main Tabs -->
   <div class="main-tabs">
     <button class="main-tab active" data-mt="patterns">Patterns</button>
+    <button class="main-tab" data-mt="concepts">ICT Concepts</button>
     <button class="main-tab" data-mt="strategies">Strategies</button>
   </div>
 
@@ -498,6 +499,20 @@ body::after {
     <div class="pattern-grid" id="patternGrid"></div>
   </div>
 
+  <!-- ═══════════════ ICT CONCEPTS TAB ═══════════════ -->
+  <div class="main-panel" id="mt-concepts">
+
+    <div class="filter-row">
+      <button class="filter-chip active" data-cf="all">All</button>
+      <button class="filter-chip" data-cf="structure">Structure</button>
+      <button class="filter-chip" data-cf="liquidity">Liquidity</button>
+      <button class="filter-chip" data-cf="pd-array">PD Arrays</button>
+      <button class="filter-chip" data-cf="time">Time</button>
+    </div>
+
+    <div class="pattern-grid" id="conceptGrid"></div>
+  </div>
+
   <!-- ═══════════════ STRATEGIES TAB ═══════════════ -->
   <div class="main-panel" id="mt-strategies">
 
@@ -511,6 +526,7 @@ body::after {
         <option value="po3-amd">Power of 3 / AMD</option>
         <option value="frvp">Fixed Range Volume Profile</option>
         <option value="smt">SMT Divergence</option>
+        <option value="orderflow">Order Flow Trading</option>
       </select>
     </div>
 
@@ -2082,6 +2098,359 @@ body::after {
 
     </div><!-- end strat-smt -->
 
+    <!-- ─── ORDER FLOW TRADING Strategy ─── -->
+    <div class="strat-panel" id="strat-orderflow">
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-st="of-overview">Overview</button>
+        <button class="sub-tab" data-st="of-pillars">3 Pillars</button>
+        <button class="sub-tab" data-st="of-patterns">5 Patterns</button>
+        <button class="sub-tab" data-st="of-trades">How to Trade</button>
+        <button class="sub-tab" data-st="of-confluence">ICT Confluence</button>
+        <button class="sub-tab" data-st="of-tools">Tools & Markets</button>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="sub-panel active" id="of-overview">
+        <div class="s-card">
+          <h2>What is Order Flow?</h2>
+          <p>While ICT strategies analyze <strong>where</strong> smart money is likely positioning based on price action patterns, Order Flow lets you see the <strong>actual orders being placed in real time</strong>. It's like upgrading from reading footprints in the sand to watching someone walk live through a security camera.</p>
+          <p>Traditional charts show you WHAT happened (price went up/down). Order flow shows you <strong>WHO</strong> made it happen and <strong>HOW</strong> — were buyers aggressive? Were sellers absorbed? Is the volume genuine or fake?</p>
+          <p>Order flow focuses on <strong>aggressors</strong> — the traders using market orders to buy at the ask or sell at the bid. These are the participants who actually move price. Passive limit orders (makers) just sit and wait.</p>
+
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="of1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="260" fill="#070b14"/><rect width="680" height="260" fill="url(#of1)"/>
+              <text x="340" y="18" font-family="JetBrains Mono" font-size="10" fill="#3b82f6" font-weight="600" text-anchor="middle">ORDER FLOW — FROM CHART TO X-RAY</text>
+
+              <!-- Traditional candle (left) -->
+              <rect x="30" y="30" width="190" height="195" fill="#3b82f608" stroke="#3b82f622" stroke-width="1" rx="4"/>
+              <text x="125" y="50" font-family="JetBrains Mono" font-size="9" fill="#3b82f6" font-weight="600" text-anchor="middle">TRADITIONAL CHART</text>
+              <text x="125" y="65" font-family="Outfit" font-size="9" fill="#5a6a82" text-anchor="middle">Shows: price went up</text>
+              <line x1="125" y1="80" x2="125" y2="195" stroke="#5a6a82" stroke-width="1"/>
+              <rect x="115" y="100" width="20" height="75" fill="#10b981" rx="2"/>
+              <text x="125" y="210" font-family="JetBrains Mono" font-size="8" fill="#5a6a82" text-anchor="middle">Just a green candle</text>
+
+              <!-- Arrow -->
+              <text x="270" y="130" font-family="JetBrains Mono" font-size="18" fill="#f59e0b">→</text>
+
+              <!-- Footprint (right) -->
+              <rect x="310" y="30" width="340" height="195" fill="#10b98108" stroke="#10b98122" stroke-width="1" rx="4"/>
+              <text x="480" y="50" font-family="JetBrains Mono" font-size="9" fill="#10b981" font-weight="600" text-anchor="middle">FOOTPRINT CHART (ORDER FLOW)</text>
+              <text x="480" y="65" font-family="Outfit" font-size="9" fill="#5a6a82" text-anchor="middle">Shows: who bought, who sold, where, how much</text>
+
+              <!-- Footprint data grid -->
+              <text x="370" y="82" font-family="JetBrains Mono" font-size="7" fill="#5a6a82">BID</text>
+              <text x="440" y="82" font-family="JetBrains Mono" font-size="7" fill="#5a6a82">PRICE</text>
+              <text x="510" y="82" font-family="JetBrains Mono" font-size="7" fill="#5a6a82">ASK</text>
+              <text x="570" y="82" font-family="JetBrains Mono" font-size="7" fill="#5a6a82">DELTA</text>
+
+              <line x1="330" y1="86" x2="630" y2="86" stroke="#1c2a44" stroke-width="0.5"/>
+
+              <text x="370" y="100" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" text-anchor="middle">45</text>
+              <text x="440" y="100" font-family="JetBrains Mono" font-size="9" fill="#5a6a82" text-anchor="middle">105.50</text>
+              <text x="510" y="100" font-family="JetBrains Mono" font-size="9" fill="#10b981" text-anchor="middle">120</text>
+              <text x="570" y="100" font-family="JetBrains Mono" font-size="9" fill="#10b981" text-anchor="middle">+75</text>
+
+              <text x="370" y="118" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" text-anchor="middle">80</text>
+              <text x="440" y="118" font-family="JetBrains Mono" font-size="9" fill="#5a6a82" text-anchor="middle">105.25</text>
+              <text x="510" y="118" font-family="JetBrains Mono" font-size="9" fill="#10b981" text-anchor="middle">210</text>
+              <text x="570" y="118" font-family="JetBrains Mono" font-size="9" fill="#10b981" text-anchor="middle">+130</text>
+              <rect x="497" y="110" width="30" height="12" fill="#10b98133" rx="2"/>
+
+              <text x="370" y="136" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" text-anchor="middle">150</text>
+              <text x="440" y="136" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" text-anchor="middle">105.00</text>
+              <text x="510" y="136" font-family="JetBrains Mono" font-size="9" fill="#10b981" text-anchor="middle">350</text>
+              <text x="570" y="136" font-family="JetBrains Mono" font-size="9" fill="#10b981" text-anchor="middle">+200</text>
+              <rect x="497" y="128" width="40" height="12" fill="#10b98144" rx="2"/>
+              <text x="620" y="136" font-family="JetBrains Mono" font-size="7" fill="#f59e0b">← POC</text>
+
+              <text x="370" y="154" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" text-anchor="middle">200</text>
+              <text x="440" y="154" font-family="JetBrains Mono" font-size="9" fill="#5a6a82" text-anchor="middle">104.75</text>
+              <text x="510" y="154" font-family="JetBrains Mono" font-size="9" fill="#10b981" text-anchor="middle">180</text>
+              <text x="570" y="154" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" text-anchor="middle">-20</text>
+
+              <text x="370" y="172" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" text-anchor="middle">90</text>
+              <text x="440" y="172" font-family="JetBrains Mono" font-size="9" fill="#5a6a82" text-anchor="middle">104.50</text>
+              <text x="510" y="172" font-family="JetBrains Mono" font-size="9" fill="#10b981" text-anchor="middle">60</text>
+              <text x="570" y="172" font-family="JetBrains Mono" font-size="9" fill="#f43f5e" text-anchor="middle">-30</text>
+
+              <text x="480" y="200" font-family="JetBrains Mono" font-size="8" fill="#10b981" text-anchor="middle">Buyers dominated 105.00-105.50</text>
+              <text x="480" y="213" font-family="JetBrains Mono" font-size="8" fill="#f43f5e" text-anchor="middle">Sellers appeared at 104.50-104.75</text>
+
+              <!-- Bottom summary -->
+              <text x="340" y="248" font-family="JetBrains Mono" font-size="9" fill="#5a6a82" text-anchor="middle">Same candle, completely different story. That's the power of Order Flow.</text>
+            </svg>
+            <div class="dia-label">Traditional Chart vs Footprint — Same Candle, Different Intelligence</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 PILLARS -->
+      <div class="sub-panel" id="of-pillars">
+        <div class="s-card">
+          <h2>The 3 Pillars of Order Flow</h2>
+
+          <h3>1. Order Book / DOM (Depth of Market)</h3>
+          <p>The DOM displays the <strong>live order book</strong> — all pending buy orders (bids) stacked on one side and sell orders (asks) on the other, like a two-sided ladder. The gap between the best bid and best ask is the <strong>spread</strong>.</p>
+          <p>What to watch: large order clusters (potential S/R walls), disappearing orders (spoofing — fake orders placed and quickly cancelled to deceive), and orders being consumed without price moving (absorption).</p>
+          <div class="chip-row">
+            <span class="chip bl">Large bid clusters = support</span>
+            <span class="chip rd">Large ask clusters = resistance</span>
+            <span class="chip gd">Narrow spread = high liquidity</span>
+          </div>
+          <p><strong>Important limitation:</strong> The DOM only shows visible limit orders. Institutional players use <strong>iceberg orders</strong> — large orders broken into small visible chunks to avoid detection. What you see on the DOM is often just the tip of the iceberg.</p>
+
+          <h3>2. Footprint Charts</h3>
+          <p>The footprint chart is the X-ray of every candle. Instead of showing just open/high/low/close, it shows the <strong>volume traded at the bid and ask at each individual price level</strong> inside the candle.</p>
+          <p>Three types:</p>
+          <ol class="step-list">
+            <li><span class="step-num">B/A</span><div><strong>Bid/Ask Footprint:</strong> Shows both buy and sell volume at each price. The most detailed view. Reveals exactly where buyers lifted offers and sellers hit bids.</div></li>
+            <li><span class="step-num">Δ</span><div><strong>Delta Footprint:</strong> Shows the NET difference (ask minus bid) at each price. Positive = buyers dominated. Negative = sellers dominated. Fastest to read.</div></li>
+            <li><span class="step-num">VP</span><div><strong>Volume Profile Footprint:</strong> Shows total volume per price level regardless of direction. Identifies the POC (highest volume level) inside each candle.</div></li>
+          </ol>
+
+          <h3>3. Delta & Cumulative Volume Delta (CVD)</h3>
+          <p><strong>Delta</strong> = Ask volume minus Bid volume for a single candle. Positive delta means buyers were more aggressive. Negative delta means sellers dominated.</p>
+          <p><strong>CVD</strong> tracks delta over time across the entire session. It's like a running scoreboard of buyer vs seller aggression.</p>
+          <p>The most powerful signal is <strong>delta divergence</strong>:</p>
+          <div class="cmp-grid">
+            <div class="cmp-box tbs">
+              <h4>Bearish Delta Divergence</h4>
+              <p>Price makes higher highs but delta makes lower highs → buyers are weakening → expect bearish reversal.</p>
+            </div>
+            <div class="cmp-box tws">
+              <h4>Bullish Delta Divergence</h4>
+              <p>Price makes lower lows but delta makes higher lows → sellers are exhausting → expect bullish reversal.</p>
+            </div>
+          </div>
+
+          <div class="s-tip">
+            <div class="lbl">Key Insight</div>
+            <p>A green candle with negative delta means aggressive sellers are actually dominating despite the bullish appearance. A red candle with positive delta means hidden buying is happening despite the bearish look. These contradictions are where the real institutional signals hide.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 PATTERNS -->
+      <div class="sub-panel" id="of-patterns">
+        <div class="s-card bull">
+          <h2>The 5 Core Order Flow Patterns</h2>
+
+          <h3>1. Absorption</h3>
+          <p>The most powerful pattern. Large limit orders <strong>soak up</strong> aggressive market orders without price moving. Example: price keeps hitting resistance with heavy buy volume but won't break — hidden sellers are absorbing every buy. The price stalls, then reverses.</p>
+          <div class="chip-row"><span class="chip gr">Signal: heavy volume + no price movement</span><span class="chip bl">Result: reversal</span></div>
+
+          <h3>2. Stacked Imbalances</h3>
+          <p>When <strong>3-5 consecutive price levels</strong> all show lopsided volume in the same direction (e.g., ask volume vastly exceeding bid at every level), that's stacked imbalances. This signals strong institutional conviction — trade in that direction for continuation.</p>
+          <div class="chip-row"><span class="chip gd">Signal: 3+ levels of one-sided volume</span><span class="chip bl">Result: continuation</span></div>
+
+          <h3>3. Exhaustion</h3>
+          <p>Price reaches a new extreme (high or low) but volume is <strong>declining</strong>. Fewer participants are stepping in to push further. The fuel is running out. The move is about to stall or reverse.</p>
+          <div class="chip-row"><span class="chip rd">Signal: new extreme + declining volume</span><span class="chip bl">Result: reversal</span></div>
+
+          <h3>4. Delta Divergence</h3>
+          <p>Price moves in one direction but delta moves in the opposite. It's the order flow equivalent of SMT Divergence — the "hidden truth" beneath the candle. CVD rising while price is flat = accumulation (smart money buying quietly). CVD falling while price rises = distribution (smart money selling into strength).</p>
+          <div class="chip-row"><span class="chip pr">Signal: price vs delta conflict</span><span class="chip bl">Result: early reversal warning</span></div>
+
+          <h3>5. Trapped Traders</h3>
+          <p>A breakout occurs with volume, then price <strong>immediately reverses</strong>. Those who chased the breakout are now trapped. Their stop losses become fuel for the reversal — price accelerates in the opposite direction as stops cascade.</p>
+          <div class="chip-row"><span class="chip rd">Signal: breakout + instant reversal</span><span class="chip bl">Result: fast reversal (stop cascade)</span></div>
+        </div>
+
+        <div class="s-card">
+          <h2>Pattern Summary</h2>
+          <div class="dia-wrap">
+            <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="of3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1c2a44" stroke-width="0.5"/></pattern></defs>
+              <rect width="680" height="200" fill="#070b14"/><rect width="680" height="200" fill="url(#of3)"/>
+              <!-- 5 pattern boxes -->
+              <rect x="15" y="15" width="118" height="75" fill="#10b98111" stroke="#10b98144" stroke-width="1" rx="5"/>
+              <text x="74" y="35" font-family="JetBrains Mono" font-size="8" fill="#10b981" font-weight="600" text-anchor="middle">ABSORPTION</text>
+              <text x="74" y="52" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Big vol, no move</text>
+              <text x="74" y="68" font-family="JetBrains Mono" font-size="8" fill="#a78bfa" text-anchor="middle">→ REVERSAL</text>
+              <text x="74" y="82" font-family="JetBrains Mono" font-size="7" fill="#5a6a82" text-anchor="middle">Win: 70-80%</text>
+
+              <rect x="148" y="15" width="118" height="75" fill="#f59e0b11" stroke="#f59e0b44" stroke-width="1" rx="5"/>
+              <text x="207" y="35" font-family="JetBrains Mono" font-size="8" fill="#f59e0b" font-weight="600" text-anchor="middle">STACKED IMB.</text>
+              <text x="207" y="52" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">3+ one-sided levels</text>
+              <text x="207" y="68" font-family="JetBrains Mono" font-size="8" fill="#10b981" text-anchor="middle">→ CONTINUATION</text>
+              <text x="207" y="82" font-family="JetBrains Mono" font-size="7" fill="#5a6a82" text-anchor="middle">Win: 65-75%</text>
+
+              <rect x="281" y="15" width="118" height="75" fill="#f43f5e11" stroke="#f43f5e44" stroke-width="1" rx="5"/>
+              <text x="340" y="35" font-family="JetBrains Mono" font-size="8" fill="#f43f5e" font-weight="600" text-anchor="middle">EXHAUSTION</text>
+              <text x="340" y="52" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">New high, low vol</text>
+              <text x="340" y="68" font-family="JetBrains Mono" font-size="8" fill="#a78bfa" text-anchor="middle">→ REVERSAL</text>
+              <text x="340" y="82" font-family="JetBrains Mono" font-size="7" fill="#5a6a82" text-anchor="middle">Win: 60-70%</text>
+
+              <rect x="414" y="15" width="118" height="75" fill="#a78bfa11" stroke="#a78bfa44" stroke-width="1" rx="5"/>
+              <text x="473" y="35" font-family="JetBrains Mono" font-size="8" fill="#a78bfa" font-weight="600" text-anchor="middle">DELTA DIVERG.</text>
+              <text x="473" y="52" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Price vs delta conflict</text>
+              <text x="473" y="68" font-family="JetBrains Mono" font-size="8" fill="#f59e0b" text-anchor="middle">→ EARLY WARNING</text>
+              <text x="473" y="82" font-family="JetBrains Mono" font-size="7" fill="#5a6a82" text-anchor="middle">Win: 60-70%</text>
+
+              <rect x="547" y="15" width="118" height="75" fill="#3b82f611" stroke="#3b82f644" stroke-width="1" rx="5"/>
+              <text x="606" y="35" font-family="JetBrains Mono" font-size="8" fill="#3b82f6" font-weight="600" text-anchor="middle">TRAPPED TRADERS</text>
+              <text x="606" y="52" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Breakout + snap back</text>
+              <text x="606" y="68" font-family="JetBrains Mono" font-size="8" fill="#a78bfa" text-anchor="middle">→ FAST REVERSAL</text>
+              <text x="606" y="82" font-family="JetBrains Mono" font-size="7" fill="#5a6a82" text-anchor="middle">Win: 65-75%</text>
+
+              <!-- Bottom note -->
+              <text x="340" y="120" font-family="JetBrains Mono" font-size="9" fill="#f59e0b" text-anchor="middle">START WITH ABSORPTION → it's the highest win rate and easiest to spot</text>
+
+              <rect x="60" y="140" width="560" height="45" fill="#0c1220" stroke="#1c2a44" stroke-width="1" rx="4"/>
+              <text x="340" y="158" font-family="JetBrains Mono" font-size="8" fill="#5a6a82" text-anchor="middle">LEARNING ORDER: 1) Delta basics → 2) Absorption → 3) Exhaustion → 4) Stacked Imbalances → 5) Delta Divergence</text>
+              <text x="340" y="175" font-family="Outfit" font-size="8" fill="#5a6a82" text-anchor="middle">Master one pattern before adding the next. Information overload is the #1 killer of order flow traders.</text>
+            </svg>
+            <div class="dia-label">5 Core Patterns — Win Rates and Learning Order</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOW TO TRADE -->
+      <div class="sub-panel" id="of-trades">
+        <div class="s-card bull">
+          <h2>Absorption Trade (Reversal)</h2>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Price approaches a key S/R level</strong> (PDH/PDL, OB, HVN, POC).</div></li>
+            <li><span class="step-num">2</span><div><strong>Footprint shows heavy aggressive orders</strong> hitting the level — but price doesn't move or barely moves.</div></li>
+            <li><span class="step-num">3</span><div><strong>Delta contradicts the aggression:</strong> Buying pressure but negative delta (sellers absorbing), or selling pressure but positive delta (buyers absorbing).</div></li>
+            <li><span class="step-num">4</span><div><strong>Enter opposite direction</strong> after a confirmation candle (rejection wick, engulfing, or LTF MSS).</div></li>
+            <li><span class="step-num">5</span><div><strong>SL:</strong> Beyond the absorption zone. <strong>TP:</strong> Next significant S/R level, POC, or HVN.</div></li>
+          </ol>
+          <div class="rr-box">Win Rate: 70-80% | R:R: 1:2 to 1:3</div>
+        </div>
+
+        <div class="s-card gold">
+          <h2>Stacked Imbalance Trade (Continuation)</h2>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Identify 3+ consecutive price levels</strong> where one side dominates (e.g., ask volume 3x bid volume at every level).</div></li>
+            <li><span class="step-num">2</span><div><strong>Wait for a small pullback</strong> after the initial move. Don't chase the impulse.</div></li>
+            <li><span class="step-num">3</span><div><strong>Enter in the direction of the imbalances</strong> on the pullback — ideally at an FVG or OB.</div></li>
+            <li><span class="step-num">4</span><div><strong>SL:</strong> Beyond the pullback extreme. <strong>TP:</strong> Next HVN, liquidity pool, or 2-3x risk.</div></li>
+          </ol>
+          <div class="rr-box">Win Rate: 65-75% | R:R: 1:2 to 1:4</div>
+        </div>
+
+        <div class="s-card bear">
+          <h2>Exhaustion Trade (Reversal)</h2>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>Price reaches a new extreme</strong> (swing high or low).</div></li>
+            <li><span class="step-num">2</span><div><strong>Volume is declining</strong> at the extreme — fewer contracts being traded. The push is running out of fuel.</div></li>
+            <li><span class="step-num">3</span><div><strong>Delta diverges:</strong> Price makes higher highs but delta makes lower highs (or vice versa).</div></li>
+            <li><span class="step-num">4</span><div><strong>Enter reversal</strong> after MSS or rejection candle confirms the exhaustion.</div></li>
+            <li><span class="step-num">5</span><div><strong>SL:</strong> Beyond the exhaustion extreme. <strong>TP:</strong> Back to POC or Value Area.</div></li>
+          </ol>
+          <div class="rr-box">Win Rate: 60-70% | R:R: 1:2 to 1:3</div>
+        </div>
+
+        <div class="s-card purple">
+          <h2>Delta Divergence Trade (Early Warning)</h2>
+          <ol class="step-list">
+            <li><span class="step-num">1</span><div><strong>CVD rising while price is flat or falling</strong> = accumulation. Smart money is quietly buying. Prepare to go long.</div></li>
+            <li><span class="step-num">2</span><div><strong>CVD falling while price is rising or flat</strong> = distribution. Smart money is selling into strength. Prepare to go short.</div></li>
+            <li><span class="step-num">3</span><div><strong>Wait for price to confirm</strong> with a break of structure (BOS/CHoCH) in the direction the delta signals.</div></li>
+            <li><span class="step-num">4</span><div><strong>Enter on the retest</strong> of the FVG/OB created by the BOS.</div></li>
+            <li><span class="step-num">5</span><div><strong>SL:</strong> Beyond recent swing point. <strong>TP:</strong> Next liquidity pool.</div></li>
+          </ol>
+          <div class="rr-box">Win Rate: 60-70% | R:R: 1:2 to 1:4</div>
+        </div>
+      </div>
+
+      <!-- ICT CONFLUENCE -->
+      <div class="sub-panel" id="of-confluence">
+        <div class="s-card gold">
+          <h2>Order Flow + ICT Confluence</h2>
+          <p>Order flow is the <strong>confirmation layer</strong> on top of ICT. Here's how each ICT concept gets supercharged by order flow data:</p>
+
+          <h3>Absorption at an Order Block</h3>
+          <p>The OB tells you WHERE smart money entered. Absorption at that level confirms they're <strong>still defending it</strong>. Ultra-high probability reversal. Enter when absorption completes and price starts moving away from the OB.</p>
+
+          <h3>Stacked Imbalances + FVG</h3>
+          <p>If the FVG was created by a candle with stacked buy imbalances, the gap is backed by <strong>genuine institutional aggression</strong> — not random noise. Trade the FVG fill with full confidence.</p>
+
+          <h3>Delta Divergence at CRT Range</h3>
+          <p>The CRT manipulation candle shows negative delta despite a bullish wick appearance — confirms the sweep is <strong>fake</strong>. Sellers were actually dominating inside that candle. The reversal is real.</p>
+
+          <h3>Exhaustion at PDH/PDL</h3>
+          <p>Price reaches Previous Day High/Low but volume is dying. The move to PDH/PDL was the <strong>last gasp</strong>. Expect a reversal back toward the POC.</p>
+
+          <h3>Footprint POC + Volume Profile POC</h3>
+          <p>When the footprint's POC (inside a single candle) aligns with the Fixed Range Volume Profile's POC (across a session), you have the <strong>most traded level from two different lenses</strong>. Maximum confluence S/R.</p>
+
+          <h3>Trapped Traders + Turtle Soup</h3>
+          <p>A Turtle Soup (false breakout) is visible on the chart. The footprint shows the breakout had volume (traders entered) but immediately reversed. Those trapped traders' stops now fuel the move in your direction.</p>
+
+          <div class="chip-row">
+            <span class="chip gr">Absorption + OB = defended level</span>
+            <span class="chip bl">Stacked Imb + FVG = real gap</span>
+            <span class="chip pr">Delta Div + CRT = confirmed fake</span>
+            <span class="chip rd">Exhaustion + PDH/PDL = move done</span>
+            <span class="chip gd">Trapped + Turtle Soup = stop cascade</span>
+          </div>
+
+          <div class="s-tip">
+            <div class="lbl">The Ultimate Stack</div>
+            <p>ICT gives you the narrative (who, where, why). Volume Profile gives you the levels (POC, HVN, VAH/VAL). Order Flow gives you the confirmation (real buying/selling, absorption, exhaustion). SMT gives you the cross-market validation. Layer all four and you're reading the market like the institutions do.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOLS & MARKETS -->
+      <div class="sub-panel" id="of-tools">
+        <div class="s-card">
+          <h2>Tools & Platforms</h2>
+          <p>Order flow requires <strong>specialized tools</strong> — standard TradingView candle charts won't show footprint data (though TradingView added a basic Volume Footprint in 2024).</p>
+
+          <h3>Recommended Platforms</h3>
+          <table class="tf-tbl">
+            <thead><tr><th>Platform</th><th>Best For</th><th>Key Feature</th></tr></thead>
+            <tbody>
+              <tr><td>ATAS</td><td style="color:var(--tx-2)">Footprint + Volume Profile</td><td style="color:var(--tx-2)">Best integrated analysis</td></tr>
+              <tr><td>Bookmap</td><td style="color:var(--tx-2)">Heatmap visualization</td><td style="color:var(--tx-2)">See order book history</td></tr>
+              <tr><td>Sierra Chart</td><td style="color:var(--tx-2)">Professional trading</td><td style="color:var(--tx-2)">Fully customizable</td></tr>
+              <tr><td>NinjaTrader</td><td style="color:var(--tx-2)">Futures + add-ons</td><td style="color:var(--tx-2)">Order Flow+ plugin</td></tr>
+              <tr><td>GoCharting</td><td style="color:var(--tx-2)">Crypto (web-based)</td><td style="color:var(--tx-2)">No install needed</td></tr>
+              <tr><td>TradingView</td><td style="color:var(--tx-2)">Basic delta view</td><td style="color:var(--tx-2)">Volume Footprint (limited)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="s-card purple">
+          <h2>Best Markets for Order Flow</h2>
+          <p>Order flow works best where data is <strong>centralized and transparent</strong>:</p>
+
+          <h3>Futures (Best)</h3>
+          <div class="chip-row">
+            <span class="chip gd">ES (S&P 500)</span>
+            <span class="chip gd">NQ (Nasdaq)</span>
+            <span class="chip gd">CL (Crude Oil)</span>
+            <span class="chip gd">GC (Gold)</span>
+          </div>
+          <p>Exchange-traded on CME. All orders are visible and centralized. This is where order flow was born and where it works best.</p>
+
+          <h3>Crypto Perpetual Futures (Good)</h3>
+          <div class="chip-row">
+            <span class="chip pr">BTC/USDT Perps</span>
+            <span class="chip pr">ETH/USDT Perps</span>
+          </div>
+          <p>High volume on Binance/Bybit. Visible order book. Good for footprint analysis. Watch out for wash trading inflating volumes.</p>
+
+          <h3>Forex (Limited)</h3>
+          <p>Decentralized market — no single order book exists. Use <strong>tick volume</strong> as a proxy. Footprint data from forex brokers is broker-specific, not market-wide. Less reliable but still useful for delta analysis.</p>
+
+          <h3>Stocks (Moderate)</h3>
+          <p>Dark pools and off-exchange venues hide 40-50% of institutional orders. The visible order book tells only part of the story. Better for high-volume stocks (AAPL, TSLA, SPY).</p>
+
+          <div class="s-tip">
+            <div class="lbl">Starting Advice</div>
+            <p>If you're new to order flow, start with <strong>ES or NQ futures on a 5-minute chart</strong> using just the delta footprint. Learn to read positive vs negative delta at key levels. Master this one view before adding absorption, imbalance, or DOM analysis. Information overload kills more order flow traders than bad entries.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end strat-orderflow -->
+
   </div><!-- end strategies panel -->
 
 </div><!-- end app -->
@@ -2250,6 +2619,133 @@ document.querySelectorAll('.filter-chip').forEach(chip => {
     document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
     chip.classList.add('active');
     renderPatterns(chip.dataset.f);
+  });
+});
+
+// ── ICT Concepts Data ──
+const concepts = [
+  { name:"Market Structure", cat:"structure", icon:"◆",
+    desc:"Market structure is the foundation of ICT. It's the sequence of highs and lows price creates. An uptrend makes Higher Highs (HH) and Higher Lows (HL). A downtrend makes Lower Highs (LH) and Lower Lows (LL). Structure tells you the current trend — trade WITH it, not against it.",
+    how:"On a 1H or 15m chart, connect swing highs and swing lows. If each swing high is higher than the last and each swing low is higher than the last, you're in an uptrend. The opposite means downtrend. When this pattern breaks, it signals a potential reversal (CHoCH/MSS).",
+    tip:"Always check structure on a higher timeframe (4H/Daily) before trading lower timeframes. A 5m bullish setup means nothing if the 4H is bearish." },
+  { name:"Break of Structure (BOS)", cat:"structure", icon:"↗",
+    desc:"BOS occurs when price breaks past a previous swing high (bullish BOS) or swing low (bearish BOS) in the direction of the existing trend. It confirms trend continuation — the market is making a new structural leg in the same direction.",
+    how:"In a bullish trend: price makes a Higher High → that break above the previous high = bullish BOS. In a bearish trend: price makes a Lower Low → that break below the previous low = bearish BOS. BOS is confirmation that the trend is still alive.",
+    tip:"BOS is a continuation signal. Don't confuse it with CHoCH (which signals reversal). BOS says 'the trend continues.' Look for pullbacks to FVG/OB after a BOS for entries." },
+  { name:"Change of Character (CHoCH)", cat:"structure", icon:"⟲",
+    desc:"CHoCH is the first sign that the trend may be reversing. In a bullish trend, CHoCH occurs when price breaks below the most recent Higher Low. In a bearish trend, CHoCH occurs when price breaks above the most recent Lower High. It's the market's 'mood shift.'",
+    how:"After a series of HH/HL (uptrend), if price suddenly breaks BELOW the last HL — that's a bearish CHoCH. It doesn't guarantee reversal, but it's an early warning. Combine with a liquidity sweep for higher probability. CHoCH is also called Market Structure Shift (MSS) by ICT.",
+    tip:"CHoCH inside a CRT range or at a key HTF level (OB, FVG) is highest probability. CHoCH in the middle of nowhere is just noise. Context matters more than the break itself." },
+  { name:"Liquidity", cat:"liquidity", icon:"◉",
+    desc:"Liquidity is the fuel that moves markets. It refers to clusters of stop-loss orders and pending orders sitting at predictable price levels. Retail traders place stops above swing highs (Buy-Side Liquidity / BSL) and below swing lows (Sell-Side Liquidity / SSL). Institutions TARGET these clusters to fill their large orders.",
+    how:"Mark equal highs ($$) and equal lows ($$) on your chart — these are liquidity magnets. Also mark PDH/PDL, session highs/lows, and obvious swing points. Price is drawn to these levels like a magnet. Once liquidity is swept, expect a reversal in the opposite direction.",
+    tip:"Every swing high has BSL above it. Every swing low has SSL below it. The more obvious the level (double tops, triple bottoms), the MORE liquidity is sitting there. That's exactly why smart money targets them." },
+  { name:"Buy-Side Liquidity (BSL)", cat:"liquidity", icon:"▲",
+    desc:"BSL sits ABOVE swing highs, resistance levels, and equal highs. It consists of buy stop orders (from shorts placing stop losses) and buy limit orders (from breakout traders). When price sweeps above these highs, it grabs BSL — triggering all those pending buy orders and providing liquidity for institutions to sell into.",
+    how:"Mark every swing high, previous session high, and PDH on your chart. Draw a horizontal line at each. Those lines represent BSL pools. When price runs above them with a wick and immediately reverses, a BSL sweep has occurred — look for short entries.",
+    tip:"BSL sweep + bearish CHoCH + FVG = A+ short setup. The sweep grabs the liquidity, the CHoCH confirms reversal, and the FVG provides your entry." },
+  { name:"Sell-Side Liquidity (SSL)", cat:"liquidity", icon:"▼",
+    desc:"SSL sits BELOW swing lows, support levels, and equal lows. It consists of sell stop orders (from longs placing stop losses) and sell limit orders (from breakdown traders). When price sweeps below these lows, it grabs SSL — triggering sell stops and providing liquidity for institutions to buy.",
+    how:"Mark every swing low, previous session low, and PDL. When price dips below them and immediately bounces back, an SSL sweep has occurred — look for long entries after confirmation.",
+    tip:"SSL sweep during London session (Judas Swing) followed by bullish MSS during NY = the classic PO3 long setup. The manipulation phase sweeps SSL, the distribution phase drives price up." },
+  { name:"Liquidity Sweep", cat:"liquidity", icon:"⚡",
+    desc:"A liquidity sweep (also called a stop hunt or liquidity grab) occurs when price briefly pierces through a key level to trigger stops, then reverses. The sweep is NOT a real breakout — it's smart money engineering liquidity to fill their orders. This is the core mechanism behind Turtle Soup, CRT manipulation, and the Judas Swing.",
+    how:"Watch for price to poke above/below a key level (PDH/PDL, equal highs/lows) with a wick, then close back inside. The wick IS the sweep. After the sweep, look for displacement (strong move in the opposite direction) and enter on the FVG/OB created by that displacement.",
+    tip:"The best sweeps are fast and aggressive — a single candle that spikes through the level and snaps back. Slow, grinding sweeps are less reliable because they give trapped traders time to exit." },
+  { name:"Order Block (OB)", cat:"pd-array", icon:"■",
+    desc:"An Order Block is the last candle before a strong displacement move. It marks where institutions placed their orders before driving price. A bullish OB is the last bearish (red) candle before a big rally. A bearish OB is the last bullish (green) candle before a big drop. When price returns to an OB, institutions often defend it.",
+    how:"Find a strong impulsive move. Look at the LAST candle of the opposite color before that move started. Mark its range (high to low) — that's your Order Block. When price retraces back to this zone, look for rejection candles for entry. Valid OBs must: sweep liquidity, create an imbalance (FVG), remain untouched, and cause a BOS/CHoCH.",
+    tip:"Not every candle before a move is an OB. Valid Order Blocks must have caused a structural break. If the candle before the move didn't break structure, it's just a random candle, not an OB." },
+  { name:"Fair Value Gap (FVG)", cat:"pd-array", icon:"≡",
+    desc:"An FVG is a 3-candle price imbalance where the market moved so fast that it left a gap between the first candle's wick and the third candle's wick. The middle candle moved through price without enough volume on both sides — creating an 'inefficiency' that price tends to come back and fill.",
+    how:"Look for three consecutive candles where the high of candle 1 doesn't touch the low of candle 3 (bullish FVG) or the low of candle 1 doesn't touch the high of candle 3 (bearish FVG). The gap between them is the FVG zone. Set limit orders at the edge of the FVG for precision entries.",
+    tip:"FVGs created during killzones (London/NY open) with displacement are the highest quality. FVGs in low-volume choppy markets are unreliable. Also: if price completely fills an FVG and closes through it, the gap is 'mitigated' — it's used up." },
+  { name:"Inversion FVG (IFVG)", cat:"pd-array", icon:"⇋",
+    desc:"When price breaks through an FVG completely (closes beyond it), that FVG flips its role — support becomes resistance and vice versa. A bullish FVG that gets broken to the downside becomes a bearish Inversion FVG (resistance on retest). It's the same concept as support/resistance flipping, but applied to fair value gaps.",
+    how:"Mark your FVGs. If price trades through one and closes beyond it, flip the label. On the next retest from the other side, treat it as the new S/R zone. Entry is on the retest with a rejection candle.",
+    tip:"IFVG works best when the original FVG was strong (created with displacement). Weak FVGs that get broken don't create reliable inversions." },
+  { name:"Breaker Block", cat:"pd-array", icon:"✕",
+    desc:"A Breaker Block is a failed Order Block. When price breaks through an OB instead of respecting it, the OB's role flips — a failed bullish OB becomes bearish resistance (bearish Breaker), and a failed bearish OB becomes bullish support (bullish Breaker). It's where trapped traders' stops fuel the next move.",
+    how:"Identify an Order Block. If price returns to it and blasts through instead of bouncing, that OB is now a Breaker Block. When price eventually retests it from the other side, treat it as S/R. The Breaker + FVG overlap = Unicorn Model (highest probability setup).",
+    tip:"Breaker Blocks require: 1) original OB sweeps liquidity, 2) price breaks through with displacement, 3) body close beyond the OB. All three must be present for a valid Breaker." },
+  { name:"Premium & Discount Zones", cat:"pd-array", icon:"⚖",
+    desc:"Every price range has a midpoint (equilibrium / 50% level). Above equilibrium = Premium zone (prices are 'expensive'). Below equilibrium = Discount zone (prices are 'cheap'). Smart money BUYS in discount and SELLS in premium. This is the backbone of ICT trade direction.",
+    how:"Draw a Fibonacci from the swing low to swing high of the current dealing range. The 50% level = equilibrium. Above 50% = premium (look for shorts). Below 50% = discount (look for longs). The OTE zone (62-79%) sits deep in discount/premium territory — that's where institutions reload.",
+    tip:"If you're bullish, only take longs in the DISCOUNT zone. If you're bearish, only take shorts in the PREMIUM zone. This one rule alone will eliminate 50% of bad trades." },
+  { name:"Dealing Range", cat:"structure", icon:"▬",
+    desc:"The Dealing Range is the current operating zone of the market — defined by the most recent swing high and swing low that contain active price action. Everything happens inside this range: BOS, CHoCH, FVG fills, OB retests. The range only resets after a confirmed BOS starts a new structural leg.",
+    how:"Find the most recent significant swing high and swing low. Draw horizontal lines at both. The space between them is your dealing range. Apply premium/discount zones (50% = equilibrium). Mark the FVGs and OBs within this range — those are your trading zones.",
+    tip:"The dealing range gives you your 'playground.' Don't trade outside it. The sweep of one side of the dealing range often leads to a move toward the opposite side — that's the CRT concept in action." },
+  { name:"Kill Zones", cat:"time", icon:"◎",
+    desc:"Kill Zones are specific time windows when institutional algorithms are most active and ICT setups have the highest probability. These align with major market session opens where volume and liquidity peak. Trading outside Kill Zones means you're trading in low-liquidity, random noise.",
+    how:"Asian KZ: 8:00 PM – 12:00 AM EST (accumulation, range formation). London KZ: 2:00 AM – 5:00 AM EST (manipulation, Judas Swing). NY AM KZ: 8:30 AM – 11:00 AM EST (distribution, highest probability). NY PM KZ: 1:30 PM – 4:00 PM EST (end-of-day positioning). Focus 80% of your trading on NY AM Kill Zone.",
+    tip:"If no setup forms during the Kill Zone window — no trade. Walking away is a position. The discipline of only trading during KZ is what separates profitable ICT traders from breakeven ones." },
+  { name:"Displacement", cat:"structure", icon:"⟹",
+    desc:"Displacement is a strong, aggressive price move with big-bodied candles and little to no wick overlap. It shows genuine institutional intent — not choppy retail noise. Displacement creates FVGs, validates Order Blocks, and confirms Market Structure Shifts. Without displacement, a BOS/CHoCH is weak.",
+    how:"Look for 2-3 consecutive large-bodied candles moving in one direction with minimal wicks. The move should be noticeably stronger than surrounding price action. The FVG left behind by displacement is your highest-quality entry zone.",
+    tip:"A BOS or CHoCH WITHOUT displacement is suspicious — it could be a fakeout. A BOS/CHoCH WITH displacement is conviction. Always check: did the structural break happen with force, or did price just barely creep past the level?" },
+  { name:"Inducement", cat:"liquidity", icon:"◇",
+    desc:"Inducement is a minor liquidity level that exists BETWEEN your entry zone (OB/FVG) and the current price. Smart money often sweeps this minor liquidity first before reaching your actual entry level. If you enter at the OB without waiting for inducement to be taken, you might get stopped out on the sweep.",
+    how:"After identifying your OB/FVG entry zone, check if there's a minor swing high or low between current price and your zone. That's inducement. Wait for price to sweep that minor level first, THEN enter at the OB/FVG. This gives you a better entry and avoids premature stops.",
+    tip:"Inducement is the 'trap before the trap.' Retail traders see the minor level and enter early. Smart money sweeps their stops, then reaches the real OB/FVG where institutional orders sit. Be patient — let inducement get swept first." },
+  { name:"Balanced Price Range (BPR)", cat:"pd-array", icon:"≈",
+    desc:"A BPR occurs when a bullish FVG and a bearish FVG overlap in the same price zone. This overlap creates a 'balanced' area where both buying and selling imbalances cancel out. Price tends to consolidate or react strongly at BPRs because both sides of institutional order flow converge there.",
+    how:"Mark all FVGs on your chart. Look for instances where a bullish FVG and bearish FVG overlap. The overlapping zone = BPR. Use BPRs as high-probability S/R zones. Entry on rejection from the BPR edge.",
+    tip:"BPRs are rare but extremely powerful. When one forms at a key HTF level (PDH/PDL, weekly OB), it becomes one of the most reliable reaction zones you'll find." },
+  { name:"Volume Imbalance (VI)", cat:"pd-array", icon:"⊿",
+    desc:"A Volume Imbalance is a gap between the BODIES (not wicks) of two consecutive candles. Unlike an FVG (3-candle gap), a VI is a 2-candle gap. It shows urgency — price moved so fast that the bodies didn't overlap. VIs often act as minor S/R zones and can be used for entry refinement.",
+    how:"Look for two consecutive candles where there's a visible gap between the close of one candle and the open of the next (body-to-body gap, even if wicks overlap). Mark the gap. Price often returns to fill it partially before continuing.",
+    tip:"VIs are weaker than FVGs but form more frequently. Use them as refinement tools inside larger setups — for example, entering at a VI within an Order Block gives you a tighter stop loss." }
+];
+
+// ── Render Concepts ──
+const cGrid = document.getElementById('conceptGrid');
+
+function renderConcepts(filter) {
+  cGrid.innerHTML = '';
+  const filtered = filter === 'all' ? concepts : concepts.filter(c => c.cat === filter);
+
+  filtered.forEach(c => {
+    const catColors = { structure:'#3b82f6', liquidity:'#f43f5e', 'pd-array':'#f59e0b', time:'#a78bfa' };
+    const catLabels = { structure:'STRUCTURE', liquidity:'LIQUIDITY', 'pd-array':'PD ARRAY', time:'TIME' };
+    const color = catColors[c.cat] || '#3b82f6';
+    const label = catLabels[c.cat] || c.cat.toUpperCase();
+
+    const card = document.createElement('div');
+    card.className = 'p-card';
+    card.setAttribute('data-cat', c.cat);
+    card.innerHTML = `
+      <div class="p-card-head">
+        <div class="icon" style="background:${color}22;color:${color};">${c.icon}</div>
+        <div class="info">
+          <h3>${c.name}</h3>
+          <div class="meta"><span style="color:${color}">${label}</span></div>
+        </div>
+      </div>
+      <div class="p-card-body">
+        <p>${c.desc}</p>
+        <h4>How to Identify & Use</h4>
+        <p>${c.how}</p>
+        <div class="pro-tip-box">
+          <div class="lbl">Pro Tip</div>
+          <p>${c.tip}</p>
+        </div>
+      </div>`;
+    card.querySelector('.p-card-head').addEventListener('click', () => {
+      card.classList.toggle('open');
+    });
+    cGrid.appendChild(card);
+  });
+}
+
+renderConcepts('all');
+
+// Concept filter chips
+document.querySelectorAll('[data-cf]').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('[data-cf]').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderConcepts(chip.dataset.cf);
   });
 });
 
